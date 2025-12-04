@@ -67,7 +67,7 @@ const HomePageComp = () => {
   ];
   return (
     <>
-      <section className="px-30 pt-20">
+      <main className="px-30 pt-20">
         {/* ---------------------------------------- */}
         {/* HERO SLIDER */}
         {/* ---------------------------------------- */}
@@ -412,7 +412,7 @@ const HomePageComp = () => {
         {/* ---------------------------------------- */}
         {/* feedback section */}
         {/* ---------------------------------------- */}
-        <section className="py-20">
+        {/* <section className="py-20">
           <div
             className="w-full py-2 rounded-3xl bg-cover bg-center bg-no-repeat"
             style={{
@@ -429,7 +429,6 @@ const HomePageComp = () => {
                 Get Weekly Updated about Products
               </h2>
 
-              {/* EMAIL + BUTTON */}
               <div className="flex items-center gap-3 mb-3">
                 <input
                   type="email"
@@ -447,8 +446,8 @@ const HomePageComp = () => {
               </p>
             </div>
           </div>
-        </section>
-      </section>
+        </section> */}
+      </main>
       <footer className="w-full bg-primary border-t border-gray-200 py-14">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Column 1 */}
