@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FiUser, FiShoppingCart } from "react-icons/fi";
-
+import { FiUser, FiShoppingCart, FiSearch } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 
 const NavbarComp = () => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  // CLOSE ON OUTSIDE CLICK
   useEffect(() => {
     const handler = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setOpen(false); // close dropdown when clicking outside
+        setOpen(false);
       }
     };
     document.addEventListener("mousedown", handler);
@@ -18,98 +19,112 @@ const NavbarComp = () => {
 
   return (
     <>
-      <nav className="w-full flex items-center justify-between ">
-        {/* LEFT MENU */}
-        <div className="hidden md:flex w-[32%] h-[60px] items-center gap-2 bg-primary p-2 px-10 rounded-br-full">
-          <NavLink
-            to="/category"
-            className={({ isActive }) =>
-              `px-4 py-2 rounded-full font-medium transition-all ${
-                isActive ? "  text-gray-500" : " text-black "
-              }`
-            }
-          >
-            Category
-          </NavLink>
+      <nav className="w-full fixed top-0 left-0 z-40 bg-white/60 backdrop-blur-xl shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+          {/* LEFT MENU */}
+          <div className="hidden md:flex items-center gap-6">
+            <NavLink
+              to="/home"
+              className="font-medium text-gray-700 hover:text-accent transition"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/category"
+              className="font-medium text-gray-700 hover:text-accent transition"
+            >
+              Categories
+            </NavLink>
+            <NavLink
+              to="/allproducts"
+              className="font-medium text-gray-700 hover:text-accent transition"
+            >
+              Products
+            </NavLink>
+            
+          </div>
 
-          <NavLink
-            to="/allproducts"
-            className={({ isActive }) =>
-              `px-4 py-2 rounded-full font-medium transition-all  ${
-                isActive ? "  text-gray-500" : " text-black "
-              }`
-            }
-          >
-            Products
-          </NavLink>
-        </div>
-
-        {/* CENTER LOGO */}
-        <div className="hidden md:flex w-[20%] h-[60px] items-center justify-center bg-primary p-2 px-4 rounded-bl-full rounded-br-full">
+          {/* LOGO */}
           <NavLink
             to="/home"
-            className="text-primary-foreground text-xl font-bold"
+            className="text-2xl font-extrabold text-gray-900 tracking-wide"
           >
-            <span className="text-foreground hover:text-accent">XStore</span>
+            XStore
           </NavLink>
-        </div>
 
-        {/* RIGHT ICONS */}
-        <div className="hidden md:flex w-[32%] h-[60px] items-center justify-end gap-4 bg-primary text-primary-foreground p-2 px-6 rounded-bl-full relative">
-          <div className="flex gap-8 px-10">
-            {/* Profile */}
-            <button onClick={() => setOpen(!open)}>
-              <FiUser size={23} className="stroke-[2.5] hover:text-secondary" />
-            </button>
+          {/* RIGHT SECTION */}
+          <div className="hidden md:flex items-center gap-6 relative">
+            {/* SEARCH */}
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search products..."
+                className="w-52 px-4 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-accent outline-none transition"
+              />
+              <FiSearch
+                className="absolute right-3 top-2.5 text-gray-500"
+                size={18}
+              />
+            </div>
 
-            {/* Cart */}
-            <button className="relative group hover:text-secondary transition">
-              <FiShoppingCart size={23} className="stroke-[2.5]" />
-
-              {/* Cart count badge */}
-              <span className="absolute -top-2 -right-2 bg-background text- text-[11px] px-[6px] py-[1px] rounded-full shadow">
+            {/* CART */}
+            <button className="relative hover:text-accent transition">
+              <FiShoppingCart size={22} />
+              <span className="absolute -top-2 -right-2 bg-accent text-white text-[10px] px-2 py-[1px] rounded-full">
                 3
               </span>
             </button>
-          </div>
 
-          {/* Dropdown */}
-          {open && (
-            <div
-              ref={dropdownRef}
-              className="absolute z-10 right-12 top-12 w-56 bg-white shadow-xl border border-gray-200 rounded-xl p-3 animate-in fade-in slide-in-from-top-2"
+            {/* PROFILE BUTTON */}
+            <button
+              onClick={() => setOpen(!open)}
+              className="relative hover:text-accent transition"
             >
-              <div className="flex flex-col text-gray-700 font-medium">
-                <button className="text-left py-2 px-3 rounded-lg hover:bg-gray-100 transition">
-                  My Profile
-                </button>
-                <button className="text-left py-2 px-3 rounded-lg hover:bg-gray-100 transition">
-                  My Cart
-                </button>
-                <button className="text-left py-2 px-3 rounded-lg hover:bg-gray-100 transition">
-                  My Orders
-                </button>
-                <button className="text-left py-2 px-3 rounded-lg hover:bg-gray-100 transition">
-                  My Wishlist
-                </button>
+              <FiUser size={22} />
+            </button>
 
-                <div className="px-3 mt-2">
-                  <p className="text-sm  mb-1">
-                    Currency
-                  </p>
-                  <select className="w-full border border-gray-300 rounded-lg px-2 py-1 text-sm">
-                    <option>USD</option>
-                    <option>INR</option>
-                    <option>EUR</option>
-                  </select>
+            {/* DROPDOWN */}
+            {open && (
+              <div
+                ref={dropdownRef}
+                className="absolute right-0 top-14 w-60 p-4 bg-white rounded-2xl shadow-2xl border border-gray-200 animate-dropdown"
+              >
+                <div className="flex flex-col font-medium">
+                  <button className="py-2 px-4 rounded-lg hover:bg-gray-100 transition text-gray-800 flex justify-between">
+                    My Profile <span>👤</span>
+                  </button>
+
+                  <button className="py-2 px-4 rounded-lg hover:bg-gray-100 transition text-gray-800 flex justify-between">
+                    My Cart <span>🛒</span>
+                  </button>
+
+                  <button className="py-2 px-4 rounded-lg hover:bg-gray-100 transition text-gray-800 flex justify-between">
+                    Orders <span>📦</span>
+                  </button>
+
+                  <button className="py-2 px-4 rounded-lg hover:bg-gray-100 transition text-gray-800 flex justify-between">
+                    Wishlist <span>❤️</span>
+                  </button>
+
+                  {/* Currency Selector */}
+                  <div className="px-2 mt-3">
+                    <p className="text-sm text-gray-600 mb-1">Currency</p>
+                    <select className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm font-medium bg-white hover:border-gray-400 transition">
+                      <option>USD</option>
+                      <option>INR</option>
+                      <option>EUR</option>
+                    </select>
+                  </div>
+
+                  <hr className="my-3" />
+
+                  <button className="py-2 px-4 rounded-lg bg-accent text-white font-semibold hover:opacity-90 transition">
+                    Logout
+                  </button>
                 </div>
-
-                <button className="mt-3 bg-accent text-background py-2 rounded-lg font-semibold hover:opacity-90 transition shadow">
-                  Logout
-                </button>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </nav>
     </>
