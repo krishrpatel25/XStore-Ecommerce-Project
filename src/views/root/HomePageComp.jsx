@@ -8,6 +8,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import { FiMail, FiStar } from "react-icons/fi";
 import "bootstrap-icons/font/bootstrap-icons.css"; // IMPORTANT
 
 const HomePageComp = () => {
@@ -36,101 +37,147 @@ const HomePageComp = () => {
   }, []);
 
   const handleViewProduct = (id) => navigate(`/products/${id}`);
-
+  const reviews = [
+    {
+      name: "Aarav Sharma",
+      avatar: "https://i.pravatar.cc/100?img=12",
+      rating: 5,
+      review:
+        "Amazing shopping experience! The delivery was fast and the packaging was premium.",
+    },
+    {
+      name: "Sophia Patel",
+      avatar: "https://i.pravatar.cc/100?img=32",
+      rating: 4,
+      review:
+        "Great product quality. Customer support helped me choose the perfect headphones!",
+    },
+    {
+      name: "Rohan Verma",
+      avatar: "https://i.pravatar.cc/100?img=51",
+      rating: 5,
+      review:
+        "Super easy returns and exchange. Definitely my favorite store to shop from!",
+    },
+  ];
   return (
-    <div className="px-8">
+    <div className="px-30 pt-20">
       {/* ---------------------------------------- */}
       {/* HERO SLIDER */}
       {/* ---------------------------------------- */}
 
-      <div className="w-full pt-8 overflow-hidden">
-        <Carousel
-          className="w-full"
-          opts={{
-            loop: true,
-            align: "start",
-          }}
-          plugins={[
-            Autoplay({
-              delay: 3000,
-              stopOnInteraction: false,
-            }),
-          ]}
-        >
-          <CarouselContent className="flex w-full h-[450px] p-0 m-0">
-            {/* SLIDE 1 */}
-            <CarouselItem className="min-w-full flex-none h-[450px] p-0">
-              <div className="w-full h-full flex items-center bg-primary">
-                {/* TEXT */}
-                <div className="w-1/2 h-full flex flex-col justify-center px-16">
-                  <p className="text-gray-600 mb-3">
-                    Amazing Products From Store
-                  </p>
-                  <h1 className="text-4xl font-bold leading-tight mb-6">
-                    Explore Our Awesome Collection...
-                  </h1>
-                  <button className="px-6 py-2 bg-accent text-white rounded-lg w-fit">
-                    Shop Now
-                  </button>
-                </div>
+      <div className="flex gap-6 lg:px-0 mt-16">
+        {/* ================================
+          LEFT BIG BOX — CAROUSEL
+      ================================= */}
+        <div className="col-span-2 w-[75%] bg-primary rounded-3xl p-0 overflow-hidden relative">
+          <Carousel
+            className="w-full"
+            opts={{ loop: true, align: "start" }}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+                stopOnInteraction: false,
+              }),
+            ]}
+          >
+            <CarouselContent className="flex w-full h-[450px] p-0 m-0">
+              {/* ---- SLIDE 1 ---- */}
+              <CarouselItem className="min-w-full flex-none h-[450px] p-0">
+                <div className="w-full h-full flex items-center relative">
+                  {/* TEXT */}
+                  <div className="w-1/2 h-full flex flex-col justify-center pl-12 lg:pl-16 z-20">
+                    <p className="text-gray-700 mb-3">
+                      Amazing Products From Store
+                    </p>
+                    <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
+                      Explore Our Awesome Collection...
+                    </h1>
+                    <button className="px-6 py-3 bg-[#FF6A45] text-white rounded-lg w-fit">
+                      Shop Now
+                    </button>
+                  </div>
 
-                {/* IMAGE */}
-                <div className="w-1/2 h-full flex justify-center items-end">
+                  {/* IMAGE */}
                   <img
                     src="/src/assets/hero-1.png"
-                    className="h-[90%] object-contain"
+                    className="h-full absolute right-0 bottom-0 object-contain z-10"
                   />
                 </div>
-              </div>
-            </CarouselItem>
+              </CarouselItem>
 
-            {/* SLIDE 2 */}
-            <CarouselItem className="min-w-full flex-none h-[450px] p-0">
-              <div className="w-full h-full flex items-center bg-primary">
-                <div className="w-1/2 h-full flex flex-col justify-center px-16">
-                  <p className="text-gray-600 mb-3">
-                    Amazing Products From Store
-                  </p>
-                  <h1 className="text-4xl font-bold leading-tight mb-6">
-                    Explore Our New Designs...
-                  </h1>
-                  <button className="px-6 py-2 bg-accent text-white rounded-lg w-fit">
-                    Shop Now
-                  </button>
-                </div>
+              {/* ---- SLIDE 2 ---- */}
+              <CarouselItem className="min-w-full flex-none h-[450px] p-0">
+                <div className="w-full h-full flex items-center relative">
+                  <div className="w-1/2 h-full flex flex-col justify-center pl-12 lg:pl-16 z-20">
+                    <p className="text-gray-700 mb-3">
+                      Amazing Products From Store
+                    </p>
+                    <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
+                      Explore Our New Designs...
+                    </h1>
+                    <button className="px-6 py-3 bg-[#FF6A45] text-white rounded-lg w-fit">
+                      Shop Now
+                    </button>
+                  </div>
 
-                <div className="w-1/2 h-full flex justify-center items-end">
                   <img
                     src="/src/assets/hero-2.png"
-                    className="h-[90%] object-contain"
+                    className="h-full absolute right-0 bottom-0 object-contain z-10"
                   />
                 </div>
-              </div>
-            </CarouselItem>
+              </CarouselItem>
 
-            {/* SLIDE 3 */}
-            <CarouselItem className="min-w-full flex-none h-[450px] p-0">
-              <div className="w-full h-full flex items-center bg-primary">
-                <div className="w-1/2 h-full flex flex-col justify-center px-16">
-                  <p className="text-gray-600 mb-3">Trending Now</p>
-                  <h1 className="text-4xl font-bold leading-tight mb-6">
-                    Upgrade Your Lifestyle...
-                  </h1>
-                  <button className="px-6 py-2 bg-accent text-white rounded-lg w-fit">
-                    Shop Now
-                  </button>
-                </div>
+              {/* ---- SLIDE 3 ---- */}
+              <CarouselItem className="min-w-full flex-none h-[450px] p-0">
+                <div className="w-full h-full flex items-center relative">
+                  <div className="w-1/2 h-full flex flex-col justify-center pl-12 lg:pl-16 z-20">
+                    <p className="text-gray-700 mb-3">Trending Now</p>
+                    <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
+                      Upgrade Your Lifestyle...
+                    </h1>
+                    <button className="px-6 py-3 bg-[#FF6A45] text-white rounded-lg w-fit">
+                      Shop Now
+                    </button>
+                  </div>
 
-                <div className="w-1/2 h-full flex justify-center items-end">
                   <img
                     src="/src/assets/hero-3.png"
-                    className="h-[90%] object-contain"
+                    className="h-full absolute right-0 bottom-0 object-contain z-10"
                   />
                 </div>
-              </div>
-            </CarouselItem>
-          </CarouselContent>
-        </Carousel>
+              </CarouselItem>
+            </CarouselContent>
+          </Carousel>
+        </div>
+
+        {/* RIGHT COLUMN */}
+        <div className="flex flex-col w-[25%] h-[450px] justify-between">
+          {/* RIGHT TOP BOX */}
+          <div className="bg-accent rounded-3xl p-8 flex items-center justify-between h-[48%]">
+            <div>
+              <h3 className="text-2xl font-semibold text-gray-900">
+                Best Sale
+              </h3>
+              <p className="text-gray-700 mt-2">View more →</p>
+            </div>
+            <img
+              src="/src/assets/earbuds.png"
+              alt="Earbuds"
+              className="w-32 drop-shadow"
+            />
+          </div>
+
+          {/* RIGHT BOTTOM BOX */}
+          <div className="bg-secondary rounded-3xl p-8 flex items-center justify-between h-[48%]">
+            <div>
+              <h3 className="text-3xl font-bold text-gray-900">30% OFF</h3>
+              <p className="text-sm text-gray-700">Exclusive Discounts</p>
+              <p className="text-gray-700 mt-2">View more →</p>
+            </div>
+            <img src="/src/assets/mobile.png" alt="Watch" className="w-32 drop-shadow" />
+          </div>
+        </div>
       </div>
 
       {/* ---------------------------------------- */}
@@ -187,14 +234,23 @@ const HomePageComp = () => {
       {/* divider FEATURES */}
       {/* ---------------------------------------- */}
 
-      <div className="flex items-center justify-center gap-3 my-12">
-        <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-        <span className="mx-4 text-primary font-semibold tracking-wide">
-          All Products
-        </span>
-        <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-      </div>
+      <section className="flex flex-col text-center">
+        <div className="flex pt-30 items-center justify-center gap-3">
+          <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+          <h2 className="mx-4 text-primary text-2xl font-semibold tracking-wide">
+            Best Selling
+          </h2>
 
+          <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+        </div>
+        <div>
+          <p className="text-foreground font-medium mt-3 text-sm px-40">
+            Our most-loved products are here. From everyday essentials to
+            premium picks, explore the items that consistently top the charts
+            and win customer trust day after day.
+          </p>
+        </div>
+      </section>
       {/* ---------------------------------------- */}
       {/* PRODUCT LISTING */}
       {/* ---------------------------------------- */}
@@ -205,20 +261,15 @@ const HomePageComp = () => {
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
         </div>
       ) : products.length > 0 ? (
-        // PRODUCT GRID
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 px-16">
           {products.map((product) => (
             <div
               key={product.id}
               onClick={() => handleViewProduct(product.id)}
-              className="bg-white rounded-4xl border border-accent shadow-sm hover:shadow-md transition-all cursor-pointer overflow-hidden"
+              className="cursor-pointer"
             >
-              {/* Image */}
-              <div className="relative w-full h-56 bg-secondary flex items-center justify-center overflow-hidden">
-                <span className="absolute top-3 left-3 text-xs font-medium text-background  backdrop-blur-md border bg-primary px-3 py-1 rounded-full">
-                  {product.category}
-                </span>
-
+              {/* Image Box */}
+              <div className="w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center">
                 <img
                   src={product.images[0]}
                   alt={product.title}
@@ -226,59 +277,45 @@ const HomePageComp = () => {
                 />
               </div>
 
-              {/* Info */}
-              <div className="p-5 flex flex-col gap-3">
-                <h2 className="text-lg font-semibold text-gray-900 line-clamp-1">
+              {/* Title + Price */}
+              <div className="mt-3 flex justify-between items-center">
+                <h2 className="text-base text-[12px] font-medium text-gray-900">
                   {product.title}
                 </h2>
 
-                <p className="text-gray-600 text-sm line-clamp-2">
-                  {product.description}
+                <p className="text-base text-[16px] text-gray-900">
+                  ${product.price}
                 </p>
+              </div>
 
-                {/* Rating */}
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }, (_, i) => {
-                    const rating = product.rating;
+              {/* Rating */}
+              <div className="flex items-center gap-1 mt-1">
+                {Array.from({ length: 5 }, (_, i) => {
+                  const rating = product.rating;
 
-                    if (i < Math.floor(rating)) {
-                      // FULL STAR
-                      return (
-                        <i
-                          key={i}
-                          className="bi bi-star-fill text-yellow-500 text-lg"
-                        ></i>
-                      );
-                    } else if (i < rating) {
-                      // HALF STAR
-                      return (
-                        <i
-                          key={i}
-                          className="bi bi-star-half text-yellow-500 text-lg"
-                        ></i>
-                      );
-                    } else {
-                      // EMPTY STAR
-                      return (
-                        <i
-                          key={i}
-                          className="bi bi-star text-gray-400 text-lg"
-                        ></i>
-                      );
-                    }
-                  })}
-
-                  <span className="text-gray-500 text-sm ml-1">
-                    {product.rating.toFixed(1)}
-                  </span>
-                </div>
-
-                {/* Price + Delete */}
-                <div className="flex justify-between items-center pt-2">
-                  <p className="text-2xl font-bold text-accent">
-                    ${product.price}
-                  </p>
-                </div>
+                  if (i < Math.floor(rating)) {
+                    return (
+                      <i
+                        key={i}
+                        className="bi bi-star-fill text-green-500 text-[12px]"
+                      ></i>
+                    );
+                  } else if (i < rating) {
+                    return (
+                      <i
+                        key={i}
+                        className="bi bi-star-half text-green-500 text-[12px]"
+                      ></i>
+                    );
+                  } else {
+                    return (
+                      <i
+                        key={i}
+                        className="bi bi-star text-gray-300 text-[12px]"
+                      ></i>
+                    );
+                  }
+                })}
               </div>
             </div>
           ))}
@@ -289,6 +326,113 @@ const HomePageComp = () => {
           <h1>No product found!! Try another page!</h1>
         </div>
       )}
+
+      <section className="w-full py-20   ">
+        <section className="flex  flex-col text-center">
+          <div className="flex pt-30 items-center justify-center gap-3">
+            <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+            <h2 className="mx-4 text-primary text-2xl font-semibold tracking-wide">
+              What Our Customers Say
+            </h2>
+
+            <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+          </div>
+          <div>
+            <p className="text-foreground font-medium mt-3 text-sm px-40">
+              Every purchase tells a story — and our customers choose XStore not
+              just for the products, but for the experience. Their words reflect
+              the quality and trust we work tirelessly to deliver.
+            </p>
+          </div>
+        </section>
+
+        {/* Heading */}
+
+        {/* REVIEW GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-3 pt-16 gap-10">
+          {reviews.map((r, i) => (
+            <div
+              key={i}
+              className="group relative p-8 rounded-4xl rounded-t-[10px] bg-primary "
+            >
+              {/* Accent Gradient Line */}
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-accent to-white rounded-t-3xl" />
+
+              {/* Avatar + Name + Stars */}
+              <div className="flex items-center gap-4 mb-5 ">
+                <img
+                  src={r.avatar}
+                  alt={r.name}
+                  className="w-10 h-10 rounded-full object-cover shadow-md border"
+                />
+                <div>
+                  <h3 className="text-lg font-semibold text-white">{r.name}</h3>
+
+                  <div className="flex">
+                    {Array.from({ length: r.rating }).map((_, idx) => (
+                      <FiStar
+                        key={idx}
+                        size={12}
+                        className="text-accent fill-accent"
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Quote Icon */}
+              <div className="text-accent text-4xl opacity-30 absolute right-6 top-6">
+                “
+              </div>
+
+              {/* Review Text */}
+              <p className="text-white text-[12px] leading-relaxed mt-2">
+                {r.review}
+              </p>
+
+              {/* Footnote */}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="py-20">
+        <div
+          className="w-full py-2 rounded-3xl bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/src/assets/feedback.png')",
+          }}
+        >
+          {/* DARK/WHITE OVERLAY FOR READABILITY (OPTIONAL) */}
+          <div className="rounded-3xl w-fit ml-10 p-8 lg:p-12">
+            <div className="flex items-center gap-2 text-gray-700 mb-3">
+              <FiMail className="text-background" size={22} />
+              <span className="font-medium text-background">Newsletter</span>
+            </div>
+
+            <h2 className="text-3xl lg:text-2xl font-bold text-gray-900 leading-snug mb-6">
+              Get Weekly Updated about Products
+            </h2>
+
+            {/* EMAIL + BUTTON */}
+            <div className="flex items-center gap-3 mb-3">
+              <input
+                type="email"
+                placeholder="xyz@abc.com"
+                className="px-3 py-2 rounded-xl bg-white border border-gray-300
+        focus:ring-2 focus:ring-accent outline-none transition w-72"
+              />
+              <button className="px-3 py-2 bg-gray-900 text-white rounded-xl hover:bg-accent transition font-medium">
+                Subscribe
+              </button>
+            </div>
+
+            <p className="text-background text-sm">
+              Get weekly updates, discounts & product news. No spam.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
