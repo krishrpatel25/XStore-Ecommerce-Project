@@ -67,15 +67,15 @@ const HomePageComp = () => {
   ];
   return (
     <>
-      <main className="px-30 pt-20">
+      <main className="px-4 md:px-10 lg:px-30 pt-20">
         {/* ---------------------------------------- */}
         {/* HERO SLIDER */}
         {/* ---------------------------------------- */}
-        <div className="flex gap-6 lg:px-0 mt-16">
+        <div className="flex flex-col md:flex-row gap-6 lg:px-0 mt-16">
           {/* ================================
           LEFT BIG BOX — CAROUSEL
       ================================= */}
-          <div className="col-span-2 w-[75%] bg-primary rounded-3xl p-0 overflow-hidden relative">
+          <div className=" w-full sm:w-full  col-span-2 w-[75%] bg-primary rounded-3xl p-0 overflow-hidden relative">
             <Carousel
               className="w-full"
               opts={{ loop: true, align: "start" }}
@@ -91,30 +91,7 @@ const HomePageComp = () => {
                 <CarouselItem className="min-w-full flex-none h-[450px] p-0">
                   <div className="w-full h-full flex items-center relative">
                     {/* TEXT */}
-                    <div className="w-1/2 h-full flex flex-col justify-center pl-12 lg:pl-16 z-20">
-                      <p className="text-gray-700 mb-3">
-                        Amazing Products From Store
-                      </p>
-                      <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
-                        Explore Our Awesome Collection...
-                      </h1>
-                      <button className="px-6 py-3 bg-[#FF6A45] text-white rounded-lg w-fit">
-                        Shop Now
-                      </button>
-                    </div>
-
-                    {/* IMAGE */}
-                    <img
-                      src="/src/assets/hero-1.png"
-                      className="h-full absolute right-0 bottom-0 object-contain z-10"
-                    />
-                  </div>
-                </CarouselItem>
-
-                {/* ---- SLIDE 2 ---- */}
-                <CarouselItem className="min-w-full flex-none h-[450px] p-0">
-                  <div className="w-full h-full flex items-center relative">
-                    <div className="w-1/2 h-full flex flex-col justify-center pl-12 lg:pl-16 z-20">
+                    <div className="w-1/2 h-full flex flex-col justify-center text-center items-center sm:text-start sm:items-start pl-12 lg:pl-16 z-20">
                       <p className="text-gray-700 mb-3">
                         Amazing Products From Store
                       </p>
@@ -126,17 +103,44 @@ const HomePageComp = () => {
                       </button>
                     </div>
 
-                    <img
-                      src="/src/assets/hero-2.png"
-                      className="h-full absolute right-0 bottom-0 object-contain z-10"
-                    />
+                    {/* IMAGE */}
+                    <div>
+                      <img
+                        src="/src/assets/hero-1.png"
+                        className="h-[75%] absolute right-8 lg:right-0 bottom-0 object-contain z-10"
+                      />
+                    </div>
+                  </div>
+                </CarouselItem>
+
+                {/* ---- SLIDE 2 ---- */}
+                <CarouselItem className="min-w-full flex-none h-[450px] p-0">
+                  <div className="w-full h-full flex items-center relative">
+                    <div className="w-1/2 h-full flex flex-col justify-center text-center items-center sm:text-start sm:items-start pl-12 lg:pl-16 z-20">
+                      <p className="text-gray-700 mb-3">
+                        Amazing Products From Store
+                      </p>
+                      <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
+                        Explore Our New Designs...
+                      </h1>
+                      <button className="px-6 py-3 bg-[#FF6A45] text-white rounded-lg w-fit">
+                        Shop Now
+                      </button>
+                    </div>
+
+                    <div>
+                      <img
+                        src="/src/assets/hero-2.png"
+                        className="h-[70%] absolute right-0 bottom-0 object-contain z-10"
+                      />
+                    </div>
                   </div>
                 </CarouselItem>
 
                 {/* ---- SLIDE 3 ---- */}
                 <CarouselItem className="min-w-full flex-none h-[450px] p-0">
                   <div className="w-full h-full flex items-center relative">
-                    <div className="w-1/2 h-full flex flex-col justify-center pl-12 lg:pl-16 z-20">
+                    <div className="w-1/2 h-full flex flex-col justify-center text-center items-center sm:text-start sm:items-start pl-12 lg:pl-16 z-20">
                       <p className="text-gray-700 mb-3">Trending Now</p>
                       <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
                         Upgrade Your Lifestyle...
@@ -145,11 +149,12 @@ const HomePageComp = () => {
                         Shop Now
                       </button>
                     </div>
-
-                    <img
-                      src="/src/assets/hero-3.png"
-                      className="h-full absolute right-0 bottom-0 object-contain z-10"
-                    />
+                    <div>
+                      <img
+                        src="/src/assets/hero-3.png"
+                        className="h-[75%] absolute right-0 bottom-0 object-contain z-10"
+                      />
+                    </div>
                   </div>
                 </CarouselItem>
               </CarouselContent>
@@ -157,7 +162,7 @@ const HomePageComp = () => {
           </div>
 
           {/* RIGHT COLUMN */}
-          <div className="flex flex-col w-[25%] h-[450px] justify-between">
+          <div className="flex flex-col w-full md:w-[50%] h-[450px] justify-between">
             {/* RIGHT TOP BOX */}
             <div className="bg-accent rounded-3xl p-8 flex items-center justify-between h-[48%]">
               <div>
@@ -166,11 +171,13 @@ const HomePageComp = () => {
                 </h3>
                 <p className="text-gray-700 mt-2">View more →</p>
               </div>
-              <img
-                src="/src/assets/earbuds.png"
-                alt="Earbuds"
-                className="w-32 drop-shadow"
-              />
+              <div>
+                <img
+                  src="/src/assets/earbuds.png"
+                  alt="Earbuds"
+                  className="w-32 drop-shadow"
+                />
+              </div>
             </div>
 
             {/* RIGHT BOTTOM BOX */}
@@ -180,11 +187,13 @@ const HomePageComp = () => {
                 <p className="text-sm text-gray-700">Exclusive Discounts</p>
                 <p className="text-gray-700 mt-2">View more →</p>
               </div>
-              <img
-                src="/src/assets/mobile.png"
-                alt="Watch"
-                className="w-32 drop-shadow"
-              />
+              <div>
+                <img
+                  src="/src/assets/mobile.png"
+                  alt="Watch"
+                  className="w-32 drop-shadow"
+                />
+              </div>
             </div>
           </div>
         </div>

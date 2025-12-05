@@ -183,7 +183,7 @@ const NavbarComp = () => {
 
         {/* NAV LINKS */}
         <div className="flex flex-col mt-2 font-medium">
-          <NavLink to="/home" onClick={() => setRightMenuOpen(false)} className="px-5 py-3 hover:bg-gray-100">Home</NavLink>
+          <NavLink to="/" onClick={() => setRightMenuOpen(false)} className="px-5 py-3 hover:bg-gray-100">Home</NavLink>
           <NavLink to="/category" onClick={() => setRightMenuOpen(false)} className="px-5 py-3 hover:bg-gray-100">Categories</NavLink>
           <NavLink to="/allproducts" onClick={() => setRightMenuOpen(false)} className="px-5 py-3 hover:bg-gray-100">Products</NavLink>
           <NavLink to="/offers" onClick={() => setRightMenuOpen(false)} className="px-5 py-3 hover:bg-gray-100">Offers</NavLink>
