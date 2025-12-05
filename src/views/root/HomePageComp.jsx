@@ -201,9 +201,7 @@ const HomePageComp = () => {
         {/* ---------------------------------------- */}
         {/* HERO SUPPORT FEATURES */}
         {/* ---------------------------------------- */}
-        <section
-          className="w-full bg-secondary mt-6 rounded-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 p-2"
-        >
+        <section className="w-full bg-secondary mt-6 rounded-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 p-2">
           {/* 1 */}
           <div className="flex p-2 items-center gap-4 bg-secondary rounded-lg">
             <div className="p-4 text-4xl text-accent">
@@ -349,18 +347,18 @@ const HomePageComp = () => {
         {/* ---------------------------------------- */}
         {/* PRODUCT Review */}
         {/* ---------------------------------------- */}
-        <section className="w-full py-20   ">
+        <section className="w-full py-20">
           <section className="flex  flex-col text-center">
             <div className="flex pt-30 items-center justify-center gap-3">
               <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-              <h2 className="mx-4 text-primary text-2xl font-semibold tracking-wide">
+              <h2 className="mx-4 text-primary text-xl md:text-2xl font-semibold tracking-wide">
                 What Our Customers Say
               </h2>
 
               <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
             </div>
             <div>
-              <p className="text-foreground font-medium mt-3 text-sm px-40">
+              <p className="text-foreground font-medium mt-3 text-[12px] md:text-sm px-2 md:px-40">
                 Every purchase tells a story — and our customers choose XStore
                 not just for the products, but for the experience. Their words
                 reflect the quality and trust we work tirelessly to deliver.
