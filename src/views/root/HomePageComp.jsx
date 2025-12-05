@@ -98,7 +98,10 @@ const HomePageComp = () => {
                       <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
                         Explore Our New Designs...
                       </h1>
-                      <button className="px-6 py-3 bg-[#FF6A45] text-white hover:bg-secondary hover:text-foreground rounded-lg w-fit">
+                      <button
+                        onClick={() => navigate("/allproducts")}
+                        className="px-6 py-3 bg-[#FF6A45] text-white hover:bg-secondary hover:text-foreground rounded-lg w-fit"
+                      >
                         Shop Now
                       </button>
                     </div>
@@ -123,7 +126,10 @@ const HomePageComp = () => {
                       <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
                         Explore Our New Designs...
                       </h1>
-                      <button className="px-6 py-3 bg-[#FF6A45] text-white hover:bg-secondary hover:text-foreground rounded-lg w-fit">
+                      <button
+                        onClick={() => navigate("/allproducts")}
+                        className="px-6 py-3 bg-[#FF6A45] text-white hover:bg-secondary hover:text-foreground rounded-lg w-fit"
+                      >
                         Shop Now
                       </button>
                     </div>
@@ -174,7 +180,8 @@ const HomePageComp = () => {
                 </h3>
                 <p
                   onClick={() => navigate("/allproducts")}
-                  className="text-gray-700 hover:text-background mt-2">
+                  className="text-gray-700 hover:text-background mt-2"
+                >
                   View more →
                 </p>
               </div>
@@ -193,8 +200,9 @@ const HomePageComp = () => {
                 <h3 className="text-3xl font-bold text-gray-900">30% OFF</h3>
                 <p className="text-sm text-gray-700">Exclusive Discounts</p>
                 <p
-                  onClick={()=>navigate("/allproducts")}
-                  className="text-gray-700 hover:text-accent mt-2">
+                  onClick={() => navigate("/allproducts")}
+                  className="text-gray-700 hover:text-accent mt-2"
+                >
                   View more →
                 </p>
               </div>
@@ -311,7 +319,7 @@ const HomePageComp = () => {
                     {product.title}
                   </h2>
 
-                  <p className="text-base text-[16px] text-gray-900">
+                  <p className="text-base text-[16px] text-accent font-semibold">
                     ${product.price}
                   </p>
                 </div>

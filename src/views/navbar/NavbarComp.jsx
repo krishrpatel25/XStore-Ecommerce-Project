@@ -16,17 +16,21 @@ const NavbarComp = () => {
   const dropdownRef = useRef(null);
 
   // Close dropdown on outside click
-useEffect(() => {
-  function handleClickOutside(e) {
-    // If dropdown is open AND click is outside → close dropdown
-    if (open && dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-      setOpen(false);
+  useEffect(() => {
+    function handleClickOutside(e) {
+      // If dropdown is open AND click is outside → close dropdown
+      if (
+        open &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target)
+      ) {
+        setOpen(false);
+      }
     }
-  }
 
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => document.removeEventListener("mousedown", handleClickOutside);
-}, [open]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
 
   return (
     <>
@@ -58,9 +62,34 @@ useEffect(() => {
           {/* LOGO */}
           <NavLink
             to="/"
-            className="text-2xl font-extrabold text-gray-900 tracking-wide"
+            className="
+    text-3xl font-extrabold tracking-widest text-gray-900
+    relative inline-block
+    transition-all duration-300
+
+    /* 3D base */
+    drop-shadow-[2px_2px_0px_rgba(0,0,0,0.25)]
+
+    /* hover animation */
+    hover:scale-110 hover:tracking-[0.25em] hover:text-accent
+    hover:drop-shadow-[6px_6px_0px_rgba(0,0,0,0.25)]
+  "
           >
-            XStore
+            <span className="relative inline-block">
+              XStore
+              {/* 3D Shine Layer */}
+              <span
+                className="
+        absolute inset-0 text-white opacity-0
+        translate-y-1 translate-x-1
+        transition-all duration-300
+        blur-sm
+        hover:opacity-30
+      "
+              >
+                XStore
+              </span>
+            </span>
           </NavLink>
 
           {/* RIGHT SECTION — DESKTOP */}
@@ -194,7 +223,6 @@ useEffect(() => {
           </button>
         </div>
 
-
         {/* NAV LINKS */}
         <div className="flex flex-col mt-2 font-medium">
           <NavLink
@@ -218,7 +246,6 @@ useEffect(() => {
           >
             Products
           </NavLink>
-
         </div>
 
         <hr className="my-3" />
@@ -233,7 +260,6 @@ useEffect(() => {
               3
             </span>
           </button>
-
         </div>
 
         <hr className="my-3" />

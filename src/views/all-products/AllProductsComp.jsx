@@ -139,7 +139,7 @@ function DropDown({ value, setValue }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex w-[300px] items-center gap-2">
+    <div className="flex w-[300px] justify-center items-center gap-2">
       <Popover open={open} onOpenChange={setOpen} className="p-6">
         <PopoverTrigger asChild>
           <Button
@@ -184,7 +184,7 @@ function DropDown({ value, setValue }) {
       </Popover>
 
       <div>
-        <h1 className="font-semibold ">Product per page</h1>
+        <p className="text-[12px] ">Product per page</p>
       </div>
     </div>
   );
@@ -253,7 +253,7 @@ function Products() {
     debouncedSearch(apiSearch);
   }, [apiSearch]);
 
-  const handleViewProduct = (id) => navigate(`/products/${id}`);
+  const handleViewProduct = (id) => navigate(`/product/${id}`);
 
   const handleDeleteProduct = async (id) => {
     try {
@@ -267,8 +267,14 @@ function Products() {
 
   if (loading) {
     return (
-      <div class="h-screen flex items-center justify-center">
-        <div class="w-32 h-32 bg-gray-200 rounded-xl animate-pulse"></div>
+      <div className="h-screen flex items-center justify-center">
+        <svg
+          className="w-20 h-20 text-accent animate-pulse"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M6 7V6a6 6 0 1112 0v1h3v15H3V7h3zm2 0h8V6a4 4 0 10-8 0v1z" />
+        </svg>
       </div>
     );
   }
@@ -323,10 +329,11 @@ function Products() {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5" /* same size as search icon */
+                  className="w-5 h-5 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  strokeWidth="2"
                 >
                   <path
                     strokeLinecap="round"
@@ -410,92 +417,76 @@ function Products() {
       </div>
 
       {filteredProducts.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-10 mt-10 px-4 sm:px-12 lg:px-14">
           {filteredProducts.map((product) => (
             <div
               key={product.id}
               onClick={() => handleViewProduct(product.id)}
-              className="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all cursor-pointer overflow-hidden"
+              className="cursor-pointer"
             >
-              {/* Image Section */}
-              <div className="relative w-full h-56 bg-gray-100 flex items-center justify-center overflow-hidden">
-                {/* Category Badge on Image (Glossy) */}
-                <span
-                  className="absolute top-3 left-3 text-xs font-medium text-purple-700 
-      bg-white/40 backdrop-blur-md border border-white/50 
-      px-3 py-1 rounded-full shadow-sm"
-                >
-                  {product.category}
-                </span>
-
+              {/* Image Box - Clean + Minimal */}
+              <div className=" w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden transition-all duration-300 group hover:-translate-y-3 hover:shadow-xl hover:scale-[1.01] ">
+                {" "}
                 <img
                   src={product.images[0]}
                   alt={product.title}
-                  className="h-full object-contain p-4"
-                />
+                  className=" h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105 "
+                />{" "}
               </div>
 
-              {/* Text Content */}
-              <div className="p-5 flex flex-col gap-3">
-                {/* Title */}
-                <h2 className="text-lg font-semibold text-gray-900 line-clamp-1">
+              {/* Title + Price */}
+              <div className="mt-3 flex justify-between items-center">
+                <h2 className="text-base text-[12px] font-medium text-gray-900">
                   {product.title}
                 </h2>
 
-                {/* Description */}
-                <p className="text-gray-600 text-sm line-clamp-2">
-                  {product.description}
+                <p className="text-base text-[16px] text-accent font-semibold">
+                  ${product.price}
                 </p>
+              </div>
 
-                {/* Rating */}
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <img
-                      key={i}
-                      src={
-                        i < Math.round(product.rating)
-                          ? "/src/assets/star.png"
-                          : "/src/assets/starEmpty.png"
-                      }
-                      className="h-[18px]"
-                      alt="star"
-                    />
-                  ))}
+              {/* Rating */}
+              <div className="flex items-center gap-1 mt-1">
+                {Array.from({ length: 5 }, (_, i) => {
+                  const rating = product.rating;
 
-                  <span className="text-gray-500 text-sm ml-1">
-                    {product.rating.toFixed(1)}
-                  </span>
-                </div>
-
-                {/* Price + Delete */}
-                <div className="flex justify-between items-center pt-2">
-                  <p className="text-2xl font-bold text-gray-900">
-                    ${product.price}
-                  </p>
-
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeleteProduct(product.id);
-                    }}
-                    className="bg-red-600 text-white px-4 py-2 rounded-xl hover:bg-red-700 transition-all"
-                  >
-                    Delete
-                  </button>
-                </div>
+                  if (i < Math.floor(rating)) {
+                    return (
+                      <i
+                        key={i}
+                        className="bi bi-star-fill text-green-500 text-[12px]"
+                      ></i>
+                    );
+                  } else if (i < rating) {
+                    return (
+                      <i
+                        key={i}
+                        className="bi bi-star-half text-green-500 text-[12px]"
+                      ></i>
+                    );
+                  } else {
+                    return (
+                      <i
+                        key={i}
+                        className="bi bi-star text-gray-300 text-[12px]"
+                      ></i>
+                    );
+                  }
+                })}
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="w-full h-[392px] pt-29 text-center items-center ">
+        <div className="w-full h-[392px] flex items-center justify-center">
           <h1>No product found!! try on another page!!</h1>
         </div>
       )}
 
       {/* Dropdown and Pagination */}
-      <div className="flex justify-between items-center py-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 pt-14">
         <DropDown value={limit} setValue={setLimit} />
+
         <PaginationComponent
           page={page}
           setPage={setPage}
