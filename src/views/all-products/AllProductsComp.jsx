@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { FaWindowClose } from "react-icons/fa";
+import { FiSearch } from "react-icons/fi";
 
 function debounce(func, delay) {
   let timeout;
@@ -293,114 +294,118 @@ function Products() {
   }
 
   return (
-    <div className="bg-[#CBB3FF] py-6 px-20 min-h-screen">
-      <div className="flex items-center justify-center py-6">
-        <span className="block w-full h-[2px] bg-black"></span>
+    <div className=" py-6 px-20 min-h-screen">
+      {/* ---------------------------------------- */}
+      {/* divider FEATURES */}
+      {/* ---------------------------------------- */}
+      <section className="flex flex-col text-center">
+        <div className="flex pt-30 items-center justify-center gap-3">
+          <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+          <h2 className="mx-4 text-primary text-xl md:text-2xl  font-semibold tracking-wide">
+            All Products
+          </h2>
 
-        <h1 className="text-3xl font-bold mx-4 text-gray-800">Products</h1>
-
-        <span className="block w-full h-[2px] bg-black"></span>
-      </div>
+          <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+        </div>
+        <div></div>
+      </section>
 
       {/* search bars */}
-      <div className="flex w-full gap-4 py-4  rounded-2xl  ">
-        <div className="flex w-full items-center gap-3  bg-white rounded-2xl shadow-lg px-4 py-3 border border-gray-300  ">
-          {/* Search Icon (SVG) */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5  text-gray-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.75 3.75a7.5 7.5 0 0012.9 12.9z"
-            />
-          </svg>
+      <div className="flex w-full gap-4 py-4 rounded-2xl justify-end ">
+        <div className="relative w-56">
+          {/* RIGHT ICONS CONTAINER */}
+          <div className="absolute inset-y-0 right-3 flex items-center gap-2">
+            {/* Clear (X) Button */}
+            {apiSearch && (
+              <button
+                onClick={handleClearApi}
+                className="text-gray-500 hover:text-red-500 transition flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5" /* same size as search icon */
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            )}
 
+            {/* Search Icon */}
+            <FiSearch className="text-gray-500 w-5 h-5" />
+          </div>
+
+          {/* INPUT FIELD */}
           <input
             type="text"
             placeholder="Search products..."
-            className="flex-1 border-0 focus:ring-0  focus:outline-none text-base"
+            className="w-full h-full px-4 py-2 rounded-full border border-gray-300 
+               focus:ring-2 focus:ring-accent outline-none pr-14"
             value={apiSearch}
             onChange={(e) => setApiSearch(e.target.value)}
           />
-
-          {apiSearch && (
-            <button
-              onClick={handleClearApi}
-              className="text-red-500 hover:text-red-600 transition"
-            >
-              {/* Close Icon */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          )}
         </div>
 
         {/* Filter Box */}
-        <div className="flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-2xl border border-gray-300 ">
-          {/* Filter Icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5 text-gray-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L14 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 018 21v-7.586L3.293 6.707A1 1 0 013 6V4z"
-            />
-          </svg>
+        <div className="relative w-56">
+          {/* RIGHT ICONS (Clear + Filter Icon) */}
+          <div className="absolute inset-y-0 right-3 flex items-center gap-2">
+            {/* Clear Button */}
+            {search && (
+              <button
+                onClick={handleClear}
+                className="text-gray-500 hover:text-red-500 transition flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            )}
 
+            {/* Filter Icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 text-gray-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L14 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 018 21v-7.586L3.293 6.707A1 1 0 013 6V4z"
+              />
+            </svg>
+          </div>
+
+          {/* INPUT FIELD */}
           <input
             type="text"
             placeholder="Filter..."
-            className="flex-1 border-0 focus:ring-0 focus:outline-none text-base"
+            className="w-full px-4 py-2 rounded-full border border-gray-300 
+               focus:ring-2 focus:ring-accent outline-none pr-14"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-
-          {search && (
-            <button
-              onClick={handleClear}
-              className="text-red-500 hover:text-red-600 transition"
-            >
-              {/* Close Icon */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          )}
         </div>
       </div>
 
