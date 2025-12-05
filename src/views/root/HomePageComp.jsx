@@ -201,9 +201,11 @@ const HomePageComp = () => {
         {/* ---------------------------------------- */}
         {/* HERO SUPPORT FEATURES */}
         {/* ---------------------------------------- */}
-        <section className="w-full flex flex-wrap justify-between items-center bg-secondary mt-6 rounded-xl">
+        <section
+          className="w-full bg-secondary mt-6 rounded-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 p-2"
+        >
           {/* 1 */}
-          <div className="flex p-6 flex-row items-center justify-center gap-4 min-w-[250px]">
+          <div className="flex p-2 items-center gap-4 bg-secondary rounded-lg">
             <div className="p-4 text-4xl text-accent">
               <i className="bi bi-send-check-fill"></i>
             </div>
@@ -214,7 +216,7 @@ const HomePageComp = () => {
           </div>
 
           {/* 2 */}
-          <div className="flex p-6 flex-row items-center justify-center gap-4 min-w-[250px]">
+          <div className="flex p-2 items-center gap-4 bg-secondary rounded-lg">
             <div className="p-4 text-4xl text-accent">
               <i className="bi bi-patch-check-fill"></i>
             </div>
@@ -225,7 +227,7 @@ const HomePageComp = () => {
           </div>
 
           {/* 3 */}
-          <div className="flex p-6 flex-row items-center justify-center gap-4 min-w-[250px]">
+          <div className="flex p-2 items-center gap-4 bg-secondary rounded-lg">
             <div className="p-4 text-4xl text-accent">
               <i className="bi bi-arrow-left-square-fill"></i>
             </div>
@@ -236,7 +238,7 @@ const HomePageComp = () => {
           </div>
 
           {/* 4 */}
-          <div className="flex p-6 flex-row items-center justify-center gap-4 min-w-[250px]">
+          <div className="flex p-2 items-center gap-4 bg-secondary rounded-lg">
             <div className="p-4 text-4xl text-accent">
               <i className="bi bi-question-octagon-fill"></i>
             </div>
@@ -253,14 +255,14 @@ const HomePageComp = () => {
         <section className="flex flex-col text-center">
           <div className="flex pt-30 items-center justify-center gap-3">
             <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-            <h2 className="mx-4 text-primary text-2xl font-semibold tracking-wide">
+            <h2 className="mx-4 text-primary text-xl md:text-2xl  font-semibold tracking-wide">
               Best Selling
             </h2>
 
             <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
           </div>
           <div>
-            <p className="text-foreground font-medium mt-3 text-sm px-40">
+            <p className="text-foreground font-medium mt-3 text-[12px] md:text-sm px-2 md:px-40">
               Our most-loved products are here. From everyday essentials to
               premium picks, explore the items that consistently top the charts
               and win customer trust day after day.
@@ -274,7 +276,7 @@ const HomePageComp = () => {
 
         {loading ? (
           // LOADING UI
-          <div className="w-full h-[392px] flex items-center justify-center">
+          <div className="w-[80%] sm:wi h-[392px] flex items-center justify-center">
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
           </div>
         ) : products.length > 0 ? (
