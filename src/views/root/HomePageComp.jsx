@@ -41,7 +41,7 @@ const HomePageComp = () => {
     getProductData();
   }, []);
 
-  const handleViewProduct = (id) => navigate(`/products/${id}`);
+  const handleViewProduct = (id) => navigate(`/product/${id}`);
   const reviews = [
     {
       name: "Aarav Sharma",
@@ -98,7 +98,7 @@ const HomePageComp = () => {
                       <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
                         Explore Our New Designs...
                       </h1>
-                      <button className="px-6 py-3 bg-[#FF6A45] text-white rounded-lg w-fit">
+                      <button className="px-6 py-3 bg-[#FF6A45] text-white hover:bg-secondary hover:text-foreground rounded-lg w-fit">
                         Shop Now
                       </button>
                     </div>
@@ -123,7 +123,7 @@ const HomePageComp = () => {
                       <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
                         Explore Our New Designs...
                       </h1>
-                      <button className="px-6 py-3 bg-[#FF6A45] text-white rounded-lg w-fit">
+                      <button className="px-6 py-3 bg-[#FF6A45] text-white hover:bg-secondary hover:text-foreground rounded-lg w-fit">
                         Shop Now
                       </button>
                     </div>
@@ -145,7 +145,10 @@ const HomePageComp = () => {
                       <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
                         Upgrade Your Lifestyle...
                       </h1>
-                      <button className="px-6 py-3 bg-[#FF6A45] text-white rounded-lg w-fit">
+                      <button
+                        onClick={() => navigate("/allproducts")}
+                        className="px-6 py-3 bg-[#FF6A45] text-white hover:bg-secondary hover:text-foreground rounded-lg w-fit"
+                      >
                         Shop Now
                       </button>
                     </div>
@@ -169,7 +172,11 @@ const HomePageComp = () => {
                 <h3 className="text-2xl font-semibold text-gray-900">
                   Best Sale
                 </h3>
-                <p className="text-gray-700 mt-2">View more →</p>
+                <p
+                  onClick={() => navigate("/allproducts")}
+                  className="text-gray-700 hover:text-background mt-2">
+                  View more →
+                </p>
               </div>
               <div>
                 <img
@@ -185,7 +192,11 @@ const HomePageComp = () => {
               <div>
                 <h3 className="text-3xl font-bold text-gray-900">30% OFF</h3>
                 <p className="text-sm text-gray-700">Exclusive Discounts</p>
-                <p className="text-gray-700 mt-2">View more →</p>
+                <p
+                  onClick={()=>navigate("/allproducts")}
+                  className="text-gray-700 hover:text-accent mt-2">
+                  View more →
+                </p>
               </div>
               <div>
                 <img
@@ -421,41 +432,45 @@ const HomePageComp = () => {
         {/* ---------------------------------------- */}
         {/* feedback section */}
         {/* ---------------------------------------- */}
-        {/* <section className="py-20">
+        <section className="py-20">
           <div
-            className="w-full py-2 rounded-3xl bg-cover bg-center bg-no-repeat"
+            className="w-full rounded-3xl bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: "url('/src/assets/feedback.png')",
             }}
           >
-            <div className="rounded-3xl w-fit ml-10 p-8 lg:p-12">
+            <div className="rounded-3xl w-full sm:w-fit mx-auto sm:ml-10 p-6 sm:p-8 lg:p-12">
+              {/* Newsletter Label */}
               <div className="flex items-center gap-2 text-gray-700 mb-3">
                 <FiMail className="text-background" size={22} />
                 <span className="font-medium text-background">Newsletter</span>
               </div>
 
-              <h2 className="text-3xl lg:text-2xl font-bold text-gray-900 leading-snug mb-6">
+              {/* Heading */}
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 leading-snug mb-6">
                 Get Weekly Updated about Products
               </h2>
 
-              <div className="flex items-center gap-3 mb-3">
+              {/* Input + Button */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-3">
                 <input
                   type="email"
                   placeholder="xyz@abc.com"
-                  className="px-3 py-2 rounded-xl bg-white border border-gray-300
-        focus:ring-2 focus:ring-accent outline-none transition w-72"
+                  className="px-3 py-2 rounded-xl bg-white border border-gray-300 focus:ring-2 focus:ring-accent outline-none transition  w-full sm:w-72"
                 />
-                <button className="px-3 py-2 bg-gray-900 text-white rounded-xl hover:bg-accent transition font-medium">
+
+                <button className=" px-4 py-2 bg-gray-900 text-white rounded-xl hover:bg-primary hover:text-foreground transition font-medium w-full sm:w-auto">
                   Subscribe
                 </button>
               </div>
 
-              <p className="text-background text-sm">
+              {/* Subtext */}
+              <p className="text-background text-sm max-w-sm">
                 Get weekly updates, discounts & product news. No spam.
               </p>
             </div>
           </div>
-        </section> */}
+        </section>
       </main>
       <footer className="w-full bg-primary border-t border-gray-200 py-14">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
