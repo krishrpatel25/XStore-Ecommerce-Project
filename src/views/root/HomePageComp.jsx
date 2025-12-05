@@ -278,7 +278,7 @@ const HomePageComp = () => {
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
           </div>
         ) : products.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 px-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-10 mt-10 px-4 sm:px-12 lg:px-14">
             {products.map((product) => (
               <div
                 key={product.id}
@@ -458,7 +458,7 @@ const HomePageComp = () => {
         </section> */}
       </main>
       <footer className="w-full bg-primary border-t border-gray-200 py-14">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Column 1 */}
           <div>
             <h3 className="text-xl font-bold text-gray-900 mb-4">XStore</h3>
