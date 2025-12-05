@@ -293,8 +293,14 @@ const HomePageComp = () => {
 
         {loading ? (
           // LOADING UI
-          <div className="w-[80%] sm:wi h-[392px] flex items-center justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
+          <div className="h-screen flex items-center justify-center">
+            <svg
+              className="w-20 h-20 text-accent animate-pulse"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M6 7V6a6 6 0 1112 0v1h3v15H3V7h3zm2 0h8V6a4 4 0 10-8 0v1z" />
+            </svg>
           </div>
         ) : products.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-10 mt-10 px-4 sm:px-12 lg:px-14">
@@ -305,12 +311,13 @@ const HomePageComp = () => {
                 className="cursor-pointer"
               >
                 {/* Image Box */}
-                <div className="w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center">
+                <div className=" w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden transition-all duration-300 group hover:-translate-y-3 hover:shadow-xl hover:scale-[1.01] ">
+                  {" "}
                   <img
                     src={product.images[0]}
                     alt={product.title}
-                    className="h-full object-contain p-4"
-                  />
+                    className=" h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105 "
+                  />{" "}
                 </div>
 
                 {/* Title + Price */}

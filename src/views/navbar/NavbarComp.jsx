@@ -35,10 +35,10 @@ const NavbarComp = () => {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="w-full fixed top-0 left-0 z-40 bg-white/60 backdrop-blur-xl shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <nav className="w-full fixed top-0 left-0 z-40 bg-white/60 backdrop-blur-xl shadow-sm border-b border-background">
+        <div className="max-w-7xl mx-auto flex items-center px-6 py-4">
           {/* LEFT MENU (Desktop Only) */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6 flex-1">
             <NavLink
               to="/"
               className="font-medium text-gray-700 hover:text-accent transition"
@@ -93,21 +93,7 @@ const NavbarComp = () => {
           </NavLink>
 
           {/* RIGHT SECTION — DESKTOP */}
-          <div className="hidden lg:flex items-center gap-6 relative">
-            {/* SEARCH BAR */}
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="w-52 px-4 py-2 rounded-full border border-gray-300 focus:ring-2 
-                focus:ring-accent outline-none transition"
-              />
-              <FiSearch
-                size={18}
-                className="absolute right-3 top-2.5 text-gray-500"
-              />
-            </div>
-
+          <div className="hidden lg:flex items-center gap-6 relative flex-1 justify-end">
             {/* CART ICON */}
             <button className="relative hover:text-accent transition">
               <FiShoppingCart size={22} />
