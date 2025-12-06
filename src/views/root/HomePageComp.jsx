@@ -71,7 +71,7 @@ const HomePageComp = () => {
         {/* ---------------------------------------- */}
         {/* HERO SLIDER */}
         {/* ---------------------------------------- */}
-        <div className="flex flex-col md:flex-row gap-6 lg:px-0 mt-16">
+        <div className="flex flex-col md:flex-row gap-6 lg:px-0 mt-5 lg:mt-16">
           {/* ================================
           LEFT BIG BOX — CAROUSEL
       ================================= */}
