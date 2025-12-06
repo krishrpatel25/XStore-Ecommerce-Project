@@ -91,7 +91,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   --font-sans: "Poppins", sans-serif;
-  --primary: #95c4c4;/* <================================primary */
+  --primary: rgb(100, 155, 155);/* <================================primary */
   --primary-foreground: oklch(0% 0 0);
   --secondary: #ebebeb;
   --secondary-foreground: oklch(0.97 0 0);

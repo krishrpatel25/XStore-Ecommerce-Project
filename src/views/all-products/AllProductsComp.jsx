@@ -367,6 +367,7 @@ function Products() {
             {/* Clear Button */}
             {search && (
               <button
+                type="button"
                 onClick={handleClear}
                 className="text-gray-500 hover:text-red-500 transition flex items-center justify-center"
               >
@@ -478,8 +479,13 @@ function Products() {
           ))}
         </div>
       ) : (
-        <div className="w-full h-[392px] flex items-center justify-center">
-          <h1>No product found!! try on another page!!</h1>
+        <div className="w-full h-[180px] flex items-center justify-center">
+          <div className="px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm shadow-md flex items-center gap-2 border border-accent/20">
+            <i className="bi bi-binoculars text-accent text-lg"></i>
+            <span className="text-sm text-accent font-medium">
+              No products found
+            </span>
+          </div>
         </div>
       )}
 
