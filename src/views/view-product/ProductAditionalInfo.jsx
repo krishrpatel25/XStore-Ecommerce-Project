@@ -15,14 +15,15 @@ function ProductAditionalInfo({ products }) {
       <section className="pt-16">
         {/* Information buttons  */}
         <Tabs defaultValue="Description" className="w-full">
-          <TabsList className="w-full h-[150px]  bg-white border-gray-300 w-full border-b-2 rounded-none flex-col md: flex md:flex-row md:gap-10 md:h-[36px] ">
+          <TabsList className="w-full h-[150px]  w-full bg-transparent border-b-2 border-primary rounded-none flex-col md: flex md:flex-row md:gap-10 md:h-[36px] ">
             <TabsTrigger
-              className="rounded-none text-gray-500 bg-white
+              className="rounded-none text-gray-700 
                data-[state=active]:font-semibold
-               data-[state=active]:text-black 
+               data-[state=active]:bg-transparent
+               data-[state=active]:text-accent 
                data-[state=active]:underline 
                data-[state=active]:underline-offset-10
-               data-[state=active]:decoration-black 
+               data-[state=active]:decoration-primary 
                data-[state=active]:decoration-2 data-[state=active]:shadow-none focus:outline-none"
               value="Description"
             >
@@ -30,12 +31,13 @@ function ProductAditionalInfo({ products }) {
             </TabsTrigger>
 
             <TabsTrigger
-              className="rounded-none text-gray-500 bg-white
+              className="rounded-none text-gray-700
                data-[state=active]:font-semibold
-               data-[state=active]:text-black 
+               data-[state=active]:bg-transparent
+               data-[state=active]:text-accent 
                data-[state=active]:underline 
                data-[state=active]:underline-offset-10
-               data-[state=active]:decoration-black 
+               data-[state=active]:decoration-primary 
                data-[state=active]:decoration-2 data-[state=active]:shadow-none focus:outline-none"
               value="info"
             >
@@ -43,12 +45,13 @@ function ProductAditionalInfo({ products }) {
             </TabsTrigger>
 
             <TabsTrigger
-              className="rounded-none text-gray-500 bg-white
+              className="rounded-none text-gray-700
                data-[state=active]:font-semibold
-               data-[state=active]:text-black 
+               data-[state=active]:bg-transparent
+               data-[state=active]:text-accent 
                data-[state=active]:underline 
                data-[state=active]:underline-offset-10
-               data-[state=active]:decoration-black 
+               data-[state=active]:decoration-primary 
                data-[state=active]:decoration-2 data-[state=active]:shadow-none focus:outline-none"
               value="reviews"
             >
@@ -60,12 +63,12 @@ function ProductAditionalInfo({ products }) {
           <div className="w-full py-6">
             {/* Description */}
             <TabsContent value="Description" className="w-full">
-              <p className="text-gray-500 text-sm sm:text-base lg:text-lg leading-relaxed">
+              <p className="text-gray-700 font-medium text-[14px] leading-relaxed">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
                 sed aut dolorem placeat!
               </p>
 
-              <ul className="pt-4 flex flex-col gap-3">
+              <ul className="pt-4  flex flex-col gap-3">
                 {[
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis adipisci.",
                   "Necessitatibus, eius laudantium maxime iste.",
@@ -76,9 +79,9 @@ function ProductAditionalInfo({ products }) {
                 ].map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-3 text-gray-500 text-sm sm:text-base"
+                    className="flex items-start gap-3 text-gray-700 font-medium text-[14px]"
                   >
-                    <IoMdCheckmark className="mt-1 text-green-500" />
+                    <IoMdCheckmark className="mt-1 text-accent" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -86,79 +89,79 @@ function ProductAditionalInfo({ products }) {
             </TabsContent>
 
             {/* Additional Information */}
-            <TabsContent value="info" className="w-full">
-              <div className="w-full overflow-visible">
-                <table className="w-full table-auto border-collapse border-2 border-gray-300 text-left text-sm sm:text-base">
+            <TabsContent value="info" className="">
+              <div className=" overflow-visible w-[50%]">
+                <table className="w-full table-auto border-collapse border-2 border-gray-300  text-left text-sm sm:text-base">
                   <tbody className="divide-y-2 divide-gray-300">
                     <tr>
-                      <td className="px-2 sm:px-4 py-2 font-semibold break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
                         Model
                       </td>
-                      <td className="px-2 sm:px-4 py-2 break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
                         {products?.title}
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-2 sm:px-4 py-2 font-semibold break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
                         Category
                       </td>
-                      <td className="px-2 sm:px-4 py-2 break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
                         {products?.category}
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-2 sm:px-4 py-2 font-semibold break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
                         Color
                       </td>
                       <td className="px-2 sm:px-4 py-2 break-words">Black</td>
                     </tr>
                     <tr>
-                      <td className="px-2 sm:px-4 py-2 font-semibold break-words">
+                      <td className="px-2  sm:px-4 py-2 text-sm font-semibold break-words">
                         Weight
                       </td>
-                      <td className="px-2 sm:px-4 py-2 break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
                         {products?.weight}kg
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-2 sm:px-4 py-2 font-semibold break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
                         Dimensions
                       </td>
-                      <td className="px-2 sm:px-4 py-2 break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
                         {products?.dimensions?.width} x{" "}
                         {products?.dimensions?.height} x{" "}
                         {products?.dimensions?.depth} cm
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-2 sm:px-4 py-2 font-semibold break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
                         Size
                       </td>
-                      <td className="px-2 sm:px-4 py-2 break-words">
+                      <td className="px-2 sm:px-4 text-sm py-2 break-words">
                         XL, XXL, LG, SM, MD
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-2 sm:px-4 py-2 font-semibold break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
                         Warranty
                       </td>
-                      <td className="px-2 sm:px-4 py-2 break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
                         {products?.warrantyInformation}
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-2 sm:px-4 py-2 font-semibold break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
                         Series
                       </td>
-                      <td className="px-2 sm:px-4 py-2 break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
                         {products?.title}
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-2 sm:px-4 py-2 font-semibold break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
                         Discount
                       </td>
-                      <td className="px-2 sm:px-4 py-2 break-words">
+                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
                         {products?.discountPercentage} %
                       </td>
                     </tr>
@@ -176,8 +179,8 @@ function ProductAditionalInfo({ products }) {
                       key={index}
                       className="flex justify-center w-[250px] sm:w-[200px] xs:w-[150px] flex-shrink-0"
                     >
-                      <div className="bg-[#CBB3FF] border-2 border-black rounded-lg p-2 sm:p-6 md:p-8 mb-4 max-w-full mx-auto">
-                        <div className="bg-white p-3 sm:p-4 rounded-2xl flex items-center gap-3 mb-2 text-black">
+                      <div className="bg-primary rounded-4xl rounded-t-2xl p-2 sm:p-6 md:p-8 mb-4 max-w-full mx-auto">
+                        <div className=" p-3 sm:p-4 rounded-2xl flex items-center gap-3 mb-2 text-background">
                           <div className="bg-gray-200 text-left rounded-full w-10 h-10 flex items-center justify-center font-bold text-gray-700">
                             {review.rating}
                           </div>
@@ -185,21 +188,22 @@ function ProductAditionalInfo({ products }) {
                             <p className="font-semibold text-left">
                               {review.reviewerName}
                             </p>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-background">
                               {review.reviewerEmail}
                             </p>
                           </div>
                         </div>
-
                         {/* Rating */}
                         <div className="flex pt-2 sm:pt-4 items-center mb-2">
+                          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-accent to-white rounded-t-3xl" />
+
                           {Array.from({ length: 5 }, (_, i) => (
                             <svg
                               key={i}
                               className={`w-4 sm:w-5 h-4 sm:h-5 ${
                                 i < review.rating
-                                  ? "text-yellow-400"
-                                  : "text-gray-300"
+                                  ? "text-accent"
+                                  : "text-accent"
                               }`}
                               fill="currentColor"
                               viewBox="0 0 20 20"
@@ -210,7 +214,7 @@ function ProductAditionalInfo({ products }) {
                         </div>
 
                         {/* Comment */}
-                        <p className="text-gray-700 text-left mb-2 text-sm sm:text-base">
+                        <p className="text-background text-left mb-2 text-sm sm:text-base">
                           {review.comment}
                         </p>
                       </div>

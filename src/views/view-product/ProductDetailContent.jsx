@@ -6,11 +6,18 @@ function ProductDetailContent({ products }) {
   const [selectImage, setSelectImage] = useState(products?.thumbnail || "");
 
   const handleAddToCart = () => {
-     toast("Added to cart!", {
-       icon: <span className="text-primary text-2xl animate-tick-pop">✔</span>,
-     });
+    toast("Product Added to Cart", {
+      icon: <i class="bi bi-bag-check-fill text-primary text-xl"></i>,
+      style: {
+        color: "var(--primary)", // ← change text color here
+      },
+    });
+  };
 
-
+  const handleAddToWishlist = () => {
+    toast("Product Added to Wishlist", {
+      icon: <i class="bi bi-bag-heart-fill text-xl"></i>,
+    });
   }
   return (
     <div>
@@ -92,7 +99,7 @@ function ProductDetailContent({ products }) {
                 Extra {products?.discountPercentage}% off
               </p>
             </div>
-            <p className="text-gray-600 text-[12px] sm:text-[14px]">
+            <p className="text-gray-600 font-medium text-[12px] sm:text-[14px]">
               {products?.description}
             </p>
 
@@ -101,12 +108,18 @@ function ProductDetailContent({ products }) {
             </p>
             <div class="w-full h-[2px] bg-primary"></div>
 
-            <div className="w-full pt-4">
+            <div className="flex justify-between w-full gap-4 pt-4">
               <Button
-                className="w-full sm:w-auto"
+                className="w-full text-white hover:bg-secondary hover:text-foreground sm:w-auto"
                 onClick={() => handleAddToCart()}
               >
                 Add Cart
+              </Button>
+              <Button
+                className="w-full bg-accent text-background hover:bg-secondary hover:text-foreground sm:w-auto"
+                onClick={() => handleAddToWishlist()}
+              >
+                whislist
               </Button>
             </div>
           </div>
