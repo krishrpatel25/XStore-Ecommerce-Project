@@ -92,11 +92,9 @@ const HomePageComp = () => {
                   <div className="w-full h-full flex items-center relative">
                     {/* TEXT */}
                     <div className="w-1/2 h-full flex flex-col justify-center text-center items-center sm:text-start sm:items-start pl-12 lg:pl-16 z-20">
-                      <p className="text-gray-700 mb-3">
-                        Amazing Products From Store
-                      </p>
-                      <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
-                        Explore Our New Designs...
+                      <p className="text-secondary mb-3">Hot Picks Today</p>
+                      <h1 className="text-4xl font-bold leading-tight text-foreground mb-6">
+                        Fresh Styles Await You...
                       </h1>
                       <button
                         onClick={() => navigate("/allproducts")}
@@ -120,10 +118,10 @@ const HomePageComp = () => {
                 <CarouselItem className="min-w-full flex-none h-[450px] p-0">
                   <div className="w-full h-full flex items-center relative">
                     <div className="w-1/2 h-full flex flex-col justify-center text-center items-center sm:text-start sm:items-start pl-12 lg:pl-16 z-20">
-                      <p className="text-gray-700 mb-3">
+                      <p className="text-secondary mb-3">
                         Amazing Products From Store
                       </p>
-                      <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
+                      <h1 className="text-4xl font-bold leading-tight text-foreground mb-6">
                         Explore Our New Designs...
                       </h1>
                       <button
@@ -147,8 +145,8 @@ const HomePageComp = () => {
                 <CarouselItem className="min-w-full flex-none h-[450px] p-0">
                   <div className="w-full h-full flex items-center relative">
                     <div className="w-1/2 h-full flex flex-col justify-center text-center items-center sm:text-start sm:items-start pl-12 lg:pl-16 z-20">
-                      <p className="text-gray-700 mb-3">Trending Now</p>
-                      <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
+                      <p className="text-secondary mb-3">Trending Now</p>
+                      <h1 className="text-4xl font-bold leading-tight text-foreground mb-6">
                         Upgrade Your Lifestyle...
                       </h1>
                       <button

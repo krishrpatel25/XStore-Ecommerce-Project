@@ -300,7 +300,7 @@ function Products() {
   }
 
   return (
-    <div className=" py-6 px-20 min-h-screen">
+    <div className=" py-6 px-4 lg:px-20 min-h-screen">
       {/* ---------------------------------------- */}
       {/* divider FEATURES */}
       {/* ---------------------------------------- */}

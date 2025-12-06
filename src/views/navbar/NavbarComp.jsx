@@ -119,8 +119,8 @@ const NavbarComp = () => {
           </div>
 
           {/* MOBILE + TABLET RIGHT SIDE AREA */}
-          <div className="flex lg:hidden items-center gap-4">
-            {/* PROFILE ICON (Mobile/Tablet) */}
+          <div className="flex items-center gap-4 md:gap-5 lg:hidden flex-1 justify-end">
+            {/* PROFILE BUTTON */}
             <button
               onClick={() => setOpen(!open)}
               className="hover:text-accent transition"
@@ -128,16 +128,16 @@ const NavbarComp = () => {
               <FiUser size={22} className="text-gray-800" />
             </button>
 
-            {/* SEARCH ICON */}
-            <button className="md:block hidden">
+            {/* SEARCH (tablet only) */}
+            <button className="hidden md:block">
               <FiSearch size={22} className="text-gray-700" />
             </button>
 
-            {/* MENU ICON */}
+            {/* MENU BUTTON */}
             <button
               onClick={() => setRightMenuOpen(true)}
-              className="p-2 rounded-full border border-gray-300 hover:border-accent 
-              hover:bg-gray-50 transition"
+              className="p-2 rounded-xl border border-gray-300 hover:border-accent 
+    hover:bg-gray-50 active:scale-95 transition"
             >
               <FiMenu size={24} className="text-gray-800" />
             </button>
