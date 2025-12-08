@@ -190,7 +190,8 @@ function ProductAditionalInfo({ products }) {
                           {/* Reviewer Info */}
                           <div className="p-3 sm:p-4 rounded-2xl flex items-center gap-3 mb-2 text-background">
                             <div className="bg-gray-200 text-left rounded-full w-10 h-10 flex items-center justify-center font-bold text-gray-700">
-                              {review.rating}
+
+                              <img src="" alt="" srcset="" />
                             </div>
 
                             <div className="ml-3">
