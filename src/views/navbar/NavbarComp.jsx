@@ -8,13 +8,14 @@ import {
   FiX,
   FiPackage,
 } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useNavigate } from "react-router-dom";
+import { useCart } from "@/context/CartsContext";
 const NavbarComp = () => {
   const [open, setOpen] = useState(false); // Profile dropdown
   const [rightMenuOpen, setRightMenuOpen] = useState(false); // Right-side drawer
   const dropdownRef = useRef(null);
-
+  const navigate = useNavigate();
+  const { cart } = useCart();
   // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(e) {
@@ -95,13 +96,16 @@ const NavbarComp = () => {
           {/* RIGHT SECTION — DESKTOP */}
           <div className="hidden lg:flex items-center gap-6 relative flex-1 justify-end">
             {/* CART ICON */}
-            <button className="relative hover:text-accent transition">
+            <button
+              onClick={() => navigate("/cart")}
+              className="relative hover:text-accent transition"
+            >
               <FiShoppingCart size={22} />
               <span
                 className="absolute -top-2 -right-2 bg-accent text-white text-[10px] 
               px-2 py-[1px] rounded-full"
               >
-                3
+                {cart.length}
               </span>
             </button>
 
