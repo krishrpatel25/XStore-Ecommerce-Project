@@ -69,7 +69,7 @@ const HomePageComp = () => {
           {/* ================================
           LEFT BIG BOX — CAROUSEL
       ================================= */}
-          <div className=" w-full sm:w-full  col-span-2 w-[75%] bg-primary rounded-3xl p-0 overflow-hidden relative">
+          <div className=" w-full sm:w-full  col-span-2 w-[75%] bg-primary rounded-3xl p-0 overflow-hidden relative ">
             <Carousel
               className="w-full"
               opts={{ loop: true, align: "start" }}
@@ -80,7 +80,7 @@ const HomePageComp = () => {
                 }),
               ]}
             >
-              <CarouselContent className="flex w-full h-[450px] p-0 m-0">
+              <CarouselContent className="flex w-full h-[450px] p-0 m-0 ">
                 {/* ---- SLIDE 1 ---- */}
                 <CarouselItem className="min-w-full flex-none h-[450px] p-0">
                   <div className="w-full h-full flex items-center relative">
@@ -172,7 +172,7 @@ const HomePageComp = () => {
                 </h3>
                 <p
                   onClick={() => navigate("/allproducts")}
-                  className="text-gray-700 hover:text-background mt-2"
+                  className="text-gray-700 hover:text-background mt-2 cursor-pointer"
                 >
                   View more →
                 </p>
@@ -193,7 +193,7 @@ const HomePageComp = () => {
                 <p className="text-sm text-gray-700">Exclusive Discounts</p>
                 <p
                   onClick={() => navigate("/allproducts")}
-                  className="text-gray-700 hover:text-accent mt-2"
+                  className="text-gray-700 hover:text-accent mt-2 cursor-pointer"
                 >
                   View more →
                 </p>
