@@ -90,83 +90,85 @@ function ProductAditionalInfo({ products }) {
 
             {/* Additional Information */}
             <TabsContent value="info" className="">
-              <div className=" overflow-visible w-[50%]">
-                <table className="w-full table-auto border-collapse border-2 border-gray-300  text-left text-sm sm:text-base">
-                  <tbody className="divide-y-2 divide-gray-300">
-                    <tr>
-                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                        Model
-                      </td>
-                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                        {products?.title}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                        Category
-                      </td>
-                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                        {products?.category}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                        Color
-                      </td>
-                      <td className="px-2 sm:px-4 py-2 break-words">Black</td>
-                    </tr>
-                    <tr>
-                      <td className="px-2  sm:px-4 py-2 text-sm font-semibold break-words">
-                        Weight
-                      </td>
-                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                        {products?.weight}kg
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                        Dimensions
-                      </td>
-                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                        {products?.dimensions?.width} x{" "}
-                        {products?.dimensions?.height} x{" "}
-                        {products?.dimensions?.depth} cm
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                        Size
-                      </td>
-                      <td className="px-2 sm:px-4 text-sm py-2 break-words">
-                        XL, XXL, LG, SM, MD
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                        Warranty
-                      </td>
-                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                        {products?.warrantyInformation}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                        Series
-                      </td>
-                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                        {products?.title}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                        Discount
-                      </td>
-                      <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                        {products?.discountPercentage} %
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="flex justify-center w-full">
+                <div className=" overflow-visible flex justify-center  w-[50%]">
+                  <table className="w-full  table-auto border-collapse border-2 border-gray-300  text-left text-sm sm:text-base">
+                    <tbody className="divide-y-2 divide-gray-300">
+                      <tr>
+                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
+                          Model
+                        </td>
+                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
+                          {products?.title}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
+                          Category
+                        </td>
+                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
+                          {products?.category}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
+                          Color
+                        </td>
+                        <td className="px-2 sm:px-4 py-2 break-words">Black</td>
+                      </tr>
+                      <tr>
+                        <td className="px-2  sm:px-4 py-2 text-sm font-semibold break-words">
+                          Weight
+                        </td>
+                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
+                          {products?.weight}kg
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
+                          Dimensions
+                        </td>
+                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
+                          {products?.dimensions?.width} x{" "}
+                          {products?.dimensions?.height} x{" "}
+                          {products?.dimensions?.depth} cm
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
+                          Size
+                        </td>
+                        <td className="px-2 sm:px-4 text-sm py-2 break-words">
+                          XL, XXL, LG, SM, MD
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
+                          Warranty
+                        </td>
+                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
+                          {products?.warrantyInformation}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
+                          Series
+                        </td>
+                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
+                          {products?.title}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
+                          Discount
+                        </td>
+                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
+                          {products?.discountPercentage} %
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </TabsContent>
 
@@ -179,56 +181,59 @@ function ProductAditionalInfo({ products }) {
                       key={index}
                       className="flex justify-center w-[250px] sm:w-[200px] xs:w-[150px] flex-shrink-0"
                     >
-                      <div className="bg-primary rounded-4xl rounded-t-2xl p-2 sm:p-6 md:p-8 mb-4 max-w-full mx-auto">
-                        <div className=" p-3 sm:p-4 rounded-2xl flex items-center gap-3 mb-2 text-background">
-                          <div className="bg-gray-200 text-left rounded-full w-10 h-10 flex items-center justify-center font-bold text-gray-700">
-                            {review.rating}
-                          </div>
-                          <div className="ml-3">
-                            <p className="font-semibold text-left">
-                              {review.reviewerName}
-                            </p>
-                            <p className="text-sm text-background">
-                              {review.reviewerEmail}
-                            </p>
-                          </div>
-                        </div>
-                        {/* Rating */}
-                        <div className="flex pt-2 sm:pt-4 items-center mb-2">
-                          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-accent to-white rounded-t-3xl" />
+                      <div className="relative max-w-full mx-auto mb-4">
+                        {/* Gradient Top Border */}
+                        <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-accent to-white rounded-t-3xl"></div>
 
-                          {Array.from({ length: 5 }, (_, i) => (
-                            <svg
-                              key={i}
-                              className={`w-4 sm:w-5 h-4 sm:h-5 ${
-                                i < review.rating
-                                  ? "text-accent"
-                                  : "text-accent"
-                              }`}
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.286 3.974c.3.921-.755 1.688-1.54 1.118l-3.38-2.455a1 1 0 00-1.176 0l-3.38 2.455c-.784.57-1.838-.197-1.539-1.118l1.285-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z" />
-                            </svg>
-                          ))}
-                        </div>
+                        {/* Main Card */}
+                        <div className="bg-primary rounded-4xl rounded-t-[10px] p-2 sm:p-6 md:p-8">
+                          {/* Reviewer Info */}
+                          <div className="p-3 sm:p-4 rounded-2xl flex items-center gap-3 mb-2 text-background">
+                            <div className="bg-gray-200 text-left rounded-full w-10 h-10 flex items-center justify-center font-bold text-gray-700">
+                              {review.rating}
+                            </div>
 
-                        {/* Comment */}
-                        <p className="text-background text-left mb-2 text-sm sm:text-base">
-                          {review.comment}
-                        </p>
+                            <div className="ml-3">
+                              <p className="font-semibold text-left">
+                                {review.reviewerName}
+                              </p>
+                              <p className="text-sm text-background">
+                                {review.reviewerEmail}
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Rating Stars */}
+                          <div className="flex pt-2 sm:pt-4 items-center mb-2">
+                            {Array.from({ length: 5 }, (_, i) => (
+                              <svg
+                                key={i}
+                                className={`w-4 sm:w-5 h-4 sm:h-5 ${
+                                  i < review.rating
+                                    ? "text-accent"
+                                    : "text-accent"
+                                }`}
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.286 3.974c.3.921-.755 1.688-1.54 1.118l-3.38-2.455a1 1 0 00-1.176 0l-3.38 2.455c-.784.57-1.838-.197-1.539-1.118l1.285-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z" />
+                              </svg>
+                            ))}
+                          </div>
+
+                          {/* Comment */}
+                          <p className="text-background text-left mb-2 text-sm sm:text-base">
+                            {review.comment}
+                          </p>
+                        </div>
                       </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
 
-                <CarouselPrevious className="absolute left-0  md:left-10 lg:left-50 xl:left-100 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow hover:bg-gray-100 transition z-10">
-                  &lt;
-                </CarouselPrevious>
+                <CarouselPrevious className="absolute left-0  md:left-10 lg:left-50 xl:left-100 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow hover:bg-gray-100 transition z-10"></CarouselPrevious>
 
-                <CarouselNext className="absolute right-0  md:right-10 lg:right-50 xl:right-100 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow hover:bg-gray-100 transition z-10">
-                  &gt;
-                </CarouselNext>
+                <CarouselNext className="absolute right-0  md:right-10 lg:right-50 xl:right-100 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow hover:bg-gray-100 transition z-10"></CarouselNext>
               </Carousel>
             </TabsContent>
           </div>
