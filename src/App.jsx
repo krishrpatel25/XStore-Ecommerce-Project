@@ -27,26 +27,28 @@ function App() {
   return (
     // add cartsProvider
     <>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: "rgba(255, 255, 255, 0.35)", // translucent matte background
-            backdropFilter: "blur(15px) saturate(150%)",
-            WebkitBackdropFilter: "blur(15px) saturate(150%)",
-            border: "2px solid rgba(255, 255, 255, 0.45)", // soft matte border
-            borderRadius: "18px",
-            boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
-            padding: "16px 20px",
-            color: "var(--accent)", // better readability
-            fontWeight: "600",
-            letterSpacing: "0.2px",
-            border: "2px solid var(--background)",
-          },
-        }}
-      />
+      <CartsProvider>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: "rgba(255, 255, 255, 0.35)", // translucent matte background
+              backdropFilter: "blur(15px) saturate(150%)",
+              WebkitBackdropFilter: "blur(15px) saturate(150%)",
+              border: "2px solid rgba(255, 255, 255, 0.45)", // soft matte border
+              borderRadius: "18px",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+              padding: "16px 20px",
+              color: "var(--accent)", // better readability
+              fontWeight: "600",
+              letterSpacing: "0.2px",
+              border: "2px solid var(--background)",
+            },
+          }}
+        />
 
-      <RouterProvider router={router}></RouterProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </CartsProvider>
     </>
   );
 }
