@@ -53,10 +53,10 @@ const FooterComp = () => {
               ].map((item) => (
                 <li
                   key={item}
-                  className="relative w-fit cursor-pointer text-gray-600 hover:text-accent transition
+                  className="relative w-fit cursor-pointer text-gray-600 hover:text-background transition
                   before:content-[''] before:absolute before:-bottom-1 before:left-0 
-                  before:w-0 before:h-[2px] before:bg-accent 
-                  before:transition-all before:duration-300 
+                  before:w-0 before:h-[2px] before:bg-background 
+                  before:transition-all before:duration-500 
                   hover:before:w-full"
                 >
                   {item}
