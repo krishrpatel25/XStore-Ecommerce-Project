@@ -136,8 +136,7 @@ const NavbarComp = () => {
             {/* MENU BUTTON */}
             <button
               onClick={() => setRightMenuOpen(true)}
-              className="p-2 rounded-xl border border-gray-300 hover:border-accent 
-    hover:bg-gray-50 active:scale-95 transition"
+              className="p-2 rounded-xl border border-gray-300 hover:border-accent hover:bg-gray-50 active:scale-95 transition"
             >
               <FiMenu size={24} className="text-gray-800" />
             </button>
