@@ -1,27 +1,42 @@
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/context/CartsContext";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 function ProductDetailContent({ products }) {
+  const {addProduct}=useCart()
+  const navigate = useNavigate();
   const [selectImage, setSelectImage] = useState(products?.thumbnail || "");
+  const [qty, setQty] = useState(1);
+  
+  const handleIncrease = () => {
+    setQty((prev) => prev + 1);
+  };
+
+  const handleDecrease = () => {
+    setQty((prev) => (prev > 1 ? prev - 1 : 1));
+  };
 
   const handleAddToCart = () => {
+    addProduct(products,qty)
     toast("Product Added to Cart", {
       icon: <i class="bi bi-bag-check-fill text-primary text-xl"></i>,
       style: {
         color: "var(--primary)", // ← change text color here
       },
     });
+    navigate(`/cart`);
   };
 
   const handleAddToWishlist = () => {
     toast("Product Added to Wishlist", {
-      icon: <i class="bi bi-bag-heart-fill text-xl"></i>,
+      icon: <i className="bi bi-bag-heart-fill text-xl"></i>,
     });
-  }
+  };
   return (
     <div>
-      <section className="pt-24 px-14">
+      <section className="pt-14 px-0 lg:pt-24 lg:px-14">
         <div className="flex flex-col lg:flex-row items-center justify-between lg:items-start gap-6 p-4 lg:p-0">
           {/* Thumbnails */}
           <div className="flex lg:flex-col gap-3 lg:order-1 overflow-x-auto lg:overflow-x-visible">
@@ -106,17 +121,41 @@ function ProductDetailContent({ products }) {
             <p className="text-2xl sm:text-3xl font-extrabold text-accent mt-2">
               ${products?.price}
             </p>
-            <div class="w-full h-[2px] bg-primary"></div>
+            <div className="w-full h-[2px] bg-primary"></div>
 
-            <div className="flex justify-between w-full gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row w-full gap-4 pt-4">
+              <div className="flex gap-4 w-full">
+                <div className="flex items-center gap-3 bg-secondary px-4 rounded-xl">
+                  {/* Decrease */}
+                  <button
+                    onClick={handleDecrease}
+                    className="w-full flex items-center px-1 justify-center bg-secondary text-foreground hover:bg-accent/80 rounded-md transition"
+                  >
+                    -
+                  </button>
+
+                  {/* Quantity */}
+                  <span className="text-md font-semibold">{qty}</span>
+
+                  {/* Increase */}
+                  <button
+                    onClick={handleIncrease}
+                    className="w-full flex items-center px-1 justify-center bg-secondary text-foreground rounded-md hover:bg-accent/80 transition"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <Button
+                  className="w-[55%]  text-white hover:bg-secondary hover:text-foreground sm:w-auto"
+                  onClick={handleAddToCart}
+                >
+                  Add Cart
+                </Button>
+              </div>
+
               <Button
-                className="w-full text-white hover:bg-secondary hover:text-foreground sm:w-auto"
-                onClick={() => handleAddToCart()}
-              >
-                Add Cart
-              </Button>
-              <Button
-                className="w-full bg-accent text-background hover:bg-secondary hover:text-foreground sm:w-auto"
+                className="bg-accent text-background hover:bg-secondary hover:text-foreground"
                 onClick={() => handleAddToWishlist()}
               >
                 whislist
