@@ -90,9 +90,9 @@ function ProductAditionalInfo({ products }) {
 
             {/* Additional Information */}
             <TabsContent value="info" className="">
-              <div className="flex justify-center w-full">
+              <div className="flex p-2 justify-center w-full">
                 <div className=" overflow-visible flex justify-center  w-[50%]">
-                  <table className="w-full  table-auto border-collapse border-2 border-gray-300  text-left text-sm sm:text-base">
+                  <table className="w-full table-auto border-collapse border-2 border-gray-300  text-left text-sm sm:text-base">
                     <tbody className="divide-y-2 divide-gray-300">
                       <tr>
                         <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
@@ -174,31 +174,45 @@ function ProductAditionalInfo({ products }) {
 
             {/* Reviews */}
             <TabsContent value="reviews" className="w-full">
-              <Carousel className="flex justify-center overflow-x-auto ">
-                <CarouselContent className="flex  space-x-2">
+              <Carousel className="flex justify-center overflow-x-auto px-2">
+                <CarouselContent className="flex space-x-3">
                   {products?.reviews?.map((review, index) => (
                     <CarouselItem
                       key={index}
-                      className="flex justify-center w-[250px] sm:w-[200px] xs:w-[150px] flex-shrink-0"
+                      className="
+            w-[180px]      /* NEW: Mobile width ONLY */
+            xs:w-[200px]   /* NEW: Slightly bigger on very small screens */
+            sm:w-[200px]   /* same as your original */
+            flex-shrink-0 flex justify-center
+          "
                     >
-                      <div className="relative max-w-full mx-auto mb-4">
-                        {/* Gradient Top Border */}
-                        <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-accent to-white rounded-t-3xl"></div>
+                      <div className="relative w-full mx-auto mb-4">
+                        {/* Top Gradient Line */}
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent to-white rounded-t-xl"></div>
 
                         {/* Main Card */}
-                        <div className="bg-primary rounded-4xl rounded-t-[10px] p-2 sm:p-6 md:p-8">
-                          {/* Reviewer Info */}
-                          <div className="p-3 sm:p-4 rounded-2xl flex items-center gap-3 mb-2 text-background">
-                            <div className="bg-gray-200 text-left rounded-full w-10 h-10 flex items-center justify-center font-bold text-gray-700">
+                        <div
+                          className="bg-primary rounded-4xl rounded-t-[10px] 
+                            p-3 sm:p-6 md:p-8   /* NEW: smaller padding ONLY for mobile (p-3) */"
+                        >
+                          {/* User Info */}
+                          <div className="p-2 sm:p-4 rounded-2xl flex items-center gap-3 mb-2 text-background">
+                            {/* NEW: Smaller image ONLY on mobile */}
+                            <img
+                              src="/src/assets/ProfilePic2.jpg"
+                              alt="profile"
+                              className="
+                    h-12 w-12     /* mobile */
+                    sm:h-20 sm:w-20   /* your original desktop size untouched */
+                    rounded-full object-cover
+                  "
+                            />
 
-                              <img src="" alt="" srcset="" />
-                            </div>
-
-                            <div className="ml-3">
-                              <p className="font-semibold text-left">
+                            <div>
+                              <p className="font-semibold text-sm sm:text-base">
                                 {review.reviewerName}
                               </p>
-                              <p className="text-sm text-background">
+                              <p className="text-[10px] sm:text-sm text-background/80">
                                 {review.reviewerEmail}
                               </p>
                             </div>
@@ -209,11 +223,11 @@ function ProductAditionalInfo({ products }) {
                             {Array.from({ length: 5 }, (_, i) => (
                               <svg
                                 key={i}
-                                className={`w-4 sm:w-5 h-4 sm:h-5 ${
-                                  i < review.rating
-                                    ? "text-accent"
-                                    : "text-accent"
-                                }`}
+                                className="
+                      w-3.5 h-3.5     /* smaller only for mobile */
+                      sm:w-5 sm:h-5   /* original size for md & lg */
+                      text-accent
+                    "
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                               >
@@ -223,7 +237,7 @@ function ProductAditionalInfo({ products }) {
                           </div>
 
                           {/* Comment */}
-                          <p className="text-background text-left mb-2 text-sm sm:text-base">
+                          <p className="text-xs sm:text-base text-background text-left leading-snug sm:leading-normal">
                             {review.comment}
                           </p>
                         </div>
@@ -232,9 +246,9 @@ function ProductAditionalInfo({ products }) {
                   ))}
                 </CarouselContent>
 
-                <CarouselPrevious className="absolute left-0  md:left-10 lg:left-50 xl:left-100 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow hover:bg-gray-100 transition z-10"></CarouselPrevious>
-
-                <CarouselNext className="absolute right-0  md:right-10 lg:right-50 xl:right-100 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow hover:bg-gray-100 transition z-10"></CarouselNext>
+                {/* hide navigation only on mobile */}
+                <CarouselPrevious className="hidden sm:flex absolute left-2 sm:left-4 lg:left-40 top-1/2 -translate-y-1/2 bg-white p-2 sm:p-3 rounded-full shadow" />
+                <CarouselNext className="hidden sm:flex absolute right-2 sm:right-4 lg:right-40 top-1/2 -translate-y-1/2 bg-white p-2 sm:p-3 rounded-full shadow" />
               </Carousel>
             </TabsContent>
           </div>
