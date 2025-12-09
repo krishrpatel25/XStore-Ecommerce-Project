@@ -426,7 +426,7 @@ function Products() {
               className="cursor-pointer"
             >
               {/* Image Box - Clean + Minimal */}
-              <div className=" w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden transition-all duration-300 group hover:-translate-y-3 hover:shadow-xl hover:scale-[1.01] ">
+              <div className=" w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden transition-all duration-500 group hover:-translate-y-3 hover:shadow-xl hover:scale-[1.01] ">
                 {" "}
                 <img
                   src={product.images[0]}
