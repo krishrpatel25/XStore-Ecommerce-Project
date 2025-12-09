@@ -36,7 +36,7 @@ const NavbarComp = () => {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="w-full fixed top-0 left-0 z-40 bg-white/60 backdrop-blur-xl shadow-sm border-b border-background">
+      <nav className="w-full h-auto fixed top-0 left-0 z-40 bg-white/60 backdrop-blur-xl shadow-sm border-b border-background">
         <div className="max-w-7xl mx-auto flex items-center px-6 py-4">
           {/* LEFT MENU (Desktop Only) */}
           <div className="hidden lg:flex items-center gap-6 flex-1">
@@ -62,31 +62,32 @@ const NavbarComp = () => {
 
           {/* LOGO */}
           <NavLink
-            to="/"
+            to="/"    
             className="
-    text-3xl font-extrabold tracking-widest text-gray-900
-    relative inline-block
-    transition-all duration-300
+              text-3xl font-extrabold tracking-widest text-gray-900
+              relative inline-block
+              transition-all duration-300
 
-    /* 3D base */
-    drop-shadow-[2px_2px_0px_rgba(0,0,0,0.25)]
+              /* 3D base */
+              drop-shadow-[2px_2px_0px_rgba(0,0,0,0.25)]
 
-    /* hover animation */
-    hover:scale-110 hover:tracking-[0.25em] hover:text-accent
-    hover:drop-shadow-[6px_6px_0px_rgba(0,0,0,0.25)]
-  "
+              /* hover animation */
+              hover:scale-110 hover:tracking-[0.25em] hover:text-accent
+              hover:drop-shadow-[6px_6px_0px_rgba(0,0,0,0.25)]
+            "
           >
             <span className="relative inline-block">
               XStore
               {/* 3D Shine Layer */}
               <span
                 className="
-        absolute inset-0 text-white opacity-0
-        translate-y-1 translate-x-1
-        transition-all duration-300
-        blur-sm
-        hover:opacity-30
-      "
+                text-sm
+                  absolute inset-0 text-white opacity-0
+                  translate-y-1 translate-x-1
+                  transition-all duration-300
+                  blur-sm
+                  hover:opacity-30
+                "
               >
                 XStore
               </span>
@@ -249,7 +250,7 @@ const NavbarComp = () => {
               <FiShoppingCart /> My Cart
             </span>
             <span className="text-xs bg-accent text-white px-2 py-[2px] rounded-full">
-              3
+              {cart.length}
             </span>
           </button>
         </div>
