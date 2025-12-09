@@ -39,19 +39,30 @@ function ProductDetailContent({ products }) {
       <section className="pt-14 px-0 lg:pt-24 lg:px-14">
         <div className="flex flex-col lg:flex-row items-center justify-between lg:items-start gap-6 p-4 lg:p-0">
           {/* Thumbnails */}
-          <div className="flex lg:flex-col gap-3 lg:order-1 overflow-x-auto lg:overflow-x-visible">
+          <div
+            className="
+    grid grid-cols-3 grid-rows-2 gap-3        /* MOBILE (default) */
+    sm:flex sm:flex-row sm:gap-3              /* TABLET AND ABOVE */
+    lg:flex-col lg:order-1 lg:overflow-visible
+  "
+          >
             {products?.images ? (
               products.images.map((img, index) => (
                 <img
                   key={index}
                   src={img}
                   alt={`product-${index}`}
-                  className="  p-2 rounded-2xl w-16 h-16 sm:w-25 sm:h-25 object-cover cursor-pointer flex-shrink-0"
+                  className="
+          w-full h-20                 /* MOBILE IMAGE SIZE */
+          sm:w-20 sm:h-20             /* TABLET+ USES OLD SIZE */
+          lg:w-24 lg:h-24
+          rounded-xl object-cover cursor-pointer
+        "
                   onClick={() => setSelectImage(img)}
                 />
               ))
             ) : (
-              <div className="flex justify-center items-center py-10">
+              <div className="flex justify-center items-center py-10 col-span-3">
                 <div className="flex space-x-2">
                   <div className="w-3 h-3 rounded-full animate-bounce"></div>
                   <div className="w-3 h-3 rounded-full animate-bounce [animation-delay:-0.2s]"></div>
