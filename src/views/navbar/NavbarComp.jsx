@@ -241,8 +241,11 @@ const NavbarComp = () => {
 
         {/* CART, WISHLIST & ORDERS */}
         <div className="flex flex-col gap-2 px-5">
-          <button className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100">
-            <span className="flex items-center gap-2">
+          <button
+            onClick={()=>navigate('/cart')}
+            className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100">
+            <span
+              className="flex items-center gap-2">
               <FiShoppingCart /> My Cart
             </span>
             <span className="text-xs bg-accent text-white px-2 py-[2px] rounded-full">

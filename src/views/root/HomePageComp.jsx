@@ -20,7 +20,7 @@ const HomePageComp = () => {
   const getProductData = async () => {
     try {
       const res = await axios.get(
-        `https://dummyjson.com/products?limit=8&skip=0`
+        `https://dummyjson.com/products?limit=8&skip=78`
       );
       setProducts(res.data.products);
     } catch (error) {
