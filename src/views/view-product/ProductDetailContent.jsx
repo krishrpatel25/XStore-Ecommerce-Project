@@ -34,52 +34,59 @@ function ProductDetailContent({ products }) {
       icon: <i className="bi bi-bag-heart-fill text-xl"></i>,
     });
   };
+
+  if (!products) {
+    return <div> no data found </div>;
+  }
   return (
     <div>
       <section className="pt-14 px-0 lg:pt-24 lg:px-14">
         <div className="flex flex-col lg:flex-row items-center justify-between lg:items-start gap-6 p-4 lg:p-0">
-          {/* Thumbnails */}
-          <div
-            className="
-    grid grid-cols-3 grid-rows-2 gap-3        /* MOBILE (default) */
-    sm:flex sm:flex-row sm:gap-3              /* TABLET AND ABOVE */
-    lg:flex-col lg:order-1 lg:overflow-visible
-  "
-          >
-            {products?.images ? (
-              products.images.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`product-${index}`}
-                  className="
-          w-full h-20                 /* MOBILE IMAGE SIZE */
-          sm:w-20 sm:h-20             /* TABLET+ USES OLD SIZE */
-          lg:w-24 lg:h-24
-          rounded-xl object-cover cursor-pointer
-        "
-                  onClick={() => setSelectImage(img)}
-                />
-              ))
-            ) : (
-              <div className="flex justify-center items-center py-10 col-span-3">
-                <div className="flex space-x-2">
-                  <div className="w-3 h-3 rounded-full animate-bounce"></div>
-                  <div className="w-3 h-3 rounded-full animate-bounce [animation-delay:-0.2s]"></div>
-                  <div className="w-3 h-3 rounded-full animate-bounce [animation-delay:-0.4s]"></div>
+          <div className="flex gap-6 justify-between">
+            {/* Thumbnails */}
+            <div
+              className="
+                  grid grid-cols-3 grid-rows-2 gap-3        /* MOBILE (default) */
+                  sm:flex sm:flex-row sm:gap-3              /* TABLET AND ABOVE */
+                  lg:flex-col lg:order-1 lg:overflow-visible
+                "
+            >
+              {products?.images ? (
+                Array.isArray(products.images) &&
+                products.images.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`product-${index}`}
+                    className="
+                      w-full h-20                 /* MOBILE IMAGE SIZE */
+                      sm:w-20 sm:h-20             /* TABLET+ USES OLD SIZE */
+                      lg:w-24 lg:h-24
+                      rounded-xl object-cover cursor-pointer
+                        "
+                    onClick={() => setSelectImage(img)}
+                  />
+                ))
+              ) : (
+                <div className="flex justify-center items-center py-10 col-span-3">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 rounded-full animate-bounce"></div>
+                    <div className="w-3 h-3 rounded-full animate-bounce [animation-delay:-0.2s]"></div>
+                    <div className="w-3 h-3 rounded-full animate-bounce [animation-delay:-0.4s]"></div>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
 
-          {/* Main Image */}
-          <div className="border-none flex justify-center items-center order-1 lg:order-2 w-full lg:w-auto">
-            <div className="w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[300px] md:h-[300px] flex justify-center items-center rounded-2xl  overflow-hidden">
-              <img
-                src={selectImage}
-                alt={products?.title}
-                className="w-full h-full object-contain transition-all duration-300"
-              />
+            {/* Main Image */}
+            <div className="border-none flex justify-center items-center order-1 lg:order-2 w-full lg:w-auto">
+              <div className="w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[300px] md:h-[300px] flex justify-center items-center rounded-2xl  overflow-hidden">
+                <img
+                  src={selectImage}
+                  alt={products?.title}
+                  className="w-full h-full object-contain transition-all duration-300"
+                />
+              </div>
             </div>
           </div>
 

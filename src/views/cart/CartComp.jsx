@@ -242,7 +242,10 @@ const CartComp = () => {
             </div>
 
             {/* Checkout Button */}
-            <button className="w-full mt-5 sm:mt-6 py-2.5 sm:py-3 bg-primary text-background hover:bg-accent rounded-lg font-semibold shadow hover:opacity-90 transition text-sm sm:text-base">
+            <button
+              onClick={() => navigate("/checkoutform")}
+              className="w-full mt-5 sm:mt-6 py-2.5 sm:py-3 bg-primary text-background hover:bg-accent rounded-lg font-semibold shadow hover:opacity-90 transition text-sm sm:text-base"
+            >
               Proceed to Checkout
             </button>
           </div>

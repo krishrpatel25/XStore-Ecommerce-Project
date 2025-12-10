@@ -8,6 +8,7 @@ import CartPage from "./pages/cart/CartPage";
 import CategoryPage from "./pages/category/CategoryPage";
 import AllProductsPage from "./pages/all-products/AllProductsPage";
 import { Toaster } from "sonner";
+import CheckoutForm from "./pages/checkout-form/CheckoutForm";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: "product/:id", element: <ViewProductPage /> },
       { path: "cart", element: <CartPage /> },
       { path: "category", element: <CategoryPage /> },
+      { path: "checkoutform", element: <CheckoutForm /> },
     ],
   },
 ]);
