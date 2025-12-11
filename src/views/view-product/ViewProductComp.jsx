@@ -4,11 +4,18 @@ import { useParams } from "react-router-dom";
 import ProductDetailContent from "./ProductDetailContent";
 import ProductAditionalInfo from "./ProductAditionalInfo";
 import ProductNotFound from "./ProductNotFound";
+import { useLocation } from "react-router-dom";
 
 function ViewProductComp() {
   const { id } = useParams();
   const [products, setproduct] = useState("");
   const [loading, setLoading] = useState(true);
+  const { pathname } = useLocation();
+
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const fetchSingleProductData = async () => {
     try {

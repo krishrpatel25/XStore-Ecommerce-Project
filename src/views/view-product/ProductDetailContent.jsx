@@ -3,30 +3,39 @@ import { useCart } from "@/context/CartsContext";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import QuantityControl from "./component/QuantityControl";
 
 function ProductDetailContent({ products }) {
-  const {addProduct}=useCart()
+  const { addProduct } = useCart();
   const navigate = useNavigate();
   const [selectImage, setSelectImage] = useState(products?.thumbnail || "");
-  const [qty, setQty] = useState(1);
-  
+  const { cart, updateCart, removeProduct } = useCart();
+  const existingItem = cart.find((i) => i.id === products.id);
+  const qty = existingItem ? existingItem.qty : 1;
+  const showQtyControl = existingItem && existingItem.qty > 0;
+
   const handleIncrease = () => {
-    setQty((prev) => prev + 1);
+    updateCart(products.id, qty + 1);
   };
 
-  const handleDecrease = () => {
-    setQty((prev) => (prev > 1 ? prev - 1 : 1));
-  };
+const handleDecrease = () => {
+  if (qty > 1) {
+    updateCart(products.id, qty - 1);
+  } else {
+    // qty is going to 0 → remove from cart
+    removeProduct(products.id);
+  }
+};
+
 
   const handleAddToCart = () => {
-    addProduct(products,qty)
+    addProduct(products, qty);
     toast("Product Added to Cart", {
       icon: <i class="bi bi-bag-check-fill text-primary text-xl"></i>,
       style: {
         color: "var(--primary)", // ← change text color here
       },
     });
-    navigate(`/cart`);
   };
 
   const handleAddToWishlist = () => {
@@ -143,33 +152,34 @@ function ProductDetailContent({ products }) {
 
             <div className="flex flex-col sm:flex-row w-full gap-4 pt-4">
               <div className="flex gap-4 w-full">
-                <div className="flex items-center gap-3 bg-secondary px-4 rounded-xl">
-                  {/* Decrease */}
-                  <button
-                    onClick={handleDecrease}
-                    className="w-full flex items-center px-1 justify-center bg-secondary text-foreground hover:bg-accent/80 rounded-md transition"
-                  >
-                    -
-                  </button>
+                {!showQtyControl ? (
+                  <>
+                    {/* Add Cart Button */}
+                    <Button
+                      className="w-[55%] text-white hover:bg-secondary hover:text-foreground sm:w-auto"
+                      onClick={handleAddToCart}
+                    >
+                      Add Cart
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    {/* Quantity Control */}
+                    <QuantityControl
+                      qty={qty}
+                      onIncrease={handleIncrease}
+                      onDecrease={handleDecrease}
+                    />
 
-                  {/* Quantity */}
-                  <span className="text-md font-semibold">{qty}</span>
-
-                  {/* Increase */}
-                  <button
-                    onClick={handleIncrease}
-                    className="w-full flex items-center px-1 justify-center bg-secondary text-foreground rounded-md hover:bg-accent/80 transition"
-                  >
-                    +
-                  </button>
-                </div>
-
-                <Button
-                  className="w-[55%]  text-white hover:bg-secondary hover:text-foreground sm:w-auto"
-                  onClick={handleAddToCart}
-                >
-                  Add Cart
-                </Button>
+                    {/* View Cart Button */}
+                    <Button
+                      className="w-[55%] text-white hover:bg-secondary hover:text-foreground sm:w-auto"
+                      onClick={() => navigate("/cart")}
+                    >
+                      View Cart
+                    </Button>
+                  </>
+                )}
               </div>
 
               <Button
