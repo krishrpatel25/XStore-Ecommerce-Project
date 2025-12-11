@@ -2,6 +2,17 @@ import { FiTrash2 } from "react-icons/fi";
 import { useCart } from "@/context/CartsContext";
 import { useNavigate } from "react-router-dom";
 import QuantityControl from "../view-product/component/QuantityControl";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const CartComp = () => {
   const { cart, updateCart, removeProduct } = useCart();
@@ -64,10 +75,10 @@ const CartComp = () => {
         {/* LEFT: CART ITEMS */}
         <div className="w-full lg:w-3/4">
           {/* Table Header — Hidden on Mobile */}
-          <div className="hidden sm:grid grid-cols-12 font-semibold text-gray-600 mb-4 px-2">
-            <p className="col-span-6">Product</p>
+          <div className="hidden sm:grid grid-cols-12 font-semibold text-gray-600 mb-4 ">
+            <p className="col-span-5">Product</p>
             <p className="col-span-3 text-center">Quantity</p>
-            <p className="col-span-2 text-center">Total Price</p>
+            <p className="col-span-3 text-center">Total Price</p>
             <p className="col-span-1 text-right">Remove</p>
           </div>
 
@@ -187,15 +198,45 @@ const CartComp = () => {
                 </p>
 
                 <div className="col-span-1 text-right pr-2">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      removeProduct(item.id);
-                    }}
-                    className="text-red-500 hover:text-red-700 text-xl"
-                  >
-                    <FiTrash2 />
-                  </button>
+                  <AlertDialog>
+                    {/* Use asChild so we can render our own button/icon */}
+                    <AlertDialogTrigger asChild>
+                      <button
+                        type="button"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-red-500 hover:text-red-700 text-xl"
+                        aria-label="Delete item"
+                      >
+                        <FiTrash2 />
+                      </button>
+                    </AlertDialogTrigger>
+
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Remove product from cart?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          If you continue, the item will be deleted from your
+                          cart. You can re-add it whenever you want.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+                        {/* Confirm button — remove happens here */}
+                        <AlertDialogAction
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            removeProduct(item.id);
+                          }}
+                        >
+                          Continue
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </div>
               </div>
             ))}
