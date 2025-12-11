@@ -13,6 +13,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 const CartComp = () => {
   const { cart, updateCart, removeProduct } = useCart();
@@ -29,6 +30,19 @@ const CartComp = () => {
 
   const format = (num) =>
     num.toLocaleString("en-US", { minimumFractionDigits: 2 });
+
+const handleRemoveProduct = (e, item) => {
+  e.stopPropagation();
+  removeProduct(item.id);
+
+  toast("Product removed from your Cart", {
+    icon: <i className="bi bi-cart-x-fill text-accent text-xl"></i>,
+    style: {
+      color: "var(--accent)",
+    },
+  });
+};
+
 
   if (cart.length === 0) {
     return (
@@ -204,7 +218,7 @@ const CartComp = () => {
                       <button
                         type="button"
                         onClick={(e) => e.stopPropagation()}
-                        className="text-red-500 hover:text-red-700 text-xl"
+                        className="text-background p-2 rounded-2xl bg-accent hover:bg-accent text-xl"
                         aria-label="Delete item"
                       >
                         <FiTrash2 />
@@ -218,18 +232,18 @@ const CartComp = () => {
                         </AlertDialogTitle>
                         <AlertDialogDescription>
                           If you continue, the item will be deleted from your
-                          cart. You can re-add it whenever you want.
+                          cart. You can add it again anytime.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
 
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
 
-                        {/* Confirm button — remove happens here */}
+                        {/* Confirm button — deletion happens here */}
                         <AlertDialogAction
                           onClick={(e) => {
-                            e.stopPropagation();
-                            removeProduct(item.id);
+                            e.stopPropagation(); 
+                            handleRemoveProduct(e, item);
                           }}
                         >
                           Continue
