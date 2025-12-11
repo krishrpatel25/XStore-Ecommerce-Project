@@ -62,7 +62,7 @@ const NavbarComp = () => {
 
           {/* LOGO */}
           <NavLink
-            to="/"    
+            to="/"
             className="
               text-3xl font-extrabold tracking-widest text-gray-900
               relative inline-block
@@ -163,14 +163,13 @@ const NavbarComp = () => {
             </button>
 
             <button className="py-2 px-4 hover:bg-gray-100 rounded-lg transition flex justify-between">
-              My Cart <span>🛒</span>
-            </button>
-
-            <button className="py-2 px-4 hover:bg-gray-100 rounded-lg transition flex justify-between">
               Orders <span>📦</span>
             </button>
 
-            <button className="py-2 px-4 hover:bg-gray-100 rounded-lg transition flex justify-between">
+            <button
+              onClick={() => navigate("/wishlist")}
+              className="py-2 px-4 hover:bg-gray-100 rounded-lg transition flex justify-between"
+            >
               Wishlist <span>❤️</span>
             </button>
 
@@ -243,10 +242,10 @@ const NavbarComp = () => {
         {/* CART, WISHLIST & ORDERS */}
         <div className="flex flex-col gap-2 px-5">
           <button
-            onClick={()=>navigate('/cart')}
-            className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100">
-            <span
-              className="flex items-center gap-2">
+            onClick={() => navigate("/cart")}
+            className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100"
+          >
+            <span className="flex items-center gap-2">
               <FiShoppingCart /> My Cart
             </span>
             <span className="text-xs bg-accent text-white px-2 py-[2px] rounded-full">
