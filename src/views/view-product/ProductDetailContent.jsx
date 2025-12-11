@@ -27,7 +27,6 @@ const handleDecrease = () => {
   }
 };
 
-
   const handleAddToCart = () => {
     addProduct(products, qty);
     toast("Product Added to Cart", {

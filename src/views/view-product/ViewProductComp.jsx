@@ -42,17 +42,19 @@ function ViewProductComp() {
   }
 
   return (
-    <div className="p-4 md:p-16 ">
-      {products ? (
-        <>
-          <ProductDetailContent products={products} />
-          {/* details section  */}
-          <ProductAditionalInfo products={products} />
-        </>
-      ) : (
-        <ProductNotFound />
-      )}
-    </div>
+    <>
+      <div className="p-4 md:p-16 ">
+        {products ? (
+          <>
+            <ProductDetailContent products={products} />
+            {/* details section  */}
+            <ProductAditionalInfo products={products} />
+          </>
+        ) : (
+          <ProductNotFound />
+        )}
+      </div>
+    </>
   );
 }
 
