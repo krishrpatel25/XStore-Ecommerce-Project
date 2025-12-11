@@ -9,7 +9,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { FiMail, FiStar } from "react-icons/fi";
-import "bootstrap-icons/font/bootstrap-icons.css"; // IMPORTANT
+import "bootstrap-icons/font/bootstrap-icons.css";
 const HomePageComp = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,6 +59,8 @@ const HomePageComp = () => {
         "Super easy returns and exchange. Definitely my favorite store to shop from!",
     },
   ];
+
+
   return (
     <>
       <main className="px-4 md:px-10 lg:px-30 pt-20">
@@ -69,7 +71,7 @@ const HomePageComp = () => {
           {/* ================================
           LEFT BIG BOX — CAROUSEL
       ================================= */}
-          <div className=" w-full sm:w-full  col-span-2 w-[75%] bg-primary rounded-3xl p-0 overflow-hidden relative ">
+          <div className=" w-full sm:w-full col-span-2 w-[75%] bg-primary rounded-3xl p-0 overflow-hidden relative ">
             <Carousel
               className="w-full"
               opts={{ loop: true, align: "start" }}
@@ -87,7 +89,7 @@ const HomePageComp = () => {
                     {/* TEXT */}
                     <div className="w-1/2 h-full flex flex-col justify-center text-center items-center sm:text-start sm:items-start pl-12 lg:pl-16 z-20">
                       <p className="text-secondary mb-3">Hot Picks Today</p>
-                      <h1 className="text-4xl font-bold leading-tight text-foreground mb-6">
+                      <h1 className="text-4xl font-bold leading-tight text-background mb-6">
                         Fresh Styles Await You...
                       </h1>
                       <button
@@ -115,7 +117,7 @@ const HomePageComp = () => {
                       <p className="text-secondary mb-3">
                         Amazing Products From Store
                       </p>
-                      <h1 className="text-4xl font-bold leading-tight text-foreground mb-6">
+                      <h1 className="text-4xl font-bold leading-tight text-background mb-6">
                         Explore Our New Designs...
                       </h1>
                       <button
@@ -140,7 +142,7 @@ const HomePageComp = () => {
                   <div className="w-full h-full flex items-center relative">
                     <div className="w-1/2 h-full flex flex-col justify-center text-center items-center sm:text-start sm:items-start pl-12 lg:pl-16 z-20">
                       <p className="text-secondary mb-3">Trending Now</p>
-                      <h1 className="text-4xl font-bold leading-tight text-foreground mb-6">
+                      <h1 className="text-4xl font-bold leading-tight text-background mb-6">
                         Upgrade Your Lifestyle...
                       </h1>
                       <button
@@ -167,12 +169,12 @@ const HomePageComp = () => {
             {/* RIGHT TOP BOX */}
             <div className="bg-accent rounded-3xl p-8 flex items-center justify-between h-[48%]">
               <div>
-                <h3 className="text-2xl font-semibold text-gray-900">
+                <h1 className="text-2xl font-semibold text-gray-900">
                   Best Sale
-                </h3>
+                </h1>
                 <p
                   onClick={() => navigate("/allproducts")}
-                  className="text-gray-700 hover:text-background mt-2 cursor-pointer"
+                  className="text-background hover:text-background/80 mt-2 cursor-pointer"
                 >
                   View more →
                 </p>
