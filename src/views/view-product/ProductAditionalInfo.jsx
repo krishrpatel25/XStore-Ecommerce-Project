@@ -15,7 +15,7 @@ function ProductAditionalInfo({ products }) {
       <section className="pt-16">
         {/* Information buttons  */}
         <Tabs defaultValue="Description" className="w-full">
-          <TabsList className="w-full h-[150px]  w-full bg-transparent border-b-2 border-primary rounded-none flex-col md: flex md:flex-row md:gap-10 md:h-[36px] ">
+          <TabsList className="w-full h-[150px] bg-transparent border-b-2 border-primary rounded-none flex-col md: flex md:flex-row md:gap-10 md:h-[36px] ">
             <TabsTrigger
               className="rounded-none text-gray-700 
                data-[state=active]:font-semibold
@@ -180,11 +180,11 @@ function ProductAditionalInfo({ products }) {
                     <CarouselItem
                       key={index}
                       className="
-            w-[180px]      /* NEW: Mobile width ONLY */
-            xs:w-[200px]   /* NEW: Slightly bigger on very small screens */
-            sm:w-[200px]   /* same as your original */
-            flex-shrink-0 flex justify-center
-          "
+                        w-[180px]      /* NEW: Mobile width ONLY */
+                        xs:w-[200px]   /* NEW: Slightly bigger on very small screens */
+                        sm:w-[200px]   /* same as your original */
+                        flex-shrink-0 flex justify-center
+                      "
                     >
                       <div className="relative w-full mx-auto mb-4">
                         {/* Top Gradient Line */}
