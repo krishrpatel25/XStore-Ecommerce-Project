@@ -11,32 +11,29 @@ export const CartsProvider = ({ children }) => {
       const storedCarts = JSON.parse(localStorage.getItem("cart")) || [];
       setCart(Array.isArray(storedCarts) ? storedCarts : []);
     } catch (err) {
-      console.error("Failed to load cart from localStorage:", err);
+      console.error("Failed to load cart:", err);
       setCart([]);
     }
   }, []);
 
-  // Save cart to localStorage
+  // Save cart
   const saveToLocal = (updatedCart) => {
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
-  // ADD PRODUCT (full product object)
+  // ⭐ ADD PRODUCT (REPLACE QTY if exists)
   const addProduct = (product, qty) => {
-    console.log("ADDING PRODUCT:", product);
-    // CORRECT EXIST CHECK
     const exist = cart.find((item) => item.id === product.id);
 
     let updatedCart;
 
     if (exist) {
-      // Update only that specific product
+      // ⭐ Replace quantity instead of adding
       updatedCart = cart.map((item) =>
-        item.id === product.id ? { ...item, qty: item.qty + qty } : item
+        item.id === product.id ? { ...item, qty } : item
       );
     } else {
-      // Add new product (qty starts at current qty)
       updatedCart = [
         ...cart,
         {
@@ -48,19 +45,15 @@ export const CartsProvider = ({ children }) => {
           qty: qty,
         },
       ];
-    
-
     }
 
     saveToLocal(updatedCart);
   };
 
-  // UPDATE CART QTY
-  // UPDATE CART QTY
+  // ⭐ UPDATE QTY (+ / -)
   const updateCart = (id, newQty) => {
     if (newQty <= 0) {
-      const filtered = cart.filter((item) => item.id !== id);
-      saveToLocal(filtered);
+      saveToLocal(cart.filter((item) => item.id !== id));
       return;
     }
 
@@ -73,8 +66,7 @@ export const CartsProvider = ({ children }) => {
 
   // REMOVE PRODUCT
   const removeProduct = (id) => {
-    const updatedCart = cart.filter((item) => item.id !== id);
-    saveToLocal(updatedCart);
+    saveToLocal(cart.filter((item) => item.id !== id));
   };
 
   return (
@@ -86,5 +78,4 @@ export const CartsProvider = ({ children }) => {
   );
 };
 
-// Hook
 export const useCart = () => useContext(CartsContext);
