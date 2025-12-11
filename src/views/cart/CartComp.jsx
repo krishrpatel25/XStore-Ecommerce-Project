@@ -1,15 +1,20 @@
 import { FiTrash2 } from "react-icons/fi";
 import { useCart } from "@/context/CartsContext";
 import { useNavigate } from "react-router-dom";
+import QuantityControl from "../view-product/component/QuantityControl";
 
 const CartComp = () => {
   const { cart, updateCart, removeProduct } = useCart();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const subTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const shippingCost = 150;
   const discount = 50;
   const finalTotal = subTotal + shippingCost - discount;
+
+  const handleViewProduct = (item) => {
+    navigate(`/product/${item.id}`);
+  };
 
   const format = (num) =>
     num.toLocaleString("en-US", { minimumFractionDigits: 2 });
@@ -142,6 +147,7 @@ const CartComp = () => {
             {cart.map((item) => (
               <div
                 key={item.id}
+                onClick={() => handleViewProduct(item)}
                 className="grid grid-cols-12 items-center py-6 mb-4"
               >
                 <div className="col-span-6 flex items-center gap-6">
@@ -164,24 +170,15 @@ const CartComp = () => {
                 </div>
 
                 <div className="col-span-3 flex items-center justify-center">
-                  <div className="flex items-center bg-secondary px-2 py-1 rounded-2xl">
-                    <button
-                      className="text-md font-medium px-2 hover:text-accent"
-                      onClick={() => updateCart(item.id, item.qty - 1)}
-                    >
-                      -
-                    </button>
-
-                    <span className="text-md font-semibold w-4 text-center">
-                      {item.qty}
-                    </span>
-
-                    <button
-                      className="text-md font-medium px-2 hover:text-accent"
-                      onClick={() => updateCart(item.id, item.qty + 1)}
-                    >
-                      +
-                    </button>
+                  <div className="flex gap-4 w-full">
+                    <div className="col-span-3 flex items-center justify-center">
+                      <QuantityControl
+                        qty={item.qty}
+                        stopClick={true}
+                        onIncrease={() => updateCart(item.id, item.qty + 1)}
+                        onDecrease={() => updateCart(item.id, item.qty - 1)}
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -191,7 +188,10 @@ const CartComp = () => {
 
                 <div className="col-span-1 text-right pr-2">
                   <button
-                    onClick={() => removeProduct(item.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeProduct(item.id);
+                    }}
                     className="text-red-500 hover:text-red-700 text-xl"
                   >
                     <FiTrash2 />
