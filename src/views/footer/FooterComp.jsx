@@ -7,29 +7,29 @@ const FooterComp = () => {
       <footer className="w-full bg-primary border-t border-gray-200 py-14">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Column 1 */}
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-4">XStore</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
+          <div className="text-foreground">
+            <h3 className="text-xl font-bold mb-4">XStore</h3>
+            <p className=" text-sm leading-relaxed">
               Premium products. Trusted service. Your favorite shopping
               destination.
             </p>
-            <div className="mt-5 flex gap-4 text-gray-500">
-              <FiFacebook size={22} className="hover:text-accent transition" />
-              <FiInstagram size={22} className="hover:text-accent transition" />
-              <FiTwitter size={22} className="hover:text-accent transition" />
+            <div className="mt-5 flex gap-4 ">
+              <FiFacebook size={22} className="hover:text-accent text-semibold transition" />
+              <FiInstagram size={22} className="hover:text-accent text-semibold transition" />
+              <FiTwitter size={22} className="hover:text-accent text-semibold transition" />
             </div>
           </div>
 
           {/* Column 2 */}
-          <div>
-            <h4 className="font-semibold text-gray-800 mb-3">Shop</h4>
-            <ul className="space-y-2 text-gray-600 text-sm">
+          <div className="text-foreground">
+            <h4 className="font-bold  mb-3">Shop</h4>
+            <ul className="space-y-2  text-sm">
               {["Men", "Wishlist", "Electronics", "Accessories"].map((item) => (
                 <li
                   key={item}
-                  className="relative w-fit cursor-pointer text-gray-600 hover:text-accent transition
+                  className="relative w-fit cursor-pointer  hover:text-background transition
                   before:content-[''] before:absolute before:-bottom-1 before:left-0 
-                  before:w-0 before:h-[2px] before:bg-accent 
+                  before:w-0 before:h-[2px] before:bg-background 
                   before:transition-all before:duration-300 
                   hover:before:w-full"
                 >
@@ -40,11 +40,11 @@ const FooterComp = () => {
           </div>
 
           {/* Column 3 */}
-          <div>
-            <h4 className="font-semibold text-gray-800 mb-3">
+          <div className="text-foreground">
+            <h4 className="font-bold  mb-3">
               Customer Support
             </h4>
-            <ul className="space-y-2 text-gray-600 text-sm">
+            <ul className="space-y-2  text-sm">
               {[
                 "Help Center",
                 "Track Order",
@@ -53,7 +53,7 @@ const FooterComp = () => {
               ].map((item) => (
                 <li
                   key={item}
-                  className="relative w-fit cursor-pointer text-gray-600 hover:text-background transition
+                  className="relative w-fit cursor-pointer  hover:text-background transition
                   before:content-[''] before:absolute before:-bottom-1 before:left-0 
                   before:w-0 before:h-[2px] before:bg-background 
                   before:transition-all before:duration-500 
@@ -66,11 +66,9 @@ const FooterComp = () => {
           </div>
 
           {/* Column 4 */}
-          <div>
-            <h4 className="font-semibold text-gray-800 mb-3">Download App</h4>
-            <p className="text-gray-600 text-sm mb-4">
-              Shop easier with our mobile app.
-            </p>
+          <div className="text-foreground">
+            <h4 className="font-bold  mb-3">Download App</h4>
+            <p className=" text-sm mb-4">Shop easier with our mobile app.</p>
             <div className="flex w-full gap-3">
               <div className="w-[50%]">
                 <img
@@ -96,7 +94,7 @@ const FooterComp = () => {
           </div>
         </div>
       </footer>
-      <div className="w-full bottom-0  bg-bbackground py-4 shadow-inner">
+      <div className="w-full bottom-0  bg-bforeground py-4 shadow-inner">
         <p className="text-center text-gray-700 text-[12px] md:text-sm">
           Copyright 2025 © XStore All Right Reserved.
         </p>
