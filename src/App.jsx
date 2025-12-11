@@ -9,6 +9,8 @@ import CategoryPage from "./pages/category/CategoryPage";
 import AllProductsPage from "./pages/all-products/AllProductsPage";
 import { Toaster } from "sonner";
 import CheckoutForm from "./pages/checkout-form/CheckoutForm";
+import WishList from "./pages/wishlist/WishList";
+import { WishListProvider } from "./context/WishListContext";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,7 @@ const router = createBrowserRouter([
       { path: "cart", element: <CartPage /> },
       { path: "category", element: <CategoryPage /> },
       { path: "checkoutform", element: <CheckoutForm /> },
+      { path: "wishlist", element: <WishList /> },
     ],
   },
 ]);
@@ -30,25 +33,27 @@ function App() {
     // add cartsProvider
     <>
       <CartsProvider>
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            style: {
-              background: "rgba(255, 255, 255, 0.35)", // translucent matte background
-              backdropFilter: "blur(15px) saturate(150%)",
-              WebkitBackdropFilter: "blur(15px) saturate(150%)",
-              borderRadius: "18px",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
-              padding: "16px 20px",
-              color: "var(--accent)", // better readability
-              fontWeight: "600",
-              letterSpacing: "0.2px",
-              border: "2px solid var(--background)",
-            },
-          }}
-        />
+        <WishListProvider>
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: "rgba(255, 255, 255, 0.35)", // translucent matte background
+                backdropFilter: "blur(15px) saturate(150%)",
+                WebkitBackdropFilter: "blur(15px) saturate(150%)",
+                borderRadius: "18px",
+                boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+                padding: "16px 20px",
+                color: "var(--accent)", // better readability
+                fontWeight: "600",
+                letterSpacing: "0.2px",
+                border: "2px solid var(--background)",
+              },
+            }}
+          />
 
-        <RouterProvider router={router}></RouterProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </WishListProvider>
       </CartsProvider>
     </>
   );
