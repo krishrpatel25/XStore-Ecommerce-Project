@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import QuantityControl from "./component/QuantityControl";
+import { useWishList } from "@/context/WishListContext";
 
 function ProductDetailContent({ products }) {
   const { addProduct } = useCart();
@@ -14,18 +15,21 @@ function ProductDetailContent({ products }) {
   const qty = existingItem ? existingItem.qty : 1;
   const showQtyControl = existingItem && existingItem.qty > 0;
 
+  const { wishlist, toggleWishlist } = useWishList();
+  const isWishlisted = wishlist.some((i) => i.id === products.id);
+
   const handleIncrease = () => {
     updateCart(products.id, qty + 1);
   };
 
-const handleDecrease = () => {
-  if (qty > 1) {
-    updateCart(products.id, qty - 1);
-  } else {
-    // qty is going to 0 → remove from cart
-    removeProduct(products.id);
-  }
-};
+  const handleDecrease = () => {
+    if (qty > 1) {
+      updateCart(products.id, qty - 1);
+    } else {
+      // qty is going to 0 → remove from cart
+      removeProduct(products.id);
+    }
+  };
 
   const handleAddToCart = () => {
     addProduct(products, qty);
@@ -37,11 +41,25 @@ const handleDecrease = () => {
     });
   };
 
-  const handleAddToWishlist = () => {
-    toast("Product Added to Wishlist", {
-      icon: <i className="bi bi-bag-heart-fill text-xl"></i>,
-    });
-  };
+  const handleWishlist = () => {
+    toggleWishlist(products)
+
+    if (isWishlisted) { 
+      toast("Product remove from wishlist", {
+        icon: <i class="bi bi-heartbreak-fill text-accent text-xl"></i>,
+        style: {
+          color: "var(--accent)", // ← change text color here
+        },
+      });
+    } else {
+      toast("Product add to wishlist", {
+        icon: <i class="bi bi-heart-fill text-primary text-xl"></i>,
+        style: {
+          color: "var(--primary)", // ← change text color here
+        },
+      });
+    }
+  }
 
   if (!products) {
     return <div> no data found </div>;
@@ -155,7 +173,7 @@ const handleDecrease = () => {
                   <>
                     {/* Add Cart Button */}
                     <Button
-                      className="w-[55%] text-white hover:bg-secondary hover:text-foreground sm:w-auto"
+                      className="w-[55%] text-white bg-accent hover:bg-primary hover:text-background sm:w-auto"
                       onClick={handleAddToCart}
                     >
                       Add Cart
@@ -172,7 +190,7 @@ const handleDecrease = () => {
 
                     {/* View Cart Button */}
                     <Button
-                      className="w-[55%] text-white hover:bg-secondary hover:text-foreground sm:w-auto"
+                      className="w-[55%] text-white bg-accent hover:bg-primary hover:text-background sm:w-auto"
                       onClick={() => navigate("/cart")}
                     >
                       View Cart
@@ -181,12 +199,23 @@ const handleDecrease = () => {
                 )}
               </div>
 
-              <Button
-                className="bg-accent text-background hover:bg-secondary hover:text-foreground"
-                onClick={() => handleAddToWishlist()}
+              <button
+                onClick={handleWishlist}
+                className="px-5 py-2 bg-secondary rounded-full flex items-center gap-2 
+                  hover:bg-primary/20 transition font-medium"
               >
-                whislist
-              </Button>
+                {isWishlisted ? (
+                  <>
+                    <i className="bi bi-heart-fill text-red-500"></i>
+                    Remove
+                  </>
+                ) : (
+                  <>
+                    <i className="bi bi-heart"></i>
+                    Wishlist
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
