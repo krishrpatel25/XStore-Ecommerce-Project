@@ -63,6 +63,8 @@ const CheckoutFormComp = () => {
       toast.error("Something went wrong");
     }
   };
+//for devtool on and off
+  const isDevTool = false;
 
   return (
     <div className="pt-20 p-6 flex items-center justify-center">
@@ -301,7 +303,7 @@ const CheckoutFormComp = () => {
           </Button>
         </CardFooter>
       </Card>
-      <DevTool control={control} />
+      {isDevTool && <DevTool control={control} />}
     </div>
   );
 };
