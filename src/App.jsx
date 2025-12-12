@@ -11,8 +11,11 @@ import { Toaster } from "sonner";
 import CheckoutForm from "./pages/checkout-form/CheckoutForm";
 import WishList from "./pages/wishlist/WishList";
 import { WishListProvider } from "./context/WishListContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const router = createBrowserRouter([
+const queryClient = new QueryClient();
+
+const router = new createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
@@ -32,29 +35,30 @@ function App() {
   return (
     // add cartsProvider
     <>
-      <CartsProvider>
-        <WishListProvider>
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              style: {
-                background: "rgba(255, 255, 255, 0.35)", // translucent matte background
-                backdropFilter: "blur(15px) saturate(150%)",
-                WebkitBackdropFilter: "blur(15px) saturate(150%)",
-                borderRadius: "18px",
-                boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
-                padding: "16px 20px",
-                color: "var(--accent)", // better readability
-                fontWeight: "600",
-                letterSpacing: "0.2px",
-                border: "2px solid var(--background)",
-              },
-            }}
-          />
-
-          <RouterProvider router={router}></RouterProvider>
-        </WishListProvider>
-      </CartsProvider>
+      <QueryClientProvider client={queryClient}>
+        <CartsProvider>
+          <WishListProvider>
+            <Toaster
+              position="bottom-right"
+              toastOptions={{
+                style: {
+                  background: "rgba(255, 255, 255, 0.35)",
+                  backdropFilter: "blur(15px) saturate(150%)",
+                  WebkitBackdropFilter: "blur(15px) saturate(150%)",
+                  borderRadius: "18px",
+                  boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+                  padding: "16px 20px",
+                  color: "var(--accent)",
+                  fontWeight: "600",
+                  letterSpacing: "0.2px",
+                  border: "2px solid var(--background)",
+                },
+              }}
+            />
+            <RouterProvider router={router} />
+          </WishListProvider>
+        </CartsProvider>
+      </QueryClientProvider>
     </>
   );
 }
