@@ -26,9 +26,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
-import { FaWindowClose } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
+import { useQuery } from "@tanstack/react-query";
 
 function debounce(func, delay) {
   let timeout;
@@ -201,29 +200,36 @@ function Products() {
   const [search, setSearch] = useState(""); // first search filter
   const [apiSearch, setApiSearch] = useState(""); //second search filter
 
-  const getProductData = async (limit) => {
-    try {
-      const skip = (page - 1) * limit;
-      const res = await axios.get(
-        `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
-      );
+  const fetchProducts = async ({ queryKey }) => {
+    const [_key, { limit, page }] = queryKey;
+    const skip = (page - 1) * limit;
 
-      const total = res.data.total;
-      const newTotalPages = Math.ceil(total / limit);
-      setTotalPages(newTotalPages);
+    const res = await axios.get(
+      `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
+    );
 
-      if (page > newTotalPages) {
-        setPage(newTotalPages);
-        return; // wait for useEffect to refetch
-      }
-
-      setProduct(res.data.products);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    return res.data;
   };
+  const { data} = useQuery({
+    queryKey: ["products", { limit, page }],
+    queryFn: fetchProducts,
+    keepPreviousData: true,
+  });
+
+  useEffect(() => {
+    if (!data) return;
+
+    const newTotalPages = Math.ceil(data.total / limit);
+    setTotalPages(newTotalPages);
+
+    if (page > newTotalPages) {
+      setPage(newTotalPages);
+      return;
+    }
+
+    setProduct(data.products);
+    setLoading(false);
+  }, [data]);
 
   const fetchApiSearch = async (value) => {
     try {
@@ -244,10 +250,6 @@ function Products() {
     debounce((value) => fetchApiSearch(value), 500),
     []
   );
-
-  useEffect(() => {
-    getProductData(limit);
-  }, [limit, page]);
 
   useEffect(() => {
     debouncedSearch(apiSearch);
