@@ -5,39 +5,30 @@ import ProductDetailContent from "./ProductDetailContent";
 import ProductAditionalInfo from "./ProductAditionalInfo";
 import ProductNotFound from "./ProductNotFound";
 import { useLocation } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import ProductLoader from "@/components/ui/ProductLoader";
 
 function ViewProductComp() {
   const { id } = useParams();
-  const [products, setproduct] = useState("");
-  const [loading, setLoading] = useState(true);
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  const fetchSingleProductData = async () => {
-    try {
-      const res = await axios.get(`https://dummyjson.com/products/${id}`);
-      console.log("View product", res);
-      setproduct(res.data);
-    } catch (error) {
-      console.log("fetching data error", error);
-    } finally {
-      setLoading(false);
-    }
+  const fetchSingleProductData = async (id) => {
+    const res = await axios.get(`https://dummyjson.com/products/${id}`);
+    console.log("View product", res);
+    return res.data;
   };
 
-  useEffect(() => {
-    fetchSingleProductData();
-  }, [id]);
+  const { data: products, isLoading } = useQuery({
+    queryKey: ["products", id],
+    queryFn: () => fetchSingleProductData(id),
+  });
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[70vh]">
-        <p className="text-gray-500 animate-pulse">Loading...</p>
-      </div>
-    );
+  if (isLoading) {
+    return <ProductLoader />;
   }
 
   return (

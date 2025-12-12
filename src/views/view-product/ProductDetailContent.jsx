@@ -7,16 +7,18 @@ import QuantityControl from "./component/QuantityControl";
 import { useWishList } from "@/context/WishListContext";
 
 function ProductDetailContent({ products }) {
-  const { addProduct } = useCart();
   const navigate = useNavigate();
-  const [selectImage, setSelectImage] = useState(products?.thumbnail || "");
+  const { addProduct } = useCart();
   const { cart, updateCart, removeProduct } = useCart();
+  const { wishlist, toggleWishlist } = useWishList();
+  const isWishlisted = wishlist.some((i) => i.id === products.id);
+  
   const existingItem = cart.find((i) => i.id === products.id);
   const qty = existingItem ? existingItem.qty : 1;
   const showQtyControl = existingItem && existingItem.qty > 0;
-
-  const { wishlist, toggleWishlist } = useWishList();
-  const isWishlisted = wishlist.some((i) => i.id === products.id);
+  
+  
+  const [selectImage, setSelectImage] = useState(products?.thumbnail || "");
 
   const handleIncrease = () => {
     updateCart(products.id, qty + 1);
@@ -26,7 +28,6 @@ function ProductDetailContent({ products }) {
     if (qty > 1) {
       updateCart(products.id, qty - 1);
     } else {
-      // qty is going to 0 → remove from cart
       removeProduct(products.id);
     }
   };
@@ -36,7 +37,7 @@ function ProductDetailContent({ products }) {
     toast("Product Added to Cart", {
       icon: <i class="bi bi-bag-check-fill text-primary text-xl"></i>,
       style: {
-        color: "var(--primary)", // ← change text color here
+        color: "var(--primary)",
       },
     });
   };
@@ -48,14 +49,14 @@ function ProductDetailContent({ products }) {
       toast("Product remove from wishlist", {
         icon: <i class="bi bi-heartbreak-fill text-accent text-xl"></i>,
         style: {
-          color: "var(--accent)", // ← change text color here
+          color: "var(--accent)",
         },
       });
     } else {
       toast("Product add to wishlist", {
         icon: <i class="bi bi-heart-fill text-primary text-xl"></i>,
         style: {
-          color: "var(--primary)", // ← change text color here
+          color: "var(--primary)",
         },
       });
     }
@@ -165,7 +166,7 @@ function ProductDetailContent({ products }) {
             <p className="text-2xl sm:text-3xl font-extrabold text-accent mt-2">
               ${products?.price}
             </p>
-            <div className="w-full h-[2px] bg-primary"></div>
+            <div className="w-full h-0.5 bg-primary"></div>
 
             <div className="flex flex-col sm:flex-row w-full gap-4 pt-4">
               <div className="flex gap-4 w-full">
