@@ -7,12 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardAction,
   CardContent,
-  CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,6 +23,24 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+const locationData = {
+  India: {
+    Gujarat: ["Ahmedabad", "Surat", "Amreli", "Gandhinagar"],
+    Rajasthan: ["Jaipur", "Udaipur"],
+    Goa: ["Panaji"],
+    Karnataka: ["Bengaluru", "Mysuru"],
+  },
+  USA: {
+    California: ["Los Angeles", "San Diego"],
+    Texas: ["Houston", "Dallas"],
+  },
+  France: {
+    Paris: ["Paris"],
+  },
+  UAE: {
+    Dubai: ["Dubai"],
+  },
+};
 
 const defaultFormValues = {
   firstName: "",
@@ -48,6 +62,9 @@ const CheckoutFormComp = () => {
 
   const { register, control, watch, setValue,handleSubmit, formState } = form;
   const { errors, isValid, isDirty } = formState;
+  
+  const selectedCountry = watch("country");
+  const selectedState = watch("state");
 
   const onSubmit = async (data) => {
     try {
@@ -141,148 +158,167 @@ const CheckoutFormComp = () => {
                   {errors.addressLine2?.message}
                 </p>
               </div>
-              <div>
-                {/* country */}
-                <div className="pb-4">
-                  <div className="pb-2">
-                    <Label htmlFor="country">country</Label>
-                  </div>
+
+              <div className="space-y-6">
+                {/* COUNTRY */}
+                <div>
+                  <Label className="mb-2 block font-medium">Country</Label>
 
                   <DropdownMenu>
                     <DropdownMenuTrigger
-                      id="country"
-                      className="border px-3 py-2 rounded-md"
+                      className="
+          w-full
+          border px-3 py-2 rounded-md
+          text-left
+          flex justify-between items-center
+          hover:bg-muted
+          transition
+        "
                     >
-                      {watch("country") || "Select country"}
+                      <span
+                        className={
+                          selectedCountry ? "" : "text-muted-foreground"
+                        }
+                      >
+                        {selectedCountry || "Select country"}
+                      </span>
                     </DropdownMenuTrigger>
 
-                    <DropdownMenuContent>
-                      <DropdownMenuLabel>country</DropdownMenuLabel>
+                    <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+                      <DropdownMenuLabel>Country</DropdownMenuLabel>
                       <DropdownMenuSeparator />
 
-                      <DropdownMenuItem
-                        onClick={() => setValue("country", "Gujarat")}
-                      >
-                        India
-                      </DropdownMenuItem>
-
-                      <DropdownMenuItem
-                        onClick={() => setValue("country", "Rajasthan")}
-                      >
-                        USA
-                      </DropdownMenuItem>
-
-                      <DropdownMenuItem
-                        onClick={() => setValue("country", "Goa")}
-                      >
-                        France
-                      </DropdownMenuItem>
-
-                      <DropdownMenuItem
-                        onClick={() => setValue("country", "Karnataka")}
-                      >
-                        UAE
-                      </DropdownMenuItem>
+                      {Object.keys(locationData).map((country) => (
+                        <DropdownMenuItem
+                          key={country}
+                          onClick={() => {
+                            setValue("country", country);
+                            setValue("state", "");
+                            setValue("city", "");
+                          }}
+                        >
+                          {country}
+                        </DropdownMenuItem>
+                      ))}
                     </DropdownMenuContent>
                   </DropdownMenu>
 
                   {errors.country && (
-                    <p className="text-red-500 text-sm">
+                    <p className="text-red-500 text-xs mt-1">
                       {errors.country.message}
                     </p>
                   )}
                 </div>
-                <div className="flex justify-between">
+
+                {/* STATE & CITY */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* STATE */}
                   <div>
-                    <div className="pb-2">
-                      <Label htmlFor="state">State</Label>
-                    </div>
+                    <Label className="mb-2 block font-medium">State</Label>
 
                     <DropdownMenu>
-                      <DropdownMenuTrigger className="border px-3 py-2 rounded-md">
-                        {watch("state") || "Select State"}
+                      <DropdownMenuTrigger
+                        disabled={!selectedCountry}
+                        className={`
+            w-full
+            border px-3 py-2 rounded-md
+            text-left
+            flex justify-between items-center
+            transition
+            ${
+              !selectedCountry
+                ? "bg-muted text-muted-foreground cursor-not-allowed"
+                : "hover:bg-muted"
+            }
+          `}
+                      >
+                        <span
+                          className={
+                            selectedState ? "" : "text-muted-foreground"
+                          }
+                        >
+                          {selectedState || "Select State"}
+                        </span>
                       </DropdownMenuTrigger>
 
-                      <DropdownMenuContent>
+                      <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
                         <DropdownMenuLabel>State</DropdownMenuLabel>
                         <DropdownMenuSeparator />
 
-                        <DropdownMenuItem
-                          onClick={() => setValue("state", "Gujarat")}
-                        >
-                          Gujarat
-                        </DropdownMenuItem>
-
-                        <DropdownMenuItem
-                          onClick={() => setValue("state", "Rajasthan")}
-                        >
-                          Rajasthan
-                        </DropdownMenuItem>
-
-                        <DropdownMenuItem
-                          onClick={() => setValue("state", "Goa")}
-                        >
-                          Goa
-                        </DropdownMenuItem>
-
-                        <DropdownMenuItem
-                          onClick={() => setValue("state", "Karnataka")}
-                        >
-                          Karnataka
-                        </DropdownMenuItem>
+                        {selectedCountry &&
+                          Object.keys(locationData[selectedCountry]).map(
+                            (state) => (
+                              <DropdownMenuItem
+                                key={state}
+                                onClick={() => {
+                                  setValue("state", state);
+                                  setValue("city", "");
+                                }}
+                              >
+                                {state}
+                              </DropdownMenuItem>
+                            )
+                          )}
                       </DropdownMenuContent>
                     </DropdownMenu>
 
                     {errors.state && (
-                      <p className="text-red-500 text-sm">
+                      <p className="text-red-500 text-xs mt-1">
                         {errors.state.message}
                       </p>
                     )}
                   </div>
+
                   {/* CITY */}
                   <div>
-                    <div className="pb-2">
-                      <Label htmlFor="city">City</Label>
-                    </div>
+                    <Label className="mb-2 block font-medium">City</Label>
 
                     <DropdownMenu>
-                      <DropdownMenuTrigger className="border px-3 py-2 rounded-md">
-                        {watch("city") || "Select City"}
+                      <DropdownMenuTrigger
+                        disabled={!selectedState}
+                        className={`
+            w-full
+            border px-3 py-2 rounded-md
+            text-left
+            flex justify-between items-center
+            transition
+            ${
+              !selectedState
+                ? "bg-muted text-muted-foreground cursor-not-allowed"
+                : "hover:bg-muted"
+            }
+          `}
+                      >
+                        <span
+                          className={
+                            watch("city") ? "" : "text-muted-foreground"
+                          }
+                        >
+                          {watch("city") || "Select City"}
+                        </span>
                       </DropdownMenuTrigger>
 
-                      <DropdownMenuContent>
+                      <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
                         <DropdownMenuLabel>City</DropdownMenuLabel>
                         <DropdownMenuSeparator />
 
-                        <DropdownMenuItem
-                          onClick={() => setValue("city", "Ahmedabad")}
-                        >
-                          Ahmedabad
-                        </DropdownMenuItem>
-
-                        <DropdownMenuItem
-                          onClick={() => setValue("city", "Surat")}
-                        >
-                          Surat
-                        </DropdownMenuItem>
-
-                        <DropdownMenuItem
-                          onClick={() => setValue("city", "Amreli")}
-                        >
-                          Amreli
-                        </DropdownMenuItem>
-
-                        <DropdownMenuItem
-                          onClick={() => setValue("city", "Gandhinagar")}
-                        >
-                          Gandhinagar
-                        </DropdownMenuItem>
+                        {selectedCountry &&
+                          selectedState &&
+                          locationData[selectedCountry][selectedState].map(
+                            (city) => (
+                              <DropdownMenuItem
+                                key={city}
+                                onClick={() => setValue("city", city)}
+                              >
+                                {city}
+                              </DropdownMenuItem>
+                            )
+                          )}
                       </DropdownMenuContent>
                     </DropdownMenu>
 
                     {errors.city && (
-                      <p className="text-red-500 text-sm">
+                      <p className="text-red-500 text-xs mt-1">
                         {errors.city.message}
                       </p>
                     )}

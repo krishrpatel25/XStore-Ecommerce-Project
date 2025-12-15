@@ -237,7 +237,9 @@ const handleRemoveProduct = (e, item) => {
                       </AlertDialogHeader>
 
                       <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel onClick={(e) => {
+                          e.stopPropagation();
+                        }}>Cancel</AlertDialogCancel>
 
                         {/* Confirm button — deletion happens here */}
                         <AlertDialogAction
