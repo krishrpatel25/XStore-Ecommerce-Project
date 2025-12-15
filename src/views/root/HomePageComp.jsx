@@ -8,12 +8,16 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { FiMail, FiStar } from "react-icons/fi";
+import { FiImage, FiMail, FiStar } from "react-icons/fi";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { Skeleton } from "@/components/ui/skeleton";
+import SkeletonCard from "@/components/ui/skeletonCard";
+
+
 const HomePageComp = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [imageLoaded, setImageLoaded] = useState(false);
   const navigate = useNavigate();
 
   // Fetch products
@@ -60,7 +64,6 @@ const HomePageComp = () => {
     },
   ];
 
-
   return (
     <>
       <main className="px-4 md:px-10 lg:px-30 pt-20">
@@ -70,7 +73,7 @@ const HomePageComp = () => {
         <div className="flex flex-col md:flex-row gap-6 lg:px-0 mt-5 lg:mt-16">
           {/* ================================
           LEFT BIG BOX — CAROUSEL
-      ================================= */}
+          ================================= */}
           <div className=" w-full sm:w-full col-span-2 w-[75%] bg-primary rounded-3xl p-0 overflow-hidden relative ">
             <Carousel
               className="w-full"
@@ -286,17 +289,10 @@ const HomePageComp = () => {
         {/* ---------------------------------------- */}
 
         {loading ? (
-          // LOADING UI
-          <div className="h-screen flex items-center justify-center">
-            <svg
-              className="w-20 h-20 text-accent animate-pulse"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M6 7V6a6 6 0 1112 0v1h3v15H3V7h3zm2 0h8V6a4 4 0 10-8 0v1z" />
-            </svg>
-          </div>
+          // ✅ SKELETON GRID (same layout)
+          <SkeletonCard />
         ) : products.length > 0 ? (
+          // ✅ PRODUCTS
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-10 mt-10 px-4 sm:px-12 lg:px-14">
             {products.map((product) => (
               <div
@@ -305,22 +301,32 @@ const HomePageComp = () => {
                 className="cursor-pointer"
               >
                 {/* Image Box */}
-                <div className=" w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden transition-all duration-300 group hover:-translate-y-3 hover:shadow-xl hover:scale-[1.01] ">
-                  {" "}
+                <div className="w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden transition-all duration-300 group hover:-translate-y-3 hover:shadow-xl hover:scale-[1.01] relative">
+                  {/* Skeleton */}
+                  {!imageLoaded && (
+                    <>
+                      <Skeleton className="absolute inset-0 rounded-2xl" />
+                      <FiImage className="absolute text-gray-300 text-4xl" />
+                    </>
+                  )}
+
+                  {/* Image */}
                   <img
                     src={product.images[0]}
                     alt={product.title}
-                    className=" h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105 "
-                  />{" "}
+                    loading="lazy"
+                    onLoad={() => setImageLoaded(true)}
+                    className={`h-full object-contain p-4 transition-all duration-500 group-hover:scale-105
+                     ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+                  />
                 </div>
 
                 {/* Title + Price */}
                 <div className="mt-3 flex justify-between items-center">
-                  <h2 className="text-base text-[12px] font-medium text-gray-900">
+                  <h2 className="text-[12px] font-medium text-gray-900">
                     {product.title}
                   </h2>
-
-                  <p className="text-base text-[16px] text-accent font-semibold">
+                  <p className="text-[16px] text-accent font-semibold">
                     ${product.price}
                   </p>
                 </div>
@@ -329,27 +335,26 @@ const HomePageComp = () => {
                 <div className="flex items-center gap-1 mt-1">
                   {Array.from({ length: 5 }, (_, i) => {
                     const rating = product.rating;
-
                     if (i < Math.floor(rating)) {
                       return (
                         <i
                           key={i}
                           className="bi bi-star-fill text-green-500 text-[12px]"
-                        ></i>
+                        />
                       );
                     } else if (i < rating) {
                       return (
                         <i
                           key={i}
                           className="bi bi-star-half text-green-500 text-[12px]"
-                        ></i>
+                        />
                       );
                     } else {
                       return (
                         <i
                           key={i}
                           className="bi bi-star text-gray-300 text-[12px]"
-                        ></i>
+                        />
                       );
                     }
                   })}
@@ -358,7 +363,7 @@ const HomePageComp = () => {
             ))}
           </div>
         ) : (
-          // NO PRODUCTS
+          // ❌ NO PRODUCTS
           <div className="w-full h-[392px] flex items-center justify-center">
             <h1>No product found!! Try another page!</h1>
           </div>
