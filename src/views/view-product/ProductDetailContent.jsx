@@ -69,7 +69,7 @@ function ProductDetailContent({ products }) {
     <div>
       <section className="pt-14 px-0 lg:pt-24 lg:px-14">
         <div className="flex flex-col lg:flex-row items-center justify-between lg:items-start gap-6 p-4 lg:p-0">
-          <div className="flex gap-6 justify-between">
+          <div className="flex flex-col md:flex-row gap-6 justify-between">
             {/* Thumbnails */}
             <div
               className="
@@ -174,7 +174,7 @@ function ProductDetailContent({ products }) {
                   <>
                     {/* Add Cart Button */}
                     <Button
-                      className="w-[55%] text-white bg-accent hover:bg-primary hover:text-background sm:w-auto"
+                      className="w-[200px] text-white bg-accent hover:bg-primary hover:text-background "
                       onClick={handleAddToCart}
                     >
                       Add Cart
@@ -191,7 +191,7 @@ function ProductDetailContent({ products }) {
 
                     {/* View Cart Button */}
                     <Button
-                      className="w-[55%] text-white bg-accent hover:bg-primary hover:text-background sm:w-auto"
+                      className="w-[100px] text-white bg-accent hover:bg-primary hover:text-background"
                       onClick={() => navigate("/cart")}
                     >
                       View Cart
@@ -199,24 +199,25 @@ function ProductDetailContent({ products }) {
                   </>
                 )}
               </div>
-
-              <button
-                onClick={handleWishlist}
-                className="px-5 py-2 bg-secondary rounded-full flex items-center gap-2 
+              <div>
+                <button
+                  onClick={handleWishlist}
+                  className="px-5 py-2 bg-secondary rounded-full flex items-center gap-2 
                   hover:bg-primary/20 transition font-medium"
-              >
-                {isWishlisted ? (
-                  <>
-                    <i className="bi bi-heart-fill text-red-500"></i>
-                    Remove
-                  </>
-                ) : (
-                  <>
-                    <i className="bi bi-heart"></i>
-                    Wishlist
-                  </>
-                )}
-              </button>
+                >
+                  {isWishlisted ? (
+                    <>
+                      <i className="bi bi-heart-fill text-red-500"></i>
+                      Remove
+                    </>
+                  ) : (
+                    <>
+                      <i className="bi bi-heart"></i>
+                      Wishlist
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>
