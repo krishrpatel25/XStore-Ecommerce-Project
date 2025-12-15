@@ -26,8 +26,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { FiSearch } from "react-icons/fi";
+import { FiImage, FiSearch } from "react-icons/fi";
 import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
+import SkeletonCard from "@/components/ui/skeletonCard";
 
 function debounce(func, delay) {
   let timeout;
@@ -199,6 +201,8 @@ function Products() {
   const [totalPages, setTotalPages] = useState(0);
   const [search, setSearch] = useState(""); // first search filter
   const [apiSearch, setApiSearch] = useState(""); //second search filter
+  const [imageLoaded, setImageLoaded] = useState({});
+  const [filteredProductLoading, setFilteredProductLoading] = useState(false);
 
   const fetchProducts = async ({ queryKey }) => {
     const [_key, { limit, page }] = queryKey;
@@ -210,7 +214,7 @@ function Products() {
 
     return res.data;
   };
-  const { data} = useQuery({
+  const { data } = useQuery({
     queryKey: ["products", { limit, page }],
     queryFn: fetchProducts,
     keepPreviousData: true,
@@ -300,6 +304,13 @@ function Products() {
     setApiSearch("");
     getProductData(limit);
   }
+
+  const handleImageLoad = (id) => {
+    setImageLoaded((prev) => ({
+      ...prev,
+      [id]: true,
+    }));
+  };
 
   return (
     <div className=" py-6 px-4 lg:px-20 min-h-screen">
@@ -419,22 +430,36 @@ function Products() {
         </div>
       </div>
 
-      {filteredProducts.length > 0 ? (
+      {filteredProductLoading ? (
+        <SkeletonCard />
+      ) : filteredProducts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-10 mt-10 px-4 sm:px-12 lg:px-14">
           {filteredProducts.map((product) => (
             <div
               key={product.id}
               onClick={() => handleViewProduct(product.id)}
               className="cursor-pointer"
+              onLoad={() => setFilteredProductLoading(false)}
             >
               {/* Image Box - Clean + Minimal */}
-              <div className=" w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden transition-all duration-500 group hover:-translate-y-3 hover:shadow-xl hover:scale-[1.01] ">
-                {" "}
+              <div className="relative w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden transition-all duration-500 group hover:-translate-y-3 hover:shadow-xl hover:scale-[1.01] ">
+                {/* Skeleton */}
+                {!imageLoaded[product.id] && (
+                  <>
+                    <Skeleton className="absolute inset-0 rounded-2xl" />
+                    <FiImage className="absolute inset-0 m-auto text-gray-300 text-4xl z-10" />
+                  </>
+                )}
+
+                {/* Image */}
                 <img
                   src={product.images[0]}
                   alt={product.title}
-                  className=" h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105 "
-                />{" "}
+                  loading="lazy"
+                  onLoad={() => handleImageLoad(product.id)}
+                  className={`h-full object-contain p-4 transition-opacity duration-500
+                  ${imageLoaded[product.id] ? "opacity-100" : "opacity-0"}`}
+                />
               </div>
 
               {/* Title + Price */}
