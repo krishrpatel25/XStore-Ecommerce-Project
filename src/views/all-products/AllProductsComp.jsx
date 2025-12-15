@@ -204,14 +204,13 @@ function Products() {
   const [imageLoaded, setImageLoaded] = useState({});
   const [filteredProductLoading, setFilteredProductLoading] = useState(false);
 
+  //----------------------- PRODUCTS fetch using dropdown-----------------------
   const fetchProducts = async ({ queryKey }) => {
     const [_key, { limit, page }] = queryKey;
     const skip = (page - 1) * limit;
-
     const res = await axios.get(
       `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
     );
-
     return res.data;
   };
   const { data } = useQuery({
