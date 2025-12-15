@@ -11,7 +11,8 @@ import ProductLoader from "@/components/ui/ProductLoader";
 function ViewProductComp() {
   const { id } = useParams();
   const { pathname } = useLocation();
-
+  
+  //---for top scroll ---
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
