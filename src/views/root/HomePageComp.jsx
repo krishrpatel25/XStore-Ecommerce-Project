@@ -12,34 +12,36 @@ import { FiImage, FiMail, FiStar } from "react-icons/fi";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Skeleton } from "@/components/ui/skeleton";
 import SkeletonCard from "@/components/ui/skeletonCard";
-
+import { useQuery } from "@tanstack/react-query";
 
 const HomePageComp = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState({});
   const navigate = useNavigate();
 
-  // Fetch products
-  const getProductData = async () => {
-    try {
-      const res = await axios.get(
-        `https://dummyjson.com/products?limit=8&skip=78`
-      );
-      setProducts(res.data.products);
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to fetch products!");
-    } finally {
-      setLoading(false);
-    }
+  const fetchProducts = async () => {
+    const res = await axios.get(
+      "https://dummyjson.com/products?limit=8&skip=78"
+    );
+    return res.data;
   };
 
-  useEffect(() => {
-    getProductData();
-  }, []);
+  const { data, isLoading } = useQuery({
+    queryKey: ["home-products"],
+    queryFn: fetchProducts,
+  });
+
+  const products = data?.products ?? [];
+  const handleImageLoad = (id) => {
+    setTimeout(() => {
+      setImageLoaded((prev) => ({
+        ...prev,
+        [id]: true,
+      }));
+    }, 300); 
+  };
 
   const handleViewProduct = (id) => navigate(`/product/${id}`);
+
   const reviews = [
     {
       name: "Aarav Sharma",
@@ -288,11 +290,10 @@ const HomePageComp = () => {
         {/* PRODUCT LISTING */}
         {/* ---------------------------------------- */}
 
-        {loading ? (
-          // ✅ SKELETON GRID (same layout)
-          <SkeletonCard />
+        {isLoading ? (
+          // ✅ Skeleton grid
+          <SkeletonCard count={8} />
         ) : products.length > 0 ? (
-          // ✅ PRODUCTS
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-10 mt-10 px-4 sm:px-12 lg:px-14">
             {products.map((product) => (
               <div
@@ -300,72 +301,57 @@ const HomePageComp = () => {
                 onClick={() => handleViewProduct(product.id)}
                 className="cursor-pointer"
               >
-                {/* Image Box */}
-                <div className="w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden transition-all duration-300 group hover:-translate-y-3 hover:shadow-xl hover:scale-[1.01] relative">
-                  {/* Skeleton */}
-                  {!imageLoaded && (
+                {/* IMAGE BOX */}
+                <div className="relative w-full h-64 bg-white rounded-2xl shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                  {/* IMAGE SKELETON */}
+                  {!imageLoaded[product.id] && (
                     <>
                       <Skeleton className="absolute inset-0 rounded-2xl" />
-                      <FiImage className="absolute text-gray-300 text-4xl" />
+                      <FiImage className="absolute inset-0 m-auto text-gray-300 text-4xl" />
                     </>
                   )}
 
-                  {/* Image */}
+                  {/* IMAGE */}
                   <img
                     src={product.images[0]}
                     alt={product.title}
                     loading="lazy"
-                    onLoad={() => setImageLoaded(true)}
-                    className={`h-full object-contain p-4 transition-all duration-500 group-hover:scale-105
-                     ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+                    decoding="async"
+                    width="256"
+                    height="256"
+                    onLoad={() => handleImageLoad(product.id)}
+                    className={`h-full w-full object-contain p-4 transition-opacity duration-500
+                    ${imageLoaded[product.id] ? "opacity-100" : "opacity-0"}`}
                   />
                 </div>
 
-                {/* Title + Price */}
+                {/* TITLE + PRICE */}
                 <div className="mt-3 flex justify-between items-center">
-                  <h2 className="text-[12px] font-medium text-gray-900">
+                  <h2 className="text-sm font-medium text-gray-900 truncate">
                     {product.title}
                   </h2>
-                  <p className="text-[16px] text-accent font-semibold">
-                    ${product.price}
-                  </p>
+                  <p className="text-accent font-semibold">${product.price}</p>
                 </div>
 
-                {/* Rating */}
-                <div className="flex items-center gap-1 mt-1">
-                  {Array.from({ length: 5 }, (_, i) => {
-                    const rating = product.rating;
-                    if (i < Math.floor(rating)) {
-                      return (
-                        <i
-                          key={i}
-                          className="bi bi-star-fill text-green-500 text-[12px]"
-                        />
-                      );
-                    } else if (i < rating) {
-                      return (
-                        <i
-                          key={i}
-                          className="bi bi-star-half text-green-500 text-[12px]"
-                        />
-                      );
-                    } else {
-                      return (
-                        <i
-                          key={i}
-                          className="bi bi-star text-gray-300 text-[12px]"
-                        />
-                      );
-                    }
-                  })}
+                {/* RATING */}
+                <div className="flex gap-1 mt-1">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <i
+                      key={i}
+                      className={`bi ${
+                        i < Math.floor(product.rating)
+                          ? "bi-star-fill text-green-500"
+                          : "bi-star text-gray-300"
+                      } text-xs`}
+                    />
+                  ))}
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          // ❌ NO PRODUCTS
-          <div className="w-full h-[392px] flex items-center justify-center">
-            <h1>No product found!! Try another page!</h1>
+          <div className="h-40 flex items-center justify-center">
+            <h1>No product found</h1>
           </div>
         )}
 
