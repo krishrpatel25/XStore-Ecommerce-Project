@@ -162,7 +162,9 @@ const NavbarComp = () => {
               My Profile <span>👤</span>
             </button>
 
-            <button className="py-2 px-4 hover:bg-gray-100 rounded-lg transition flex justify-between">
+            <button
+              onClick={() => navigate("/order")}
+              className="py-2 px-4 hover:bg-gray-100 rounded-lg transition flex justify-between">
               Orders <span>📦</span>
             </button>
 
@@ -172,15 +174,7 @@ const NavbarComp = () => {
             >
               Wishlist <span>❤️</span>
             </button>
-
-            <button className="py-2 px-4 hover:bg-gray-100 rounded-lg transition flex justify-between">
-              Settings <span>⚙️</span>
-            </button>
-
-            <button className="py-2 px-4 hover:bg-gray-100 rounded-lg transition flex justify-between">
-              Help <span>❓</span>
-            </button>
-
+            
             <hr className="my-3" />
 
             <button className="py-2 px-4 bg-accent text-white rounded-lg font-semibold hover:opacity-90 transition">
