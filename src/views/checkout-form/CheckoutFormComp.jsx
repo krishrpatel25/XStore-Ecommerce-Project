@@ -1,15 +1,10 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { IZodSchema } from "./IZodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DevTool } from "@hookform/devtools";
@@ -18,10 +13,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "@/context/CartsContext";
+import { useOrders } from "@/context/OrdersContext";
 
 const locationData = {
   India: {
@@ -53,293 +51,267 @@ const defaultFormValues = {
   state: "",
   country: "",
 };
+
 const CheckoutFormComp = () => {
+  // ✅ ALL HOOKS INSIDE COMPONENT
+  const navigate = useNavigate();
+  const { cart, clearCart } = useCart();
+  const { createOrder } = useOrders();
+
   const form = useForm({
     resolver: zodResolver(IZodSchema),
     defaultValues: defaultFormValues,
     mode: "onChange",
   });
 
-  const { register, control, watch, setValue,handleSubmit, formState } = form;
+  const { register, watch, setValue, handleSubmit, formState, control } = form;
   const { errors, isValid, isDirty } = formState;
-  
+
   const selectedCountry = watch("country");
   const selectedState = watch("state");
 
-  const onSubmit = async (data) => {
-    try {
-      const res = await axios.post("https://dummyjson.com/users/add", data, {
-        headers: { "Content-Type": "application/json" },
-      });
-
-      console.log("User added:", res.data);
-      toast.success("Added user successfully");
-      form.reset({ ...defaultFormValues });
-    } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong");
+  const onSubmit = (data) => {
+    if (cart.length === 0) {
+      toast.error("Your cart is empty");
+      return;
     }
+
+    createOrder(cart, {
+      customer: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        mobile: data.mobile,
+      },
+      address: {
+        address: `${data.addressLine1}, ${data.addressLine2}`,
+        city: data.city,
+        state: data.state,
+        country: data.country,
+      },
+    });
+
+    clearCart();
+
+    toast.success("Order placed successfully");
+
+    // ✅ REDIRECT TO ORDERS PAGE
+    navigate("/order");
   };
-//for devtool on and off
+
   const isDevTool = false;
 
   return (
-    <div className="pt-20 p-6 flex items-center justify-center">
-      <Card className="w-full max-w-lg">
-        <CardContent>
-          <form>
-            <div className="flex flex-col gap-2 p-4">
-              <div className="flex justify-between">
-                <div className="grid gap-2">
-                  <Label htmlFor="firstName">Firstname</Label>
-                  <Input
-                    id="firstName"
-                    type="firstName"
-                    {...register("firstName")}
-                    placeholder="your firstname"
-                    required
-                  />
-                  <p className="text-red-600 text-[12px]">
-                    {errors.firstName?.message}
-                  </p>
+    <div className="pt-28 px-4 md:px-10 lg:px-24">
+      <div className="mb-8">
+        <h1 className="text-3xl font-semibold text-gray-900">Checkout</h1>
+        <p className="text-sm text-gray-500 mt-1">
+          Shipping & contact information
+        </p>
+      </div>
+      <div className="min-h-screen px-4 sm:px-6 py-2">
+        <div className="max-w-5xl mx-auto">
+          <Card className="rounded-xl border bg-background shadow-sm">
+            <CardContent className="p-0">
+              <form id="checkout-form" onSubmit={handleSubmit(onSubmit)}>
+                <div className="p-6 sm:p-8 space-y-10">
+                  {/* PERSONAL */}
+                  <section>
+                    <h2 className="text-2xl text-primary font-semibold mb-2">
+                      Personal details
+                    </h2>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div className="space-y-1.5">
+                        <Label>First name</Label>
+                        <Input
+                          placeholder="your firstname"
+                          {...register("firstName")}
+                        />
+                        <p className="text-xs text-red-500">
+                          {errors.firstName?.message}
+                        </p>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <Label>Last name</Label>
+                        <Input
+                          placeholder="your lastname"
+                          {...register("lastName")}
+                        />
+                        <p className="text-xs text-red-500">
+                          {errors.lastName?.message}
+                        </p>
+                      </div>
+                    </div>
+                  </section>
+
+                  {/* CONTACT */}
+                  <section>
+                    <h2 className="text-2xl text-primary font-semibold mb-2">
+                      Contact
+                    </h2>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div className="space-y-1.5">
+                        <Label>Mobile</Label>
+                        <Input
+                          placeholder="9876543210"
+                          {...register("mobile")}
+                        />
+                        <p className="text-xs text-red-500">
+                          {errors.mobile?.message}
+                        </p>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <Label>Email</Label>
+                        <Input
+                          placeholder="you@email.com"
+                          {...register("email")}
+                        />
+                        <p className="text-xs text-red-500">
+                          {errors.email?.message}
+                        </p>
+                      </div>
+                    </div>
+                  </section>
+
+                  {/* ADDRESS */}
+                  <section>
+                    <h2 className="text-2xl text-primary font-semibold mb-2">
+                      Shipping address
+                    </h2>
+
+                    <div className="space-y-5">
+                      <div className="space-y-1.5">
+                        <Label>Address line 1</Label>
+                        <Textarea
+                          placeholder="House no, street name"
+                          {...register("addressLine1")}
+                        />
+                        <p className="text-xs text-red-500">
+                          {errors.addressLine1?.message}
+                        </p>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <Label>Address line 2</Label>
+                        <Textarea
+                          placeholder="Area, landmark (optional)"
+                          {...register("addressLine2")}
+                        />
+                      </div>
+
+                      {/* LOCATION */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                        <div className="space-y-1.5">
+                          <Label>Country</Label>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger className="w-full border px-3 py-2 rounded-md text-left">
+                              {selectedCountry || "Select country"}
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              {Object.keys(locationData).map((country) => (
+                                <DropdownMenuItem
+                                  key={country}
+                                  onClick={() => {
+                                    setValue("country", country, {
+                                      shouldDirty: true,
+                                    });
+                                    setValue("state", "");
+                                    setValue("city", "");
+                                  }}
+                                >
+                                  {country}
+                                </DropdownMenuItem>
+                              ))}
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <Label>State</Label>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger
+                              disabled={!selectedCountry}
+                              className="w-full border px-3 py-2 rounded-md text-left"
+                            >
+                              {selectedState || "Select state"}
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              {selectedCountry &&
+                                Object.keys(locationData[selectedCountry]).map(
+                                  (state) => (
+                                    <DropdownMenuItem
+                                      key={state}
+                                      onClick={() =>
+                                        setValue("state", state, {
+                                          shouldDirty: true,
+                                        })
+                                      }
+                                    >
+                                      {state}
+                                    </DropdownMenuItem>
+                                  )
+                                )}
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <Label>City</Label>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger
+                              disabled={!selectedState}
+                              className="w-full border px-3 py-2 rounded-md text-left"
+                            >
+                              {watch("city") || "Select city"}
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              {selectedCountry &&
+                                selectedState &&
+                                locationData[selectedCountry][
+                                  selectedState
+                                ].map((city) => (
+                                  <DropdownMenuItem
+                                    key={city}
+                                    onClick={() =>
+                                      setValue("city", city, {
+                                        shouldDirty: true,
+                                      })
+                                    }
+                                  >
+                                    {city}
+                                  </DropdownMenuItem>
+                                ))}
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
                 </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="lastName">lastName</Label>
-                  <Input
-                    id="lastName"
-                    type="lastName"
-                    {...register("lastName")}
-                    placeholder="your lastname"
-                    required
-                  />
-                  <p className="text-red-600 text-[12px]">
-                    {errors.lastName?.message}
-                  </p>
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    {...register("email")}
-                    placeholder="abc@example.com"
-                    required
-                  />
-                  <p className="text-red-600 text-[12px]">
-                    {errors.email?.message}
-                  </p>
-                </div>
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="addressLine1">addressLine1</Label>
-                <Textarea
-                  id="addressLine1"
-                  type="addressLine1"
-                  {...register("addressLine1")}
-                  placeholder="House No., Apartment, Street Name"
-                  required
-                />
-                <p className="text-red-600 text-[12px]">
-                  {errors.addressLine1?.message}
-                </p>
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="addressLine2">addressLine2</Label>
-                <Textarea
-                  id="addressLine2"
-                  type="addressLine2"
-                  {...register("addressLine2")}
-                  placeholder="Area, Landmark (Optional)"
-                  required
-                />
-                <p className="text-red-600 text-[12px]">
-                  {errors.addressLine2?.message}
-                </p>
-              </div>
+              </form>
+            </CardContent>
 
-              <div className="space-y-6">
-                {/* COUNTRY */}
-                <div>
-                  <Label className="mb-2 block font-medium">Country</Label>
+            {/* FOOTER */}
+            <CardFooter className="border-t bg-muted/40 p-6">
+              <Button
+                type="submit"
+                form="checkout-form"
+                className="w-full h-12 text-base font-medium flex items-center justify-center gap-2"
+                disabled={!isDirty || !isValid}
+              >
+                <span>Place Order</span>
+                <i className="bi bi-arrow-right"></i>
+              </Button>
+            </CardFooter>
+          </Card>
 
-                  <DropdownMenu>
-                    <DropdownMenuTrigger
-                      className="
-          w-full
-          border px-3 py-2 rounded-md
-          text-left
-          flex justify-between items-center
-          hover:bg-muted
-          transition
-        "
-                    >
-                      <span
-                        className={
-                          selectedCountry ? "" : "text-muted-foreground"
-                        }
-                      >
-                        {selectedCountry || "Select country"}
-                      </span>
-                    </DropdownMenuTrigger>
-
-                    <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
-                      <DropdownMenuLabel>Country</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-
-                      {Object.keys(locationData).map((country) => (
-                        <DropdownMenuItem
-                          key={country}
-                          onClick={() => {
-                            setValue("country", country);
-                            setValue("state", "");
-                            setValue("city", "");
-                          }}
-                        >
-                          {country}
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-
-                  {errors.country && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors.country.message}
-                    </p>
-                  )}
-                </div>
-
-                {/* STATE & CITY */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* STATE */}
-                  <div>
-                    <Label className="mb-2 block font-medium">State</Label>
-
-                    <DropdownMenu>
-                      <DropdownMenuTrigger
-                        disabled={!selectedCountry}
-                        className={`
-            w-full
-            border px-3 py-2 rounded-md
-            text-left
-            flex justify-between items-center
-            transition
-            ${
-              !selectedCountry
-                ? "bg-muted text-muted-foreground cursor-not-allowed"
-                : "hover:bg-muted"
-            }
-          `}
-                      >
-                        <span
-                          className={
-                            selectedState ? "" : "text-muted-foreground"
-                          }
-                        >
-                          {selectedState || "Select State"}
-                        </span>
-                      </DropdownMenuTrigger>
-
-                      <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
-                        <DropdownMenuLabel>State</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-
-                        {selectedCountry &&
-                          Object.keys(locationData[selectedCountry]).map(
-                            (state) => (
-                              <DropdownMenuItem
-                                key={state}
-                                onClick={() => {
-                                  setValue("state", state);
-                                  setValue("city", "");
-                                }}
-                              >
-                                {state}
-                              </DropdownMenuItem>
-                            )
-                          )}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-
-                    {errors.state && (
-                      <p className="text-red-500 text-xs mt-1">
-                        {errors.state.message}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* CITY */}
-                  <div>
-                    <Label className="mb-2 block font-medium">City</Label>
-
-                    <DropdownMenu>
-                      <DropdownMenuTrigger
-                        disabled={!selectedState}
-                        className={`
-            w-full
-            border px-3 py-2 rounded-md
-            text-left
-            flex justify-between items-center
-            transition
-            ${
-              !selectedState
-                ? "bg-muted text-muted-foreground cursor-not-allowed"
-                : "hover:bg-muted"
-            }
-          `}
-                      >
-                        <span
-                          className={
-                            watch("city") ? "" : "text-muted-foreground"
-                          }
-                        >
-                          {watch("city") || "Select City"}
-                        </span>
-                      </DropdownMenuTrigger>
-
-                      <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
-                        <DropdownMenuLabel>City</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-
-                        {selectedCountry &&
-                          selectedState &&
-                          locationData[selectedCountry][selectedState].map(
-                            (city) => (
-                              <DropdownMenuItem
-                                key={city}
-                                onClick={() => setValue("city", city)}
-                              >
-                                {city}
-                              </DropdownMenuItem>
-                            )
-                          )}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-
-                    {errors.city && (
-                      <p className="text-red-500 text-xs mt-1">
-                        {errors.city.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex-col gap-2">
-          <Button
-            type="submit"
-            className="w-full"
-            onClick={handleSubmit(onSubmit)}
-            disabled={!isDirty || !isValid}
-          >
-            continue checkout
-          </Button>
-        </CardFooter>
-      </Card>
-      {isDevTool && <DevTool control={control} />}
+          {isDevTool && <DevTool control={control} />}
+        </div>
+      </div>
     </div>
   );
 };
