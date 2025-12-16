@@ -12,6 +12,8 @@ import CheckoutForm from "./pages/checkout-form/CheckoutForm";
 import WishList from "./pages/wishlist/WishList";
 import { WishListProvider } from "./context/WishListContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { OrdersProvider } from "./context/OrdersContext";
+import OrderPage from "./pages/order/OrderPage";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +29,8 @@ const router = new createBrowserRouter([
       { path: "category", element: <CategoryPage /> },
       { path: "checkoutform", element: <CheckoutForm /> },
       { path: "wishlist", element: <WishList /> },
+      { path: "order", element: <OrderPage /> },
+      { path: "order/:orderId", element: <OrderPage /> },
     ],
   },
 ]);
@@ -37,26 +41,28 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <CartsProvider>
-          <WishListProvider>
-            <Toaster
-              position="bottom-right"
-              toastOptions={{
-                style: {
-                  background: "rgba(255, 255, 255, 0.35)",
-                  backdropFilter: "blur(15px) saturate(150%)",
-                  WebkitBackdropFilter: "blur(15px) saturate(150%)",
-                  borderRadius: "18px",
-                  boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
-                  padding: "16px 20px",
-                  color: "var(--accent)",
-                  fontWeight: "600",
-                  letterSpacing: "0.2px",
-                  border: "2px solid var(--background)",
-                },
-              }}
-            />
-            <RouterProvider router={router} />
-          </WishListProvider>
+          <OrdersProvider>
+            <WishListProvider>
+              <Toaster
+                position="bottom-right"
+                toastOptions={{
+                  style: {
+                    background: "rgba(255, 255, 255, 0.35)",
+                    backdropFilter: "blur(15px) saturate(150%)",
+                    WebkitBackdropFilter: "blur(15px) saturate(150%)",
+                    borderRadius: "18px",
+                    boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+                    padding: "16px 20px",
+                    color: "var(--accent)",
+                    fontWeight: "600",
+                    letterSpacing: "0.2px",
+                    border: "2px solid var(--background)",
+                  },
+                }}
+              />
+              <RouterProvider router={router} />
+            </WishListProvider>
+          </OrdersProvider>
         </CartsProvider>
       </QueryClientProvider>
     </>
