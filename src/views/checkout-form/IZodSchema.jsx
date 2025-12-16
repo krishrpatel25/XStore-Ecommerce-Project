@@ -7,20 +7,20 @@ export const IZodSchema = z.object({
 
   email: z.string().email("Invalid email"),
   mobile: z
-    .number()
-    .min(10, "mobile number must me 10 number")
-    .max(10, "mobile number must be 10 number"),
-  
+    .string()
+    .regex(/^[0-9]{10}$/, "Mobile number must be exactly 10 digits"),
+
   addressLine1: z
     .string()
-    .min(5, "Address Line 1 is required and should be at least 5 characters.")
-    .max(100, "Address Line 1 should not be more than 100 characters."),
+    .trim()
+    .min(5, "Address Line 1 must be at least 5 characters.")
+    .max(100, "Address Line 1 must not exceed 100 characters."),
 
   addressLine2: z
     .string()
-    .max(100, "Address Line 2 should not be more than 100 characters.")
-    .optional()
-    .or(z.literal("")),
+    .trim()
+    .min(5, "Address Line 1 must be at least 5 characters.")
+    .max(100, "Address Line 1 must not exceed 100 characters."),
 
   city: z
     .string()
