@@ -36,8 +36,8 @@ const NavbarComp = () => {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="w-full h-auto fixed top-0 left-0 z-40 bg-white/60 backdrop-blur-xl shadow-sm border-b border-background">
-        <div className="max-w-7xl mx-auto flex items-center px-6 py-4">
+      <nav className="fixed top-3 left-1/2 -translate-x-1/2 z-40 w-[94%] rounded-full bg-white/70 backdrop-blur-xl shadow-sm border border-background">
+        <div className="max-w-7xl mx-auto flex items-center px-4 md:px-6 py-2 md:py-4">
           {/* LEFT MENU (Desktop Only) */}
           <div className="hidden lg:flex items-center gap-6 flex-1">
             <NavLink
@@ -95,27 +95,21 @@ const NavbarComp = () => {
           </NavLink>
 
           {/* RIGHT SECTION — DESKTOP */}
-          <div className="hidden lg:flex items-center gap-6 relative flex-1 justify-end">
-            {/* CART ICON */}
+          <div className="hidden lg:flex items-center gap-6 flex-1 justify-end">
             <button
               onClick={() => navigate("/cart")}
               className="relative hover:text-accent transition"
             >
               <FiShoppingCart size={22} />
-              <span
-                className="absolute -top-2 -right-2 bg-accent text-white text-[10px] 
-              px-2 py-[1px] rounded-full"
-              >
+              <span className="absolute -top-2 -right-2 bg-accent text-white text-[10px] px-2 py-[1px] rounded-full">
                 {cart.length}
               </span>
             </button>
 
-            {/* PROFILE ICON (Desktop) */}
-
             <button
               onClick={(e) => {
-                e.stopPropagation(); // prevents outside click handler from firing
-                setOpen((prev) => !prev); // toggle open/close
+                e.stopPropagation();
+                setOpen((prev) => !prev);
               }}
               className="hover:text-accent transition"
             >
@@ -123,27 +117,22 @@ const NavbarComp = () => {
             </button>
           </div>
 
-          {/* MOBILE + TABLET RIGHT SIDE AREA */}
-          <div className="flex items-center gap-4 md:gap-5 lg:hidden flex-1 justify-end">
-            {/* PROFILE BUTTON */}
+          {/* MOBILE + TABLET RIGHT */}
+          <div className="flex items-center gap-2 md:gap-5 lg:hidden flex-1 justify-end">
             <button
               onClick={() => setOpen(!open)}
               className="hover:text-accent transition"
             >
-              <FiUser size={22} className="text-gray-800" />
+              <FiUser size={18} className="text-gray-800 md:hidden" />
+              <FiUser size={20} className="hidden md:block text-gray-800" />
             </button>
 
-            {/* SEARCH (tablet only) */}
-            <button className="hidden md:block">
-              <FiSearch size={22} className="text-gray-700" />
-            </button>
-
-            {/* MENU BUTTON */}
             <button
               onClick={() => setRightMenuOpen(true)}
-              className="p-2 rounded-xl border border-gray-300 hover:border-accent hover:bg-gray-50 active:scale-95 transition"
+              className="p-1.5 md:p-2 rounded-lg border border-gray-300 active:scale-95 transition"
             >
-              <FiMenu size={24} className="text-gray-800" />
+              <FiMenu size={20} className="text-gray-800 md:hidden" />
+              <FiMenu size={22} className="hidden md:block text-gray-800" />
             </button>
           </div>
         </div>
@@ -153,43 +142,128 @@ const NavbarComp = () => {
       {open && (
         <div
           ref={dropdownRef}
-          onClick={(e) => e.stopPropagation()} // Keep open when clicking inside
-          className="fixed right-4 top-20 w-64 p-4 bg-white rounded-2xl shadow-2xl 
-               border border-gray-200 animate-dropdown z-50"
+          onClick={(e) => e.stopPropagation()}
+          className="
+          fixed right-3 top-16
+          w-56 sm:w-64
+          p-3 sm:p-4
+          bg-white
+          rounded-xl sm:rounded-2xl
+          shadow-xl
+          border border-gray-200
+          z-50
+        "
         >
-          <div className="flex flex-col font-medium">
-            <button className="py-2 px-4 hover:bg-gray-100 rounded-lg transition flex justify-between">
+          <div className="flex flex-col text-sm sm:text-base font-medium">
+            <button className="py-2 px-3 hover:bg-gray-100 rounded-lg transition flex justify-between">
               My Profile <span>👤</span>
             </button>
 
             <button
               onClick={() => navigate("/order")}
-              className="py-2 px-4 hover:bg-gray-100 rounded-lg transition flex justify-between">
+              className="py-2 px-3 hover:bg-gray-100 rounded-lg transition flex justify-between"
+            >
               Orders <span>📦</span>
             </button>
 
             <button
               onClick={() => navigate("/wishlist")}
-              className="py-2 px-4 hover:bg-gray-100 rounded-lg transition flex justify-between"
+              className="py-2 px-3 hover:bg-gray-100 rounded-lg transition flex justify-between"
             >
               Wishlist <span>❤️</span>
             </button>
-            
-            <hr className="my-3" />
 
-            <button className="py-2 px-4 bg-accent text-white rounded-lg font-semibold hover:opacity-90 transition">
+            <hr className="my-2 sm:my-3" />
+
+            <button className="py-2 px-3 bg-accent text-white rounded-lg font-semibold hover:opacity-90 transition">
               Logout
             </button>
           </div>
         </div>
       )}
 
+      {/* OVERLAY */}
       {rightMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/20 z-40 lg:hidden"
           onClick={() => setRightMenuOpen(false)}
         />
       )}
+
+      {/* RIGHT SIDE MENU */}
+      <div
+        className={`
+    fixed top-0 right-0 h-full
+    w-48 sm:w-72
+    bg-white
+    z-50
+    shadow-md
+    border-l border-gray-200
+    transform transition-transform duration-300
+    ${rightMenuOpen ? "translate-x-0" : "translate-x-full"}
+    lg:hidden
+  `}
+      >
+        {/* HEADER */}
+        <div className="flex items-center justify-between px-3 py-2 border-b">
+          <h2 className="text-xs sm:text-lg font-semibold">Menu</h2>
+          <button onClick={() => setRightMenuOpen(false)}>
+            <FiX size={18} className="text-gray-700 sm:hidden" />
+            <FiX size={24} className="hidden sm:block text-gray-700" />
+          </button>
+        </div>
+
+        {/* LINKS */}
+        <div className="flex flex-col mt-1 text-xs sm:text-base font-medium">
+          <NavLink
+            to="/"
+            onClick={() => setRightMenuOpen(false)}
+            className="px-3 py-2 hover:bg-gray-100"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/category"
+            onClick={() => setRightMenuOpen(false)}
+            className="px-3 py-2 hover:bg-gray-100"
+          >
+            Categories
+          </NavLink>
+          <NavLink
+            to="/allproducts"
+            onClick={() => setRightMenuOpen(false)}
+            className="px-3 py-2 hover:bg-gray-100"
+          >
+            Products
+          </NavLink>
+        </div>
+
+        <hr className="my-1" />
+
+        {/* CART */}
+        <div className="px-3">
+          <button
+            onClick={() => navigate("/cart")}
+            className="flex items-center justify-between w-full px-2 py-1.5 rounded-md hover:bg-gray-100 text-xs"
+          >
+            <span className="flex items-center gap-1.5">
+              <FiShoppingCart size={14} /> My Cart
+            </span>
+            <span className="text-[9px] bg-accent text-white px-1.5 py-[1px] rounded-full">
+              {cart.length}
+            </span>
+          </button>
+        </div>
+
+        <hr className="my-1" />
+
+        {/* LOGOUT */}
+        <div className="px-3 pb-3">
+          <button className="w-full py-1.5 rounded-md bg-accent text-white text-xs font-semibold hover:opacity-90 transition">
+            Logout
+          </button>
+        </div>
+      </div>
 
       {/* RIGHT SIDE SLIDER MENU */}
       <div
