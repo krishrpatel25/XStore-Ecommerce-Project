@@ -8,7 +8,7 @@ const Wishlist = () => {
 
   if (wishlist.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-[80vh] gap-4">
+      <div className="flex flex-col items-center justify-center h-[80vh] gap-4 min-h-screen">
         <i className="bi bi-heart text-5xl text-accent animate-pulse"></i>
         <h2 className="text-lg text-gray-500 font-medium">
           Your wishlist is empty ❤️
@@ -25,7 +25,7 @@ const Wishlist = () => {
   }
 
   return (
-    <div className="px-4 md:px-6 lg:px-20">
+    <div className="px-4 md:px-6 lg:px-20 ">
       <div className="pt-24 px-2">
         <h1 className="text-2xl font-semibold">My Wishlists</h1>
         <div className="flex gap-3">

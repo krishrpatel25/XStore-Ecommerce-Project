@@ -14,6 +14,7 @@ import { WishListProvider } from "./context/WishListContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { OrdersProvider } from "./context/OrdersContext";
 import OrderPage from "./pages/order/OrderPage";
+import ViewOrderPage from "./pages/view-order/ViewOrderPage";
 
 const queryClient = new QueryClient();
 
@@ -30,7 +31,7 @@ const router = new createBrowserRouter([
       { path: "checkoutform", element: <CheckoutForm /> },
       { path: "wishlist", element: <WishList /> },
       { path: "order", element: <OrderPage /> },
-      { path: "order/:orderId", element: <OrderPage /> },
+      { path: "order/:orderId", element: <ViewOrderPage /> },
     ],
   },
 ]);
