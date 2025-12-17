@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IZodSchema } from "./IZodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,7 +53,6 @@ const defaultFormValues = {
 };
 
 const CheckoutFormComp = () => {
-  // ✅ ALL HOOKS INSIDE COMPONENT
   const navigate = useNavigate();
   const { cart, clearCart } = useCart();
   const { createOrder } = useOrders();
@@ -65,10 +64,18 @@ const CheckoutFormComp = () => {
   });
 
   const { register, watch, setValue, handleSubmit, formState, control } = form;
+
   const { errors, isValid, isDirty } = formState;
 
   const selectedCountry = watch("country");
   const selectedState = watch("state");
+
+  /* ✅ REGISTER DROPDOWN FIELDS */
+  useEffect(() => {
+    register("country");
+    register("state");
+    register("city");
+  }, [register]);
 
   const onSubmit = (data) => {
     if (cart.length === 0) {
@@ -92,10 +99,7 @@ const CheckoutFormComp = () => {
     });
 
     clearCart();
-
     toast.success("Order placed successfully");
-
-    // ✅ REDIRECT TO ORDERS PAGE
     navigate("/order");
   };
 
@@ -109,6 +113,7 @@ const CheckoutFormComp = () => {
           Shipping & contact information
         </p>
       </div>
+
       <div className="min-h-screen px-4 sm:px-6 py-2">
         <div className="max-w-5xl mx-auto">
           <Card className="rounded-xl border bg-background shadow-sm">
@@ -218,9 +223,16 @@ const CheckoutFormComp = () => {
                                   onClick={() => {
                                     setValue("country", country, {
                                       shouldDirty: true,
+                                      shouldValidate: true,
                                     });
-                                    setValue("state", "");
-                                    setValue("city", "");
+                                    setValue("state", "", {
+                                      shouldDirty: true,
+                                      shouldValidate: true,
+                                    });
+                                    setValue("city", "", {
+                                      shouldDirty: true,
+                                      shouldValidate: true,
+                                    });
                                   }}
                                 >
                                   {country}
@@ -248,6 +260,7 @@ const CheckoutFormComp = () => {
                                       onClick={() =>
                                         setValue("state", state, {
                                           shouldDirty: true,
+                                          shouldValidate: true,
                                         })
                                       }
                                     >
@@ -279,6 +292,7 @@ const CheckoutFormComp = () => {
                                     onClick={() =>
                                       setValue("city", city, {
                                         shouldDirty: true,
+                                        shouldValidate: true,
                                       })
                                     }
                                   >
@@ -295,16 +309,14 @@ const CheckoutFormComp = () => {
               </form>
             </CardContent>
 
-            {/* FOOTER */}
             <CardFooter className="border-t bg-muted/40 p-6">
               <Button
                 type="submit"
                 form="checkout-form"
-                className="w-full h-12 text-base font-medium flex items-center justify-center gap-2"
+                className="w-full h-12 text-base font-medium"
                 disabled={!isDirty || !isValid}
               >
-                <span>Place Order</span>
-                <i className="bi bi-arrow-right"></i>
+                Place Order
               </Button>
             </CardFooter>
           </Card>
