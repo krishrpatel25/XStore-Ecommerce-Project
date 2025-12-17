@@ -7,6 +7,7 @@ import ProductNotFound from "./ProductNotFound";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import ProductLoader from "@/components/ui/ProductLoader";
+import GoBackButton from "@/components/ui/GoBackButton";
 
 function ViewProductComp() {
   const { id } = useParams();
@@ -35,6 +36,7 @@ function ViewProductComp() {
   return (
     <>
       <div className="p-4 md:p-16 ">
+        <GoBackButton to="/allproducts" className="pt-20 md:px-10 " />
         {products ? (
           <>
             <ProductDetailContent products={products} />
