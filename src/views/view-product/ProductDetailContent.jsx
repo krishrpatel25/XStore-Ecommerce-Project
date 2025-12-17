@@ -12,12 +12,11 @@ function ProductDetailContent({ products }) {
   const { cart, updateCart, removeProduct } = useCart();
   const { wishlist, toggleWishlist } = useWishList();
   const isWishlisted = wishlist.some((i) => i.id === products.id);
-  
+
   const existingItem = cart.find((i) => i.id === products.id);
   const qty = existingItem ? existingItem.qty : 1;
   const showQtyControl = existingItem && existingItem.qty > 0;
-  
-  
+
   const [selectImage, setSelectImage] = useState(products?.thumbnail || "");
 
   const handleIncrease = () => {
@@ -43,9 +42,9 @@ function ProductDetailContent({ products }) {
   };
 
   const handleWishlist = () => {
-    toggleWishlist(products)
+    toggleWishlist(products);
 
-    if (isWishlisted) { 
+    if (isWishlisted) {
       toast("Product remove from wishlist", {
         icon: <i class="bi bi-heartbreak-fill text-accent text-xl"></i>,
         style: {
@@ -60,23 +59,23 @@ function ProductDetailContent({ products }) {
         },
       });
     }
-  }
+  };
 
   if (!products) {
     return <div> no data found </div>;
   }
   return (
     <div>
-      <section className="pt-14 px-0 lg:pt-24 lg:px-14">
+      <section className="px-0 lg:pt-14 lg:px-14">
         <div className="flex flex-col lg:flex-row items-center justify-between lg:items-start gap-6 p-4 lg:p-0">
           <div className="flex flex-col md:flex-row gap-6 justify-between">
             {/* Thumbnails */}
             <div
               className="
-                  grid grid-cols-3 grid-rows-2 gap-3        /* MOBILE (default) */
-                  sm:flex sm:flex-row sm:gap-3              /* TABLET AND ABOVE */
-                  lg:flex-col lg:order-1 lg:overflow-visible
-                "
+                grid grid-cols-3 gap-3
+                sm:flex sm:flex-row sm:flex-wrap sm:gap-3
+                lg:flex-col lg:order-1 lg:overflow-visible
+              "
             >
               {products?.images ? (
                 Array.isArray(products.images) &&
@@ -174,7 +173,7 @@ function ProductDetailContent({ products }) {
                   <>
                     {/* Add Cart Button */}
                     <Button
-                      className="w-[200px] text-white bg-accent hover:bg-primary hover:text-background "
+                      className="w-[100px] text-white bg-accent hover:bg-primary hover:text-background "
                       onClick={handleAddToCart}
                     >
                       Add Cart
