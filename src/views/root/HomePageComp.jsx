@@ -64,156 +64,196 @@ const HomePageComp = () => {
         "Super easy returns and exchange. Definitely my favorite store to shop from!",
     },
   ];
+const itemProduct = [
+  {
+    id: "01",
+    name: "CORE_SHELL",
+    price: "$420",
+    category: "Outerwear",
+    img: "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    id: "02",
+    name: "FLUID_AXIS",
+    price: "$180",
+    category: "Base Layer",
+    img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    id: "03",
+    name: "VOID_MESH",
+    price: "$310",
+    category: "Technical",
+    img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    id: "04",
+    name: "THERMAL_GRIP",
+    price: "$95",
+    category: "Accessories",
+    img: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?auto=format&fit=crop&q=80&w=800",
+  },
+];
 
   return (
     <>
-      <main className="px-4 md:px-10 lg:px-30 pt-20">
+      <div className="relative min-h-screen bg-secondary text-black font-sans overflow-hidden">
+        {/* 1. BACKGROUND LAYER: THE HYBRID VOID */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          {/* Massive Rotating Teal Blob */}
+          <div className="absolute top-[-10%] left-[-5%] w-[60vw] h-[60vw] bg-[#649b9b] rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-40 blur-[100px] animate-liquid" />
+
+          {/* The Structural Teal Block */}
+          <div className="absolute right-0 top-0 w-1/3 h-full bg-[#649b9b] opacity-100 hidden lg:block" />
+
+          {/* The Dynamic Orange Beam */}
+          <div
+            style={{ backgroundColor: "oklch(67.221% 0.20974 33.259)" }}
+            className="absolute top-[-20%] left-[35%] w-[8vw] h-[150%] rotate-[25deg] opacity-90 shadow-[0_0_80px_rgba(0,0,0,0.1)]"
+          />
+
+          {/* Background Typography */}
+          <h2 className="absolute top-1/2 left-[10%] -translate-y-1/2 text-[25vw] font-black text-black/[0.03] select-none tracking-tighter italic">
+            AXIS
+          </h2>
+        </div>
+
+        {/* 2. THE FLOATING SCANNER (OKLCH Orange) */}
+        <div
+          style={{ backgroundColor: "oklch(67.221% 0.20974 33.259)" }}
+          className="absolute top-0 left-[20%] w-[1px] h-full z-20 opacity-30 hidden lg:block"
+        >
+          <div
+            style={{ backgroundColor: "oklch(67.221% 0.20974 33.259)" }}
+            className="w-3 h-3 rounded-full -translate-x-1 animate-scan shadow-[0_0_20px_#ff6b00]"
+          />
+        </div>
+
+        {/* 3. MAIN CONTENT GRID */}
+        <main className="relative z-30 grid grid-cols-1 lg:grid-cols-12 min-h-screen">
+          {/* SPACER FOR LEFT NAV (If you decide to add it back) */}
+          <div className="lg:col-span-2 hidden lg:block"></div>
+
+          {/* CENTER TITLE SECTION */}
+          <div className="lg:col-span-6 flex flex-col justify-center px-10 lg:px-20">
+            <div className="relative">
+              <h1 className="text-[clamp(4rem,12vw,10rem)] font-black leading-[0.75] tracking-tighter mix-blend-difference text-white lg:text-black">
+                GRAV
+                <br />
+                <span className="relative inline-block">
+                  ITY.
+                  <span className="absolute -right-16 top-4 text-[10px] tracking-[1em] font-light opacity-30 rotate-90 origin-left whitespace-nowrap">
+                    EDITION_2025
+                  </span>
+                </span>
+              </h1>
+
+              <div className="mt-16 flex items-start gap-10">
+                <div className="w-16 h-[2px] bg-black mt-3 shrink-0"></div>
+                <p className="max-w-xs text-sm font-medium leading-relaxed opacity-60">
+                  A radical deconstruction of space. Forged between the fluid
+                  void of{" "}
+                  <span className="text-[#649b9b] font-bold">#649B9B</span> and
+                  thermal orange energy.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT PRODUCT DISPLAY (SQUARE STATIC IMAGE REPLACEMENT) */}
+          <div className="lg:col-span-4 relative flex items-center justify-center p-10 lg:p-0">
+            <div className="relative w-full max-w-sm">
+              {/* The Floating Frame */}
+              <div className="relative aspect-square overflow-hidden shadow-[0_80px_100px_rgba(0,0,0,0.4)] animate-float group z-10 bg-black">
+                {/* STATIC SQUARE CONTENT: A CSS PATTERN INSTEAD OF IMAGE */}
+                <div className="absolute inset-0 opacity-40 bg-[radial-gradient(#649b9b_1.5px,transparent_1.5px)] [background-size:24px_24px] group-hover:scale-110 transition-transform duration-[2s]" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-black via-transparent to-[#649b9b]/20" />
+
+                {/* Center Icon/Graphic */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-32 h-32 border border-white/10 flex items-center justify-center rotate-45 group-hover:rotate-90 transition-transform duration-[1.5s]">
+                    <div
+                      style={{
+                        backgroundColor: "oklch(67.221% 0.20974 33.259)",
+                      }}
+                      className="w-1 h-20"
+                    />
+                  </div>
+                </div>
+
+                {/* Glass Overlay */}
+                <div className="absolute -inset-2 border border-white/20 backdrop-blur-[2px] z-30 pointer-events-none group-hover:opacity-0 transition-opacity" />
+
+                {/* Interactive Purchase Button */}
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-40">
+                  <button
+                    style={{ backgroundColor: "oklch(67.221% 0.20974 33.259)" }}
+                    className="px-10 py-5 text-white font-black text-[10px] uppercase tracking-[0.5em] shadow-2xl hover:scale-105 transition-transform"
+                  >
+                    Acquire: $1,200
+                  </button>
+                </div>
+              </div>
+
+              {/* Background Decorative "01" */}
+              <span className="absolute -bottom-10 -right-20 text-[18rem] font-black text-white/10 pointer-events-none select-none z-0">
+                01
+              </span>
+
+              {/* Circular Path Detail */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] border border-white/10 rounded-full -rotate-12 pointer-events-none"></div>
+            </div>
+          </div>
+        </main>
+
+        {/* 4. FOOTER MARQUEE */}
+        <footer className="absolute bottom-0 left-0 w-full h-16 border-t border-black/5 bg-secondary/50 backdrop-blur-sm z-50 flex items-center px-10">
+          <div className="flex gap-8 overflow-hidden whitespace-nowrap opacity-30 text-[9px] font-black uppercase tracking-[0.5em]">
+            <div className="animate-marquee shrink-0">
+              Limited Release • #649B9B Structural Core • Engineered Form •
+              Global Logistics • 2025 Archive •
+            </div>
+            <div className="animate-marquee shrink-0" aria-hidden="true">
+              Limited Release • #649B9B Structural Core • Engineered Form •
+              Global Logistics • 2025 Archive •
+            </div>
+          </div>
+        </footer>
+
+        {/* ANIMATION ENGINE */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+        @keyframes liquid {
+          0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(0deg) scale(1); }
+          50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; transform: rotate(180deg) scale(1.1); }
+        }
+        @keyframes scan {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(100vh); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(-1deg); }
+          50% { transform: translateY(-30px) rotate(1deg); }
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-liquid { animation: liquid 15s ease-in-out infinite; }
+        .animate-scan { animation: scan 4s linear infinite; }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-marquee { animation: marquee 30s linear infinite; }
+      `,
+          }}
+        />
+      </div>
+
+      
+      <main className="">
         {/* ---------------------------------------- */}
         {/* HERO SLIDER */}
         {/* ---------------------------------------- */}
-        <div className="flex flex-col md:flex-row gap-6 lg:px-0 mt-5 lg:mt-16">
-          {/* ================================
-          LEFT BIG BOX — CAROUSEL
-          ================================= */}
-          <div className=" w-full sm:w-full col-span-2 w-[75%] bg-primary rounded-3xl p-0 overflow-hidden relative ">
-            <Carousel
-              className="w-full"
-              opts={{ loop: true, align: "start" }}
-              plugins={[
-                Autoplay({
-                  delay: 3000,
-                  stopOnInteraction: false,
-                }),
-              ]}
-            >
-              <CarouselContent className="flex w-full h-[450px] p-0 m-0 ">
-                {/* ---- SLIDE 1 ---- */}
-                <CarouselItem className="min-w-full flex-none h-[450px] p-0">
-                  <div className="w-full h-full flex items-center relative">
-                    {/* TEXT */}
-                    <div className="w-1/2 h-full flex flex-col justify-center text-center items-center sm:text-start sm:items-start pl-12 lg:pl-16 z-20">
-                      <p className="text-secondary mb-3">Hot Picks Today</p>
-                      <h1 className="text-4xl font-bold leading-tight text-background mb-6">
-                        Fresh Styles Await You...
-                      </h1>
-                      <button
-                        onClick={() => navigate("/allproducts")}
-                        className="px-6 py-3 bg-[#FF6A45] text-white hover:bg-secondary hover:text-foreground rounded-lg w-fit"
-                      >
-                        Shop Now
-                      </button>
-                    </div>
-
-                    {/* IMAGE */}
-                    <div>
-                      <img
-                        src="/src/assets/hero-1.png"
-                        className="h-[75%] absolute right-8 lg:right-0 bottom-0 object-contain z-10"
-                      />
-                    </div>
-                  </div>
-                </CarouselItem>
-
-                {/* ---- SLIDE 2 ---- */}
-                <CarouselItem className="min-w-full flex-none h-[450px] p-0">
-                  <div className="w-full h-full flex items-center relative">
-                    <div className="w-1/2 h-full flex flex-col justify-center text-center items-center sm:text-start sm:items-start pl-12 lg:pl-16 z-20">
-                      <p className="text-secondary mb-3">
-                        Amazing Products From Store
-                      </p>
-                      <h1 className="text-4xl font-bold leading-tight text-background mb-6">
-                        Explore Our New Designs...
-                      </h1>
-                      <button
-                        onClick={() => navigate("/allproducts")}
-                        className="px-6 py-3 bg-[#FF6A45] text-white hover:bg-secondary hover:text-foreground rounded-lg w-fit"
-                      >
-                        Shop Now
-                      </button>
-                    </div>
-
-                    <div>
-                      <img
-                        src="/src/assets/hero-2.png"
-                        className="h-[70%] absolute right-0 bottom-0 object-contain z-10"
-                      />
-                    </div>
-                  </div>
-                </CarouselItem>
-
-                {/* ---- SLIDE 3 ---- */}
-                <CarouselItem className="min-w-full flex-none h-[450px] p-0">
-                  <div className="w-full h-full flex items-center relative">
-                    <div className="w-1/2 h-full flex flex-col justify-center text-center items-center sm:text-start sm:items-start pl-12 lg:pl-16 z-20">
-                      <p className="text-secondary mb-3">Trending Now</p>
-                      <h1 className="text-4xl font-bold leading-tight text-background mb-6">
-                        Upgrade Your Lifestyle...
-                      </h1>
-                      <button
-                        onClick={() => navigate("/allproducts")}
-                        className="px-6 py-3 bg-[#FF6A45] text-white hover:bg-secondary hover:text-foreground rounded-lg w-fit"
-                      >
-                        Shop Now
-                      </button>
-                    </div>
-                    <div>
-                      <img
-                        src="/src/assets/hero-3.png"
-                        className="h-[75%] absolute right-0 bottom-0 object-contain z-10"
-                      />
-                    </div>
-                  </div>
-                </CarouselItem>
-              </CarouselContent>
-            </Carousel>
-          </div>
-
-          {/* RIGHT COLUMN */}
-          <div className="flex flex-col w-full md:w-[50%] h-[450px] justify-between">
-            {/* RIGHT TOP BOX */}
-            <div className="bg-accent rounded-3xl p-8 flex items-center justify-between h-[48%]">
-              <div>
-                <h1 className="text-2xl font-semibold text-gray-900">
-                  Best Sale
-                </h1>
-                <p
-                  onClick={() => navigate("/allproducts")}
-                  className="text-background hover:text-background/80 mt-2 cursor-pointer"
-                >
-                  View more →
-                </p>
-              </div>
-              <div>
-                <img
-                  src="/src/assets/earbuds.png"
-                  alt="Earbuds"
-                  className="w-32 drop-shadow"
-                />
-              </div>
-            </div>
-
-            {/* RIGHT BOTTOM BOX */}
-            <div className="bg-secondary rounded-3xl p-8 flex items-center justify-between h-[48%]">
-              <div>
-                <h3 className="text-3xl font-bold text-gray-900">30% OFF</h3>
-                <p className="text-sm text-gray-700">Exclusive Discounts</p>
-                <p
-                  onClick={() => navigate("/allproducts")}
-                  className="text-gray-700 hover:text-accent mt-2 cursor-pointer"
-                >
-                  View more →
-                </p>
-              </div>
-              <div>
-                <img
-                  src="/src/assets/mobile.png"
-                  alt="Watch"
-                  className="w-32 drop-shadow"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* ---------------------------------------- */}
         {/* HERO SUPPORT FEATURES */}
@@ -293,22 +333,39 @@ const HomePageComp = () => {
           // ✅ Skeleton grid
           <SkeletonCard count={8} />
         ) : products.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-10 mt-10 px-4 sm:px-12 lg:px-14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-px bg-black/5 mt-10 border-t border-black/5">
             {products.map((product) => (
               <div
                 key={product.id}
                 onClick={() => handleViewProduct(product.id)}
-                className="cursor-pointer"
+                className="group relative bg-secondary p-6 cursor-pointer transition-all duration-500 hover:bg-white border-b border-black/5 sm:border-r"
               >
+                {/* TOP DATA TAG (UI Enhancement) */}
+                <div className="flex justify-between items-center mb-4 opacity-40 group-hover:opacity-100 transition-opacity">
+                  <span className="text-[9px] font-mono font-bold tracking-widest">
+                    REF: 00{product.id}
+                  </span>
+                  <div className="flex gap-1">
+                    <div className="w-1 h-1 bg-black/20" />
+                    <div
+                      style={{ backgroundColor: "#649b9b" }}
+                      className="w-1 h-1"
+                    />
+                  </div>
+                </div>
+
                 {/* IMAGE BOX */}
-                <div className="relative w-full h-64 bg-white rounded-2xl shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                <div className="relative w-full h-72 bg-neutral-100 overflow-hidden border border-black/5 transition-transform duration-700 group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)]">
                   {/* IMAGE SKELETON */}
                   {!imageLoaded[product.id] && (
                     <>
-                      <Skeleton className="absolute inset-0 rounded-2xl" />
+                      <Skeleton className="absolute inset-0" />
                       <FiImage className="absolute inset-0 m-auto text-gray-300 text-4xl" />
                     </>
                   )}
+
+                  {/* OVERLAY SCANLINE (Visual Only) */}
+                  <div className="absolute top-0 left-0 w-full h-[1px] bg-[#649b9b]/30 opacity-0 group-hover:opacity-100 group-hover:top-full transition-all duration-[1.5s] ease-in-out z-10" />
 
                   {/* IMAGE */}
                   <img
@@ -319,38 +376,58 @@ const HomePageComp = () => {
                     width="256"
                     height="256"
                     onLoad={() => handleImageLoad(product.id)}
-                    className={`h-full w-full object-contain p-4 transition-opacity duration-500
-                    ${imageLoaded[product.id] ? "opacity-100" : "opacity-0"}`}
+                    className={`h-full w-full object-contain p-6 grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110
+            ${imageLoaded[product.id] ? "opacity-100" : "opacity-0"}`}
+                  />
+
+                  {/* TACTICAL CORNER ACCENT */}
+                  <div
+                    style={{ borderColor: "oklch(67.221% 0.20974 33.259)" }}
+                    className="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 opacity-0 group-hover:opacity-100 transition-opacity"
                   />
                 </div>
 
                 {/* TITLE + PRICE */}
-                <div className="mt-3 flex justify-between items-center">
-                  <h2 className="text-sm font-medium text-gray-900 truncate">
-                    {product.title}
-                  </h2>
-                  <p className="text-accent font-semibold">${product.price}</p>
+                <div className="mt-6 space-y-1">
+                  <div className="flex justify-between items-start gap-4">
+                    <h2 className="text-sm font-black italic uppercase tracking-tighter leading-tight group-hover:text-[#649b9b] transition-colors">
+                      {product.title}
+                    </h2>
+                    <p
+                      style={{ color: "oklch(67.221% 0.20974 33.259)" }}
+                      className="text-lg font-black tracking-tighter"
+                    >
+                      ${product.price}
+                    </p>
+                  </div>
                 </div>
 
-                {/* RATING */}
-                <div className="flex gap-1 mt-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <i
-                      key={i}
-                      className={`bi ${
-                        i < Math.floor(product.rating)
-                          ? "bi-star-fill text-green-500"
-                          : "bi-star text-gray-300"
-                      } text-xs`}
-                    />
-                  ))}
+                {/* RATING & FOOTER */}
+                <div className="mt-4 flex justify-between items-center border-t border-black/[0.03] pt-4">
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <div
+                        key={i}
+                        className={`w-1.5 h-3 ${
+                          i < Math.floor(product.rating)
+                            ? "bg-black"
+                            : "bg-black/10"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-[8px] font-mono opacity-30 uppercase tracking-widest group-hover:opacity-100">
+                    Available_Stock
+                  </span>
                 </div>
               </div>
             ))}
           </div>
         ) : (
           <div className="h-40 flex items-center justify-center">
-            <h1>No product found</h1>
+            <h1 className="text-[10px] font-black uppercase tracking-[0.5em] opacity-20">
+              No product found
+            </h1>
           </div>
         )}
 
