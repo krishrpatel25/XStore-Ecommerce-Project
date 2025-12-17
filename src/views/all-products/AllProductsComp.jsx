@@ -184,7 +184,7 @@ function Products() {
   const [search, setSearch] = useState(""); // filter
   const [apiSearch, setApiSearch] = useState(""); // API search
   const [imageLoaded, setImageLoaded] = useState({});
-  const [filteredProductLoading, setFilteredProductLoading] = useState(false);
+  const [filteredProductLoading, setFilteredProductLoading] = useState(true);
 
   /* -------- DEBOUNCED API SEARCH -------- */
   const debouncedApiSearch = useCallback(
