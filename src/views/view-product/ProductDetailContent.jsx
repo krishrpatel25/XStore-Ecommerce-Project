@@ -65,158 +65,174 @@ function ProductDetailContent({ products }) {
     return <div> no data found </div>;
   }
   return (
-    <div>
-      <section className="px-0 lg:pt-14 lg:px-14">
-        <div className="flex flex-col lg:flex-row items-center justify-between lg:items-start gap-6 p-4 lg:p-0">
-          <div className="flex flex-col md:flex-row gap-6 justify-between">
-            {/* Thumbnails */}
-            <div
-              className="
-                grid grid-cols-3 gap-3
-                sm:flex sm:flex-row sm:flex-wrap sm:gap-3
-                lg:flex-col lg:order-1 lg:overflow-visible
-              "
-            >
-              {products?.images ? (
-                Array.isArray(products.images) &&
-                products.images.map((img, index) => (
-                  <img
-                    key={index}
-                    src={img}
-                    alt={`product-${index}`}
-                    className="
-                      w-full h-20                 /* MOBILE IMAGE SIZE */
-                      sm:w-20 sm:h-20             /* TABLET+ USES OLD SIZE */
-                      lg:w-24 lg:h-24
-                      rounded-xl object-cover cursor-pointer
-                        "
-                    onClick={() => setSelectImage(img)}
+    <div className=" text-foreground group/section max-w-7xl mx-auto">
+      <section className="border-t border-foreground/10">
+        <div className="flex flex-col lg:flex-row border-b border-foreground/10 min-h-[450px]">
+          {/* ─── 01. IMAGE SECTION (Height Reduced) ─── */}
+          <div className="relative w-full lg:w-[45%] overflow-hidden flex flex-col md:flex-row items-center justify-center p-4 md:p-8 gap-4">
+            {/* Thumbnails: Smaller sizes */}
+            <div className="flex flex-row md:flex-col gap-4 z-20 order-2 md:order-1">
+              {products?.images?.map((img, index) => (
+                <div
+                  key={index}
+                  onClick={() => setSelectImage(img)}
+                  className="relative cursor-pointer group/item"
+                >
+                  {/* Background Decorative Block (The "Shadow") */}
+                  <div
+                    className={`absolute inset-0 bg-primary/10 -rotate-3 transition-transform duration-300 group-hover/item:rotate-0
+        ${selectImage === img ? "opacity-100" : "opacity-0"}`}
                   />
-                ))
-              ) : (
-                <div className="flex justify-center items-center py-10 col-span-3">
-                  <div className="flex space-x-2">
-                    <div className="w-3 h-3 rounded-full animate-bounce"></div>
-                    <div className="w-3 h-3 rounded-full animate-bounce [animation-delay:-0.2s]"></div>
-                    <div className="w-3 h-3 rounded-full animate-bounce [animation-delay:-0.4s]"></div>
+
+                  {/* Main Thumbnail Container */}
+                  <div
+                    className={`relative p-1 border-2 transition-all duration-500 bg-background
+        ${
+          selectImage === img
+            ? "border-primary translate-x-1 -translate-y-1 shadow-[4px_4px_0px_0px_rgba(var(--primary),1)]"
+            : "border-foreground/10 opacity-60 hover:opacity-100 hover:border-foreground/30"
+        }`}
+                  >
+                    <img
+                      src={img}
+                      // Size increased from w-12 to w-16/w-20
+                      className="w-14 h-14 md:w-20 md:h-20 object-cover"
+                      alt={`Thumbnail ${index}`}
+                    />
+
+                    {/* Technical index tag inside the image */}
+                    <div
+                      className={`absolute bottom-0 right-0 px-1 text-[8px] font-mono leading-none
+          ${
+            selectImage === img
+              ? "bg-primary text-background"
+              : "bg-foreground/10 text-foreground"
+          }`}
+                    >
+                      0{index + 1}
+                    </div>
                   </div>
                 </div>
-              )}
+              ))}
+            </div>
+            {/* Ghost Text: Scaled down from 15vw to 10vw */}
+            <span className="absolute text-[10vw] font-black text-foreground/[0.03] select-none uppercase italic leading-none z-0">
+              {products?.category?.slice(0, 4) || "TECH"}
+            </span>
+
+            {/* Main Image: Max-height limited to 300px */}
+            <div className="relative z-10 w-full h-full flex items-center justify-center order-1 md:order-2 group/img">
+              <div className="absolute top-0 left-0 text-[7px] font-mono opacity-20 flex flex-col">
+                <span>RES_1080px</span>
+                <span>MNTR_V2</span>
+              </div>
+
+              <img
+                src={selectImage}
+                alt={products?.title}
+                className="max-h-[300px] w-auto object-contain transition-all duration-500 group-hover/img:scale-105"
+              />
             </div>
 
-            {/* Main Image */}
-            <div className="border-none flex justify-center items-center order-1 lg:order-2 w-full lg:w-auto">
-              <div className="w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[300px] md:h-[300px] flex justify-center items-center rounded-2xl  overflow-hidden">
-                <img
-                  src={selectImage}
-                  alt={products?.title}
-                  className="w-full h-full object-contain transition-all duration-300"
-                />
-              </div>
-            </div>
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-primary scale-x-0 group-hover/section:scale-x-100 transition-transform duration-500 origin-right" />
           </div>
 
-          {/* Product Details */}
-          <div className="flex flex-col  sm:p-6 lg:px-16 gap-2  w-full lg:w-[60%] order-3">
-            <span className="text-sm sm:text-base text-gray-700">
-              {products?.category}
-            </span>
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+          {/* ─── 02. INFO SECTION (Reduced Padding & Font) ─── */}
+          <div className="w-full lg:w-[55%] p-6 md:p-10 flex flex-col justify-center border-l border-foreground/10 bg-background relative">
+            <div className="absolute top-0 right-0 w-1.5 h-1.5 bg-primary" />
+
+            {/* Label: Tighter spacing */}
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-[10px] font-mono text-primary font-bold">
+                [DATA_01]
+              </span>
+              <div className="h-[1px] w-8 bg-foreground/20"></div>
+              <span className="text-[9px] font-mono opacity-40 uppercase tracking-widest">
+                {products?.category}
+              </span>
+            </div>
+
+            {/* Title: Scaled down from 7xl to 4xl/5xl */}
+            <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter italic text-foreground mb-4 leading-none hover:text-primary transition-colors cursor-default">
               {products?.title}
             </h1>
-            <div className="flex items-center gap-1 mt-1">
-              {Array.from({ length: 5 }, (_, i) => {
-                const rating = products.rating;
 
-                if (i < Math.floor(rating)) {
-                  return (
-                    <i
-                      key={i}
-                      className="bi bi-star-fill text-green-500 text-[12px]"
-                    ></i>
-                  );
-                } else if (i < rating) {
-                  return (
-                    <i
-                      key={i}
-                      className="bi bi-star-half text-green-500 text-[12px]"
-                    ></i>
-                  );
-                } else {
-                  return (
-                    <i
-                      key={i}
-                      className="bi bi-star text-gray-300 text-[12px]"
-                    ></i>
-                  );
-                }
-              })}
-              <p className="px-4 text-[12px]">30,856 Ratings & 3,851 Reviews</p>
-            </div>
-            <div>
-              <p className="text-primary">
-                Extra {products?.discountPercentage}% off
-              </p>
-            </div>
-            <p className="text-gray-600 font-medium text-[12px] sm:text-[14px]">
+            <p className="text-[12px] text-foreground/60 uppercase leading-snug tracking-tight max-w-md mb-6 line-clamp-3">
               {products?.description}
             </p>
 
-            <p className="text-2xl sm:text-3xl font-extrabold text-accent mt-2">
-              ${products?.price}
-            </p>
-            <div className="w-full h-0.5 bg-primary"></div>
+            {/* Price & Rating: Compact Grid */}
+            <div className="flex items-center gap-8 mb-8 py-4 border-y border-foreground/5">
+              <div className="flex flex-col">
+                <span className="text-[9px] font-mono opacity-30 uppercase">
+                  Value
+                </span>
+                <span className="text-2xl font-black text-accent italic">
+                  ${products?.price}
+                </span>
+              </div>
 
-            <div className="flex flex-col sm:flex-row w-full gap-4 pt-4">
-              <div className="flex gap-4 w-full">
-                {!showQtyControl ? (
+              <div className="w-[1px] h-8 bg-foreground/10" />
+
+              <div className="flex flex-col">
+                <span className="text-[9px] font-mono opacity-30 uppercase mb-1">
+                  Rating
+                </span>
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <div
+                      key={i}
+                      className={`w-3 h-1 ${
+                        i < Math.floor(products?.rating)
+                          ? "bg-primary"
+                          : "bg-foreground/10"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons: Height reduced from h-14 to h-11 */}
+            <div className="flex flex-wrap gap-3">
+              {!showQtyControl ? (
+                <button
+                  onClick={handleAddToCart}
+                  className="h-11 px-8 bg-foreground text-background flex items-center justify-center text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all"
+                >
+                  Add_To_Cart
+                </button>
+              ) : (
+                <div className="flex gap-2">
+                  {/* Assuming QuantityControl has internal height padding, adjust accordingly */}
+                  <QuantityControl
+                    qty={qty}
+                    onIncrease={handleIncrease}
+                    onDecrease={handleDecrease}
+                  />
+                  <button
+                    onClick={() => navigate("/cart")}
+                    className="h-11 px-5 border border-primary text-primary font-black uppercase text-[10px] tracking-widest"
+                  >
+                    View
+                  </button>
+                </div>
+              )}
+
+              <button
+                onClick={handleWishlist}
+                className="h-11 px-5 border border-foreground/10 flex items-center justify-center gap-2 hover:bg-foreground/5 transition font-mono text-[9px] uppercase tracking-tighter"
+              >
+                {isWishlisted ? (
                   <>
-                    {/* Add Cart Button */}
-                    <Button
-                      className="w-[100px] text-white bg-accent hover:bg-primary hover:text-background "
-                      onClick={handleAddToCart}
-                    >
-                      Add Cart
-                    </Button>
+                    <i className="bi bi-heart-fill text-red-500"></i> Saved
                   </>
                 ) : (
                   <>
-                    {/* Quantity Control */}
-                    <QuantityControl
-                      qty={qty}
-                      onIncrease={handleIncrease}
-                      onDecrease={handleDecrease}
-                    />
-
-                    {/* View Cart Button */}
-                    <Button
-                      className="w-[100px] text-white bg-accent hover:bg-primary hover:text-background"
-                      onClick={() => navigate("/cart")}
-                    >
-                      View Cart
-                    </Button>
+                    <i className="bi bi-heart"></i> Wishlist
                   </>
                 )}
-              </div>
-              <div>
-                <button
-                  onClick={handleWishlist}
-                  className="px-5 py-2 bg-secondary rounded-full flex items-center gap-2 
-                  hover:bg-primary/20 transition font-medium"
-                >
-                  {isWishlisted ? (
-                    <>
-                      <i className="bi bi-heart-fill text-red-500"></i>
-                      Remove
-                    </>
-                  ) : (
-                    <>
-                      <i className="bi bi-heart"></i>
-                      Wishlist
-                    </>
-                  )}
-                </button>
-              </div>
+              </button>
             </div>
           </div>
         </div>
