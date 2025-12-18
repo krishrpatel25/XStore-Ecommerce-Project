@@ -48,16 +48,43 @@ function App() {
                 position="bottom-right"
                 toastOptions={{
                   style: {
-                    background: "rgba(255, 255, 255, 0.35)",
-                    backdropFilter: "blur(15px) saturate(150%)",
-                    WebkitBackdropFilter: "blur(15px) saturate(150%)",
-                    borderRadius: "18px",
-                    boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
-                    padding: "16px 20px",
-                    color: "var(--accent)",
-                    fontWeight: "600",
-                    letterSpacing: "0.2px",
-                    border: "2px solid var(--background)",
+                    /* Sharp Geometry */
+                    borderRadius: "0px",
+
+                    /* Secondary Theme */
+                    background: "var(--secondary)",
+                    color: "var(--foreground)",
+
+                    /* Brutalist Border & Shadow */
+                    border: "1px solid var(--foreground)",
+                    boxShadow: "5px 5px 0px 0px var(--primary)",
+
+                    /* Technical Typography */
+                    fontFamily: "monospace",
+                    fontSize: "11px",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.15em",
+                    fontWeight: "800",
+
+                    /* Layout */
+                    padding: "14px 22px",
+                    minWidth: "280px",
+                  },
+                  // Theming the icons to match the technical vibe
+                  success: {
+                    duration: 3000,
+                    iconTheme: {
+                      primary: "var(--primary)",
+                      secondary: "var(--secondary)",
+                    },
+                  },
+                  error: {
+                    style: {
+                      background: "#000000",
+                      color: "#ff4b4b",
+                      border: "1px solid #ff4b4b",
+                      boxShadow: "5px 5px 0px 0px #ff4b4b",
+                    },
                   },
                 }}
               />
