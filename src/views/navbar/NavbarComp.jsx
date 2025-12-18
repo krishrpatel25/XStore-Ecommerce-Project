@@ -36,72 +36,49 @@ const NavbarComp = () => {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="fixed top-3 left-1/2 -translate-x-1/2 z-40 w-[94%] rounded-full bg-white/70 backdrop-blur-xl shadow-sm border border-background">
-        <div className="max-w-7xl mx-auto flex items-center px-4 md:px-6 py-2 md:py-4">
+      <nav className="fixed top-0 left-0 z-40 w-full bg-background/80 backdrop-blur-md border-b border-foreground/10">
+        <div className="max-w-7xl mx-auto flex items-center px-4 md:px-10 h-16 md:h-20">
           {/* LEFT MENU (Desktop Only) */}
-          <div className="hidden lg:flex items-center gap-6 flex-1">
-            <NavLink
-              to="/"
-              className="font-medium text-gray-700 hover:text-accent transition"
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/category"
-              className="font-medium text-gray-700 hover:text-accent transition"
-            >
-              Categories
-            </NavLink>
-            <NavLink
-              to="/allproducts"
-              className="font-medium text-gray-700 hover:text-accent transition"
-            >
-              Products
-            </NavLink>
+          <div className="hidden lg:flex items-center gap-8 flex-1">
+            {["Home", "Category", "AllProducts"].map((item) => (
+              <NavLink
+                key={item}
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-foreground/60 hover:text-primary transition-colors relative group"
+              >
+                {item}
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all group-hover:w-full" />
+              </NavLink>
+            ))}
           </div>
 
-          {/* LOGO */}
+          {/* LOGO - Brutalist Center */}
           <NavLink
             to="/"
-            className="
-              text-3xl font-extrabold tracking-widest text-gray-900
-              relative inline-block
-              transition-all duration-300
-
-              /* 3D base */
-              drop-shadow-[2px_2px_0px_rgba(0,0,0,0.25)]
-
-              /* hover animation */
-              hover:scale-110 hover:tracking-[0.25em] hover:text-accent
-              hover:drop-shadow-[6px_6px_0px_rgba(0,0,0,0.25)]
-            "
+            className="flex-shrink-0 group relative px-6 py-1 border-x border-foreground/10"
           >
-            <span className="relative inline-block">
+            <div className="absolute top-0 left-0 w-1 h-1 bg-primary" />
+            <div className="absolute bottom-0 right-0 w-1 h-1 bg-primary" />
+
+            <span className="text-2xl font-black uppercase tracking-tighter italic text-foreground transition-all group-hover:text-primary group-hover:skew-x-[-10deg] inline-block">
               XStore
-              {/* 3D Shine Layer */}
-              <span
-                className="
-                text-sm
-                  absolute inset-0 text-white opacity-0
-                  translate-y-1 translate-x-1
-                  transition-all duration-300
-                  blur-sm
-                  hover:opacity-30
-                "
-              >
-                XStore
-              </span>
+            </span>
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[7px] font-mono opacity-30 tracking-[0.5em] uppercase">
+              Ver_2.0.25
             </span>
           </NavLink>
 
           {/* RIGHT SECTION — DESKTOP */}
-          <div className="hidden lg:flex items-center gap-6 flex-1 justify-end">
+          <div className="hidden lg:flex items-center gap-8 flex-1 justify-end">
             <button
               onClick={() => navigate("/cart")}
-              className="relative hover:text-accent transition"
+              className="relative group p-2"
             >
-              <FiShoppingCart size={22} />
-              <span className="absolute -top-2 -right-2 bg-accent text-white text-[10px] px-2 py-[1px] rounded-full">
+              <FiShoppingCart
+                size={18}
+                className="group-hover:text-primary transition-colors"
+              />
+              <span className="absolute top-0 right-0 bg-primary text-background text-[8px] font-bold w-4 h-4 flex items-center justify-center">
                 {cart.length}
               </span>
             </button>
@@ -111,226 +88,122 @@ const NavbarComp = () => {
                 e.stopPropagation();
                 setOpen((prev) => !prev);
               }}
-              className="hover:text-accent transition"
+              className={`p-2 transition-all ${
+                open ? "bg-primary text-background" : "hover:text-primary"
+              }`}
             >
-              <FiUser size={24} />
+              <FiUser size={20} />
             </button>
           </div>
 
           {/* MOBILE + TABLET RIGHT */}
-          <div className="flex items-center gap-2 md:gap-5 lg:hidden flex-1 justify-end">
-            <button
-              onClick={() => setOpen(!open)}
-              className="hover:text-accent transition"
-            >
-              <FiUser size={18} className="text-gray-800 md:hidden" />
-              <FiUser size={20} className="hidden md:block text-gray-800" />
+          <div className="flex lg:hidden items-center gap-4 flex-1 justify-end">
+            <button onClick={() => setOpen(!open)} className="p-2">
+              <FiUser size={18} />
             </button>
 
             <button
               onClick={() => setRightMenuOpen(true)}
-              className="p-1.5 md:p-2 rounded-lg border border-gray-300 active:scale-95 transition"
+              className="h-10 w-10 flex flex-col items-center justify-center gap-1 border border-foreground/10 hover:border-primary transition-all"
             >
-              <FiMenu size={20} className="text-gray-800 md:hidden" />
-              <FiMenu size={22} className="hidden md:block text-gray-800" />
+              <div className="w-5 h-[1px] bg-foreground" />
+              <div className="w-3 h-[1px] bg-foreground self-end mr-2.5" />
+              <div className="w-5 h-[1px] bg-foreground" />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* GLOBAL PROFILE DROPDOWN — WORKS ON ALL SCREENS */}
+      {/* GLOBAL PROFILE DROPDOWN */}
       {open && (
         <div
           ref={dropdownRef}
           onClick={(e) => e.stopPropagation()}
-          className="
-          fixed right-3 top-16
-          w-56 sm:w-64
-          p-3 sm:p-4
-          bg-white
-          rounded-xl sm:rounded-2xl
-          shadow-xl
-          border border-gray-200
-          z-50
-        "
+          className="fixed right-4 top-20 w-56 bg-background border border-foreground/20 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)] z-50 p-1"
         >
-          <div className="flex flex-col text-sm sm:text-base font-medium">
-            <button className="py-2 px-3 hover:bg-gray-100 rounded-lg transition flex justify-between">
-              My Profile <span>👤</span>
-            </button>
-
-            <button
-              onClick={() => navigate("/order")}
-              className="py-2 px-3 hover:bg-gray-100 rounded-lg transition flex justify-between"
-            >
-              Orders <span>📦</span>
-            </button>
-
-            <button
-              onClick={() => navigate("/wishlist")}
-              className="py-2 px-3 hover:bg-gray-100 rounded-lg transition flex justify-between"
-            >
-              Wishlist <span>❤️</span>
-            </button>
-
-            <hr className="my-2 sm:my-3" />
-
-            <button className="py-2 px-3 bg-accent text-white rounded-lg font-semibold hover:opacity-90 transition">
-              Logout
+          <div className="flex flex-col">
+            {[
+              { label: "My Profile", path: null },
+              { label: "Orders", path: "/order" },
+              { label: "Wishlist", path: "/wishlist" },
+            ].map((item) => (
+              <button
+                key={item.label}
+                onClick={() => item.path && navigate(item.path)}
+                className="group flex items-center justify-between px-4 py-3 text-[10px] font-mono uppercase tracking-widest hover:bg-primary hover:text-background transition-all"
+              >
+                {item.label}
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity">
+                  →
+                </span>
+              </button>
+            ))}
+            <div className="h-[1px] bg-foreground/10 my-1" />
+            <button className="py-4 px-4 bg-accent text-background text-[10px] font-black uppercase tracking-[0.3em] hover:bg-primary transition-colors">
+              Logout_System
             </button>
           </div>
         </div>
       )}
 
-      {/* OVERLAY */}
-      {rightMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/20 z-40 lg:hidden"
-          onClick={() => setRightMenuOpen(false)}
-        />
-      )}
-
-      {/* RIGHT SIDE MENU */}
+      {/* MOBILE DRAWER (Right Side Menu) */}
       <div
-        className={`
-    fixed top-0 right-0 h-full
-    w-48 sm:w-72
-    bg-white
-    z-50
-    shadow-md
-    border-l border-gray-200
-    transform transition-transform duration-300
-    ${rightMenuOpen ? "translate-x-0" : "translate-x-full"}
-    lg:hidden
-  `}
-      >
-        {/* HEADER */}
-        <div className="flex items-center justify-between px-3 py-2 border-b">
-          <h2 className="text-xs sm:text-lg font-semibold">Menu</h2>
-          <button onClick={() => setRightMenuOpen(false)}>
-            <FiX size={18} className="text-gray-700 sm:hidden" />
-            <FiX size={24} className="hidden sm:block text-gray-700" />
-          </button>
-        </div>
-
-        {/* LINKS */}
-        <div className="flex flex-col mt-1 text-xs sm:text-base font-medium">
-          <NavLink
-            to="/"
-            onClick={() => setRightMenuOpen(false)}
-            className="px-3 py-2 hover:bg-gray-100"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/category"
-            onClick={() => setRightMenuOpen(false)}
-            className="px-3 py-2 hover:bg-gray-100"
-          >
-            Categories
-          </NavLink>
-          <NavLink
-            to="/allproducts"
-            onClick={() => setRightMenuOpen(false)}
-            className="px-3 py-2 hover:bg-gray-100"
-          >
-            Products
-          </NavLink>
-        </div>
-
-        <hr className="my-1" />
-
-        {/* CART */}
-        <div className="px-3">
-          <button
-            onClick={() => navigate("/cart")}
-            className="flex items-center justify-between w-full px-2 py-1.5 rounded-md hover:bg-gray-100 text-xs"
-          >
-            <span className="flex items-center gap-1.5">
-              <FiShoppingCart size={14} /> My Cart
-            </span>
-            <span className="text-[9px] bg-accent text-white px-1.5 py-[1px] rounded-full">
-              {cart.length}
-            </span>
-          </button>
-        </div>
-
-        <hr className="my-1" />
-
-        {/* LOGOUT */}
-        <div className="px-3 pb-3">
-          <button className="w-full py-1.5 rounded-md bg-accent text-white text-xs font-semibold hover:opacity-90 transition">
-            Logout
-          </button>
-        </div>
-      </div>
-
-      {/* RIGHT SIDE SLIDER MENU */}
-      <div
-        className={`fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl border-l border-gray-200 
-        transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-full sm:w-80 bg-background z-50 border-l border-foreground/10 transform transition-transform duration-500 ease-in-out ${
           rightMenuOpen ? "translate-x-0" : "translate-x-full"
         } lg:hidden`}
       >
-        {/* HEADER */}
-        <div className="flex items-center justify-between px-5 py-4 border-b">
-          <h2 className="text-lg font-semibold">Menu</h2>
-          <button onClick={() => setRightMenuOpen(false)}>
-            <FiX size={24} className="text-gray-700" />
+        <div className="flex items-center justify-between p-6 border-b border-foreground/10">
+          <span className="font-mono text-[10px] uppercase tracking-[0.5em] opacity-40">
+            Menu_Directory
+          </span>
+          <button
+            onClick={() => setRightMenuOpen(false)}
+            className="p-2 border border-foreground/10"
+          >
+            <FiX size={20} />
           </button>
         </div>
 
-        {/* NAV LINKS */}
-        <div className="flex flex-col mt-2 font-medium">
-          <NavLink
-            to="/"
-            onClick={() => setRightMenuOpen(false)}
-            className="px-5 py-3 hover:bg-gray-100"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/category"
-            onClick={() => setRightMenuOpen(false)}
-            className="px-5 py-3 hover:bg-gray-100"
-          >
-            Categories
-          </NavLink>
-          <NavLink
-            to="/allproducts"
-            onClick={() => setRightMenuOpen(false)}
-            className="px-5 py-3 hover:bg-gray-100"
-          >
-            Products
-          </NavLink>
-        </div>
+        <div className="flex flex-col p-6 gap-6">
+          {["Home", "Category", "AllProducts"].map((item) => (
+            <NavLink
+              key={item}
+              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+              onClick={() => setRightMenuOpen(false)}
+              className="text-4xl font-black uppercase italic tracking-tighter hover:text-primary transition-all"
+            >
+              {item}
+            </NavLink>
+          ))}
 
-        <hr className="my-3" />
+          <div className="h-[1px] bg-foreground/10 my-4" />
 
-        {/* CART, WISHLIST & ORDERS */}
-        <div className="flex flex-col gap-2 px-5">
           <button
-            onClick={() => navigate("/cart")}
-            className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100"
+            onClick={() => {
+              navigate("/cart");
+              setRightMenuOpen(false);
+            }}
+            className="flex items-center justify-between w-full p-4 border border-foreground/10 font-mono text-xs uppercase"
           >
-            <span className="flex items-center gap-2">
-              <FiShoppingCart /> My Cart
-            </span>
-            <span className="text-xs bg-accent text-white px-2 py-[2px] rounded-full">
+            <span>[ My_Cart ]</span>
+            <span className="bg-primary text-background px-2 py-0.5 font-bold">
               {cart.length}
             </span>
           </button>
-        </div>
 
-        <hr className="my-3" />
-
-        {/* LOGOUT */}
-        <div className="px-5 pb-5">
-          <button className="w-full py-2.5 rounded-lg bg-accent text-white font-semibold hover:opacity-90 transition">
-            Logout
+          <button className="w-full py-5 bg-accent text-background font-black uppercase tracking-widest text-xs mt-auto">
+            Logout_System
           </button>
         </div>
       </div>
+
+      {/* OVERLAY */}
+      {rightMenuOpen && (
+        <div
+          className="fixed inset-0 bg-background/60 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => setRightMenuOpen(false)}
+        />
+      )}
     </>
   );
 };
