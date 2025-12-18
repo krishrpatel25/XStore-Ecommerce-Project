@@ -4,47 +4,74 @@ import { FiFacebook, FiInstagram, FiTwitter } from "react-icons/fi";
 const FooterComp = () => {
   return (
     <>
-      <footer className="w-full bg-primary border-t border-gray-200 py-14">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Column 1 */}
-          <div className="text-foreground">
-            <h3 className="text-xl font-bold mb-4">XStore</h3>
-            <p className=" text-sm leading-relaxed">
-              Premium products. Trusted service. Your favorite shopping
-              destination.
+      <footer className="w-full bg-primary border-t-2 border-foreground pt-16 relative overflow-hidden">
+        {/* BACKGROUND DECOR: Large Serial Number */}
+        <div className="absolute bottom-0 right-0 text-[15vw] opacity-[0.02] select-none leading-none pointer-events-none">
+          XS_2025
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
+          {/* Column 1: Core Identification */}
+          <div className="space-y-6">
+            <div className="flex flex-col">
+              {/* BOLD LABEL */}
+              <span className="text-[10px] font-semibold font-bold text-background mb-1 tracking-[0.3em]">
+                ID_TAG:
+              </span>
+              {/* ULTRA BOLD HEADING */}
+              <h3 className="text-4xl uppercase italic tracking-tighter text-foreground leading-none">
+                XStore_
+              </h3>
+            </div>
+            <p className="font-semibold text-[11px] uppercase tracking-widest leading-relaxed text-foreground/50 max-w-[240px]">
+              Premium assets.{" "}
+              <span className="text-foreground/80 font-bold">
+                Validated logistics.
+              </span>{" "}
+              Your primary source for industrial-grade consumer units.
             </p>
-            <div className="mt-5 flex gap-4 ">
-              <FiFacebook size={22} className="hover:text-accent text-semibold transition" />
-              <FiInstagram size={22} className="hover:text-accent text-semibold transition" />
-              <FiTwitter size={22} className="hover:text-accent text-semibold transition" />
+            <div className="flex text-bold gap-6">
+              <FiFacebook
+                size={18}
+                className="hover:text-background transition-colors cursor-pointer"
+              />
+              <FiInstagram
+                size={18}
+                className="hover:text-background transition-colors cursor-pointer"
+              />
+              <FiTwitter
+                size={18}
+                className="hover:text-background transition-colors cursor-pointer"
+              />
             </div>
           </div>
 
-          {/* Column 2 */}
-          <div className="text-foreground">
-            <h4 className="font-bold  mb-3">Shop</h4>
-            <ul className="space-y-2  text-sm">
+          {/* Column 2: Index / Shop */}
+          <div>
+            {/* SECTION HEADER BOLDED */}
+            <h4 className="font-semibold text-[11px] font-black uppercase tracking-[0.4em] mb-8 text-foreground pb-2 border-b-2 border-foreground/10">
+              Directory_01
+            </h4>
+            <ul className="space-y-4 font-semibold text-[11px] uppercase tracking-widest text-foreground/70">
               {["Men", "Wishlist", "Electronics", "Accessories"].map((item) => (
                 <li
                   key={item}
-                  className="relative w-fit cursor-pointer  hover:text-background transition
-                  before:content-[''] before:absolute before:-bottom-1 before:left-0 
-                  before:w-0 before:h-[2px] before:bg-background 
-                  before:transition-all before:duration-300 
-                  hover:before:w-full"
+                  className="group flex items-center gap-2 cursor-pointer hover:text-background hover:font-bold transition-all"
                 >
+                  <span className="w-0 group-hover:w-3 h-[2px] bg-background transition-all" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3 */}
-          <div className="text-foreground">
-            <h4 className="font-bold  mb-3">
-              Customer Support
+          {/* Column 3: Support Protocols */}
+          <div>
+            {/* SECTION HEADER BOLDED */}
+            <h4 className="font-semibold text-[11px] uppercase tracking-[0.4em] mb-8 text-foreground pb-2 border-b-2 border-foreground/10">
+              Service_Log
             </h4>
-            <ul className="space-y-2  text-sm">
+            <ul className="space-y-4 font-semibold text-[11px] uppercase tracking-widest text-foreground/70">
               {[
                 "Help Center",
                 "Track Order",
@@ -53,52 +80,63 @@ const FooterComp = () => {
               ].map((item) => (
                 <li
                   key={item}
-                  className="relative w-fit cursor-pointer  hover:text-background transition
-                  before:content-[''] before:absolute before:-bottom-1 before:left-0 
-                  before:w-0 before:h-[2px] before:bg-background 
-                  before:transition-all before:duration-500 
-                  hover:before:w-full"
+                  className="group flex items-center gap-2 cursor-pointer hover:text-background hover:font-bold transition-all"
                 >
+                  <span className="w-0 group-hover:w-3 h-[2px] bg-background transition-all" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 4 */}
-          <div className="text-foreground">
-            <h4 className="font-bold  mb-3">Download App</h4>
-            <p className=" text-sm mb-4">Shop easier with our mobile app.</p>
-            <div className="flex w-full gap-3">
-              <div className="w-[50%]">
-                <img
-                  src="/src/assets/qrCode.png"
-                  className="h-24 w-24 hover:opacity-80 transition"
-                />
-              </div>
-              <div className="flex flex-col items-center justify-between w-[50%]">
-                <div>
+          {/* Column 4: Interface Expansion (App) */}
+          <div className="relative group">
+            {/* SECTION HEADER BOLDED */}
+            <h4 className="font-semibold text-[11px] uppercase tracking-[0.4em] mb-8 text-foreground pb-2 border-b-2 border-foreground/10">
+              Mobile_Uplink
+            </h4>
+            <div className="bg-foreground/[0.03] border-2 border-foreground/10 p-5">
+              <p className="font-semibold text-[9px] font-bold uppercase tracking-widest mb-6 text-foreground/40">
+                Scan QR to synchronize mobile interface:
+              </p>
+              <div className="flex gap-4">
+                <div className="relative p-1 border-2 border-foreground/20 bg-white">
+                  <img
+                    src="/src/assets/qrCode.png"
+                    className="h-20 w-20 grayscale brightness-90"
+                    alt="QR"
+                  />
+                  <div className="absolute inset-0 border-2 border-accent transition-opacity pointer-events-none" />
+                </div>
+                <div className="flex flex-col justify-between">
                   <img
                     src="/src/assets/playstore.png"
-                    className="h-10 w-30 hover:opacity-80 transition"
+                    className="h-8 w-auto invert transition-all filter brightness-200"
                   />
-                </div>
-                <div>
                   <img
                     src="/src/assets/appstore.png"
-                    className="h-10 w-30 hover:opacity-80 transition"
+                    className="h-8 w-auto invert transition-all filter brightness-200"
                   />
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* COPYRIGHT STRIP */}
+        <div className="mt-20 border-t-2 bg-secondary border-foreground/10 py-10 px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="font-semibold text-[10px] uppercase tracking-[0.3em] text-foreground/40">
+            © 2025 XStore //{" "}
+            <span className="text-accent">All Rights Reserved</span> //
+            System_v4.0.1
+          </p>
+          <div className="flex gap-6 font-semibold text-[8px] uppercase tracking-widest">
+            <span className="opacity-20">Latency: 14ms</span>
+            <span className="text-accent">Encrypted: Yes</span>
+            <span className="opacity-20">Status: Terminal_Stable</span>
+          </div>
+        </div>
       </footer>
-      <div className="w-full bottom-0  bg-bforeground py-4 shadow-inner">
-        <p className="text-center text-gray-700 text-[12px] md:text-sm">
-          Copyright 2025 © XStore All Right Reserved.
-        </p>
-      </div>
     </>
   );
 };
