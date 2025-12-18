@@ -7,6 +7,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* hero section */
+
+
 @keyframes scaleIn {
   0% {
     opacity: 0;
@@ -50,7 +53,19 @@
 .animate-tick-pop {
   animation: tick-pop 0.35s ease-out;
 }
+/* hero footer infinite scroll  */
+@keyframes footer-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
 
+.animate-footer-scroll {
+  animation: footer-scroll 30s linear infinite;
+}
 
 
 
