@@ -46,22 +46,71 @@ const handleRemoveProduct = (e, item) => {
 
   if (cart.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-3 justify-center h-[80vh] md:h-[85vh]">
-        <div>
-          <p className="text-center text-gray-500 text-2xl md:text-3xl font-medium">
-            Your cart is empty 🛒
-          </p>
+      <div className="flex flex-col items-center justify-center min-h-[80vh] w-full min-h-screen px-6 py-10 bg-background relative overflow-hidden">
+        {/* BACKGROUND ACCENT */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.03] select-none pointer-events-none">
+          <h2 className="text-[40vw] font-black leading-none">00</h2>
         </div>
-        <div
-          onClick={() => navigate("/allproducts")}
-          className="relative w-fit cursor-pointer text-accent hover:text-primary transition
-                  before:content-[''] before:absolute before:-bottom-1 before:left-0 
-                  before:w-0 before:h-[2px] before:bg-primary 
-                  before:transition-all before:duration-500 
-                  hover:before:w-full"
-        >
-          <p>Shop Now ❯</p>
+
+        <div className="relative z-10 flex flex-col items-center w-full max-w-[320px] md:max-w-none">
+          {/* MICRO-LABELS (Perfect for Mobile) */}
+          <div className="flex flex-col items-center mb-8">
+            <div className="flex items-center gap-1.5 px-2 py-0.5 border border-red-600/40 bg-red-600/5 mb-2">
+              <span className="w-1 h-1 bg-red-600 animate-pulse" />
+              <p className="text-[8px] md:text-[10px] font-mono font-bold text-red-600 uppercase tracking-tighter">
+                System.Alert_Empty_cart
+              </p>
+            </div>
+            <p className="text-[7px] font-mono opacity-30 uppercase tracking-[0.3em]">
+              Code_Ref: 0x00021
+            </p>
+          </div>
+
+          {/* MAIN TEXT: Scaled for narrow screens */}
+          <div className="text-center mb-10">
+            <h1 className="text-5xl md:text-8xl font-black uppercase italic tracking-tighter leading-[0.85] text-foreground">
+              Empty_
+              <br />
+              Inventory
+            </h1>
+            <p className="mt-4 font-mono text-[9px] md:text-[11px] uppercase tracking-widest leading-loose text-foreground/60 px-4">
+              Manifest index is currently{" "}
+              <span className="text-primary font-bold">Empty</span>.
+              Re-synchronize with primary asset database to continue.
+            </p>
+          </div>
+
+          {/* COMPACT TECHNICAL BUTTON */}
+          <button
+            onClick={() => navigate("/allproducts")}
+            className="group relative w-[60%] md:w-auto bg-primary text-background px-6 py-4 transition-all active:scale-95"
+          >
+            <div className="flex items-center justify-between md:justify-center md:gap-6">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em]">
+                BROWSE_Product
+              </span>
+              <span className="text-sm font-bold">❯❯</span>
+            </div>
+
+            {/* Brutalist Shadow Accent */}
+            <div className="absolute -bottom-1 -right-1 w-full h-full border border-foreground -z-10 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
+          </button>
+
+          {/* SYSTEM LOGS (Tiny side-notes) */}
+          <div className="mt-12 w-full border-t border-foreground/5 pt-4 flex flex-col gap-1 items-center opacity-40">
+            <div className="flex justify-between w-full max-w-[200px] text-[7px] font-mono uppercase tracking-tighter">
+              <span>Log_Path</span>
+              <span>/root/cart/null</span>
+            </div>
+            <div className="flex justify-between w-full max-w-[200px] text-[7px] font-mono uppercase tracking-tighter">
+              <span>Thread_Status</span>
+              <span className="text-green-600">Active</span>
+            </div>
+          </div>
         </div>
+
+        {/* SCAN LINE EFFECT */}
+        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.05)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_2px,3px_100%]" />
       </div>
     );
   }
@@ -69,186 +118,133 @@ const handleRemoveProduct = (e, item) => {
   // Subtotal = sum of products
 
   return (
-    <section className="px-4 md:px-6 lg:px-20">
-      <div className="pt-24 px-2">
-        <h1 className="text-2xl font-semibold">My Cart</h1>
-        <div className="flex gap-3">
-          <div className="text-sm font-medium">
-            <p>items in your cart</p>
-          </div>
-          <div
-            onClick={() => navigate("/allproducts")}
-            className="text-sm text-primary font-medium cursor-pointer"
-          >
-            <p> View more →</p>
+    <section className="px-4 md:px-10 lg:px-24 pt-32 min-h-screen ">
+      {/* HEADER SECTION */}
+      <div className="border-b border-foreground/10 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic text-foreground leading-none">
+            Inventory_Cart
+          </h1>
+          <div className="flex items-center gap-3 mt-4">
+            <span className="text-[10px] font-mono text-primary font-bold uppercase tracking-[0.3em]">
+              [{cart.length}] Items_Stored
+            </span>
+            <button
+              onClick={() => navigate("/allproducts")}
+              className="text-[10px] font-mono opacity-50 hover:text-primary hover:opacity-100 transition-all uppercase underline underline-offset-4"
+            >
+              Add_More_Assets →
+            </button>
           </div>
         </div>
       </div>
 
-      <div className="pt-10 py-12 min-h-[100vh] max-h-max flex flex-col lg:flex-row gap-10">
+      <div className="flex flex-col lg:flex-row gap-12 py-12">
         {/* LEFT: CART ITEMS */}
         <div className="w-full lg:w-3/4">
-          {/* Table Header — Hidden on Mobile */}
-          <div className="hidden sm:grid grid-cols-12 font-semibold text-gray-600 mb-4 ">
-            <p className="col-span-5">Product</p>
-            <p className="col-span-3 text-center">Quantity</p>
-            <p className="col-span-3 text-center">Total Price</p>
-            <p className="col-span-1 text-right">Remove</p>
+          <div className="hidden sm:grid grid-cols-12 font-mono text-[10px] uppercase tracking-widest opacity-40 border-b border-foreground/10 pb-4 mb-4">
+            <p className="col-span-5">Asset_Description</p>
+            <p className="col-span-3 text-center">Unit_Control</p>
+            <p className="col-span-3 text-center">Subtotal</p>
+            <p className="col-span-1 text-right">Delete</p>
           </div>
 
-          {/* MOBILE SLIDER WRAPPER */}
-          <div className="sm:hidden overflow-x-auto pb-2">
-            <div className="flex flex-nowrap gap-4">
-              {cart.map((item) => (
-                <div
-                  key={item.id}
-                  className="min-w-[280px] bg-secondary p-4 rounded-2xl shadow-md "
-                >
-                  {/* PRODUCT */}
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-xl bg-secondary">
-                      <img
-                        src={item.image}
-                        className="w-12 h-12 rounded-lg object-cover"
-                      />
-                    </div>
-
-                    <div>
-                      <h2 className="font-medium text-[13px] text-gray-800">
-                        {item.title}
-                      </h2>
-                      <p className="text-[11px] text-gray-500">
-                        {item.category}
-                      </p>
-                      <p className="text-accent font-semibold text-[13px]">
-                        ${item.price.toFixed(2)}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* QTY */}
-                  <div className="mt-3">
-                    <div className="flex items-center bg-secondary px-2 py-1 rounded-xl w-max">
-                      <button
-                        className="text-sm font-medium px-2 hover:text-accent"
-                        onClick={() => updateCart(item.id, item.qty - 1)}
-                      >
-                        -
-                      </button>
-
-                      <span className="text-sm font-semibold w-5 text-center">
-                        {item.qty}
-                      </span>
-
-                      <button
-                        className="text-sm font-medium px-2 hover:text-accent"
-                        onClick={() => updateCart(item.id, item.qty + 1)}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* TOTAL + REMOVE */}
-                  <div className="flex justify-between items-center mt-3">
-                    <p className="font-bold text-primary text-[15px]">
-                      ${(item.price * item.qty).toFixed(2)}
-                    </p>
-
-                    <button
-                      onClick={() => removeProduct(item.id)}
-                      className="text-red-500 hover:text-red-700 text-lg"
-                    >
-                      <FiTrash2 />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* DESKTOP + TABLET LAYOUT */}
-          <div className="hidden sm:block">
+          <div className="flex flex-col divide-y divide-foreground/10 border-t border-foreground/5 md:border-t-0">
             {cart.map((item) => (
               <div
                 key={item.id}
                 onClick={() => handleViewProduct(item)}
-                className="grid grid-cols-12 items-center py-6 mb-4"
+                className="group grid grid-cols-1 sm:grid-cols-12 items-center py-8 gap-6 sm:gap-0 relative hover:bg-secondary/5 transition-colors px-2 cursor-pointer"
               >
-                <div className="col-span-6 flex items-center gap-6">
-                  <div className="p-2 rounded-2xl bg-secondary">
+                {/* PRODUCT INFO */}
+                <div className="sm:col-span-5 flex items-center gap-6">
+                  <div className="relative">
                     <img
                       src={item.image}
-                      className="w-14 h-14 rounded-xl object-cover"
+                      className="w-16 h-16 md:w-20 md:p-2 md:h-20 object-cover border border-foreground/10 grayscale group-hover:grayscale-0 transition-all"
+                      alt={item.title}
                     />
+                    <div className="absolute -top-2 -left-2 w-2 h-2 border-t border-l border-primary" />
                   </div>
-
                   <div>
-                    <h2 className="font-medium text-[14px] text-gray-800">
+                    <h2 className="font-black uppercase italic tracking-tighter text-lg leading-tight group-hover:text-primary transition-colors">
                       {item.title}
                     </h2>
-                    <p className="text-sm text-gray-500">{item.category}</p>
-                    <p className="text-accent font-semibold text-sm">
-                      ${item.price.toFixed(2)}
+                    <p className="text-[10px] font-mono opacity-50 uppercase tracking-widest mt-1">
+                      Cat: {item.category}
                     </p>
                   </div>
                 </div>
 
-                <div className="col-span-3 flex items-center justify-center">
-                  <div className="flex gap-4 w-full">
-                    <div className="col-span-3 flex items-center justify-center">
-                      <QuantityControl
-                        qty={item.qty}
-                        stopClick={true}
-                        onIncrease={() => updateCart(item.id, item.qty + 1)}
-                        onDecrease={() => updateCart(item.id, item.qty - 1)}
-                      />
-                    </div>
+                {/* QTY CONTROL */}
+                <div className="sm:col-span-3 flex justify-start sm:justify-center">
+                  <div
+                    className="flex items-center border border-foreground/20 p-1 bg-background"
+                    onClick={(e) => e.stopPropagation()} // Prevents navigating to product page when changing qty
+                  >
+                    <button
+                      className="w-8 h-8 flex items-center justify-center hover:bg-primary hover:text-background transition-all font-mono"
+                      onClick={() => updateCart(item.id, item.qty - 1)}
+                    >
+                      -
+                    </button>
+                    <span className="w-10 text-center font-mono text-sm font-bold">
+                      {item.qty}
+                    </span>
+                    <button
+                      className="w-8 h-8 flex items-center justify-center hover:bg-primary hover:text-background transition-all font-mono"
+                      onClick={() => updateCart(item.id, item.qty + 1)}
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
 
-                <p className="col-span-2 text-center font-bold text-primary text-lg">
-                  ${(item.price * item.qty).toFixed(2)}
-                </p>
+                {/* TOTAL */}
+                <div className="sm:col-span-3 text-left sm:text-center">
+                  <p className="font-black italic text-xl tracking-tighter text-primary">
+                    ${(item.price * item.qty).toFixed(2)}
+                  </p>
+                </div>
 
-                <div className="col-span-1 text-right pr-2">
+                {/* REMOVE ACTION (ALERTPALOG) */}
+                <div className="sm:col-span-1 flex justify-end">
                   <AlertDialog>
-                    {/* Use asChild so we can render our own button/icon */}
                     <AlertDialogTrigger asChild>
                       <button
-                        type="button"
-                        onClick={(e) => e.stopPropagation()}
-                        className="text-background p-2 rounded-2xl bg-accent hover:bg-accent text-xl"
-                        aria-label="Delete item"
+                        onClick={(e) => e.stopPropagation()} // STOPS REDIRECT ON CLICK
+                        className="p-3 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-background transition-all relative z-10"
                       >
-                        <FiTrash2 />
+                        <FiTrash2 size={18} />
                       </button>
                     </AlertDialogTrigger>
 
-                    <AlertDialogContent>
+                    <AlertDialogContent
+                      className="rounded-none bg-secondary z-[100] font-mono"
+                      onClick={(e) => e.stopPropagation()} // Keeps dialog from triggering parent clicks
+                    >
                       <AlertDialogHeader>
-                        <AlertDialogTitle>
-                          Remove product from cart?
+                        <AlertDialogTitle className="uppercase font-black italic tracking-tighter text-2xl">
+                          Confirm_Deletion
                         </AlertDialogTitle>
-                        <AlertDialogDescription>
-                          If you continue, the item will be deleted from your
-                          cart. You can add it again anytime.
+                        <AlertDialogDescription className="text-xs tracking-tight text-foreground">
+                          Are you sure you want to remove this asset from the
+                          current inventory? This action cannot be undone within
+                          this session.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
-
-                      <AlertDialogFooter>
-                        <AlertDialogCancel onClick={(e) => {
-                          e.stopPropagation();
-                        }}>Cancel</AlertDialogCancel>
-
-                        {/* Confirm button — deletion happens here */}
+                      <AlertDialogFooter className="mt-6 gap-2">
+                        <AlertDialogCancel className="rounded-none border border-foreground/20 uppercase text-[10px] tracking-widest font-bold">
+                          Abort
+                        </AlertDialogCancel>
                         <AlertDialogAction
                           onClick={(e) => {
-                            e.stopPropagation(); 
+                            e.stopPropagation();
                             handleRemoveProduct(e, item);
                           }}
+                          className="rounded-none bg-red-600 text-white hover:bg-red-700 uppercase text-[10px] tracking-widest font-bold px-6"
                         >
-                          Continue
+                          Execute_Remove
                         </AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
@@ -259,51 +255,42 @@ const handleRemoveProduct = (e, item) => {
           </div>
         </div>
 
-        <div className="hidden lg:block w-[2px] min-h-[80vh] bg-primary py-10"></div>
-        <div className="lg:hidden h-[2px] min-w-[10vh] bg-primary"></div>
-
         {/* RIGHT: PRICE SUMMARY */}
         <div className="w-full lg:w-1/3">
-          <div className="p-4 sm:p-6 top-28 rounded-2xl bg-secondary/80 backdrop-blur-lg border border-background shadow-lg">
-            {/* Heading */}
-            <h2 className="text-lg sm:text-2xl font-bold text-center text-gray-800 mb-3 sm:mb-4">
-              Price Details
+          <div className="sticky top-28 border-2 border-primary p-6 bg-background shadow-[8px_8px_0px_0px_rgba(var(--primary),0.1)]">
+            <h2 className="text-xs font-mono font-black uppercase tracking-[0.5em] mb-8 border-b border-foreground/10 pb-2">
+              Final_Assessment
             </h2>
 
-            <hr className="border-primary" />
-
-            {/* Subtotal */}
-            <div className="flex justify-between text-gray-700 mt-3 sm:mt-4 text-sm sm:text-base">
-              <p>Sub Total</p>
-              <p className="font-medium">${format(subTotal)}</p>
+            <div className="space-y-4">
+              <div className="flex justify-between text-[11px] font-mono uppercase opacity-60">
+                <p>Subtotal_Accumulated</p>
+                <p className="font-bold">${format(subTotal)}</p>
+              </div>
+              <div className="flex justify-between text-[11px] font-mono uppercase opacity-60">
+                <p>Logistics_Fee</p>
+                <p className="font-bold">${format(shippingCost)}</p>
+              </div>
+              <div className="flex justify-between text-[11px] font-mono uppercase">
+                <p>System_Discount</p>
+                <p className="font-bold text-green-600">-${format(discount)}</p>
+              </div>
+              <div className="h-[1px] bg-foreground/10 my-6" />
+              <div className="flex justify-between items-baseline">
+                <p className="text-[10px] font-mono font-black uppercase tracking-widest">
+                  Grand_Total
+                </p>
+                <p className="text-4xl font-black italic tracking-tighter text-accent">
+                  ${format(finalTotal)}
+                </p>
+              </div>
             </div>
 
-            {/* Shipping */}
-            <div className="flex justify-between text-gray-700 mt-2 text-sm sm:text-base">
-              <p>Shipping Cost</p>
-              <p className="font-medium">${format(shippingCost)}</p>
-            </div>
-
-            {/* Discount */}
-            <div className="flex justify-between text-gray-700 mt-2 text-sm sm:text-base">
-              <p>Discount</p>
-              <p className="font-medium text-green-600">-${format(discount)}</p>
-            </div>
-
-            <hr className="my-4 border-primary" />
-
-            {/* TOTAL */}
-            <div className="flex justify-between text-gray-900 text-lg sm:text-xl font-bold">
-              <p>Total</p>
-              <p className="text-accent">${format(finalTotal)}</p>
-            </div>
-
-            {/* Checkout Button */}
             <button
               onClick={() => navigate("/checkoutform")}
-              className="w-full mt-5 sm:mt-6 py-2.5 sm:py-3 bg-primary text-background hover:bg-accent rounded-lg font-semibold shadow hover:opacity-90 transition text-sm sm:text-base"
+              className="w-full mt-10 py-5 bg-foreground text-background hover:bg-primary transition-all font-black uppercase tracking-[0.3em] text-xs"
             >
-              Proceed to Checkout
+              Proceed_to_Execution
             </button>
           </div>
         </div>
