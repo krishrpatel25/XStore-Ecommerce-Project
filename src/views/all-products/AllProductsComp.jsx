@@ -263,86 +263,108 @@ function Products() {
     debouncedApiSearch("");
   };
 
-  const handleImageLoad= (id) =>
+  const handleImageLoad = (id) =>
     setImageLoaded((prev) => ({ ...prev, [id]: true }));
 
- 
-
   return (
-    <div className=" py-6 px-4 lg:px-20 min-h-screen">
+    <div className=" px-4 md:px-10 lg:px-30 pt-20 min-h-screen">
       {/* ---------------------------------------- */}
       {/* divider FEATURES */}
       {/* ---------------------------------------- */}
       <section className="flex flex-col text-center">
-        <div className="flex pt-30 items-center justify-center gap-3">
-          <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-          <h2 className="mx-4 text-primary text-xl md:text-2xl  font-semibold tracking-wide">
-            All Products
-          </h2>
+        <div className="w-full pt-8 pb-10 flex flex-col">
+          {/* Top Geometric Notch */}
+          <div className="w-32 h-1.5 bg-primary ml-10"></div>
 
-          <div className="flex-grow h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+          <div className="flex items-center gap-4">
+            {/* Left Line */}
+            <div className="h-[1px] grow bg-foreground/10"></div>
+
+            {/* MAIN HEADING BLOCK */}
+            <div className="flex flex-col items-center text-center px-4">
+              <span className="text-[10px] font-mono text-primary tracking-[0.4em] uppercase mb-1">
+                Top_Demand
+              </span>
+              <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-foreground leading-none">
+                All <span className="text-primary">Products</span>
+              </h2>
+
+              {/* Small Detail Label under the title */}
+              <div className="mt-4 px-3 py-1 border border-foreground/10 bg-foreground/5 flex items-center gap-3">
+                <div className="w-1 h-1 bg-accent animate-pulse"></div>
+                <span className="text-[9px] font-black font-mono tracking-tighter text-foreground/60 uppercase">
+                  System_Transition_v.02
+                </span>
+              </div>
+            </div>
+
+            {/* Right Line (Primary Color for contrast) */}
+            <div className="h-[1px] w-24 md:w-64 bg-primary"></div>
+          </div>
+
+          {/* Optional: Descriptive sub-text aligned to the right line */}
+          <div className="flex justify-end pr-10 mt-2">
+            <p className="max-w-[300px] text-[10px] text-right font-medium opacity-40 uppercase leading-tight">
+              Explore the items that consistently top the charts and win
+              customer trust day after day.
+            </p>
+          </div>
         </div>
-        <div></div>
       </section>
 
       {/* search bars */}
-      <div className="flex w-full gap-4 py-4 rounded-2xl justify-end ">
-        <div className="relative w-56">
-          {/* RIGHT ICONS CONTAINER */}
-          <div className="absolute inset-y-0 right-3 flex items-center gap-2">
-            {/* Clear (X) Button */}
+      <div className="flex flex-col sm:flex-row w-full gap-4 py-4 justify-end  font-mono">
+        {/* SEARCH MODULE */}
+        <div className="relative w-full md:w-64 group">
+          <div className="absolute inset-y-0 right-2 flex items-center gap-2 z-30">
+            {/* CLEAR BUTTON - Always shows if text exists */}
             {apiSearch && (
               <button
                 onClick={handleClearApi}
-                className="text-gray-500 hover:text-red-500 transition flex items-center justify-center"
+                className="h-7 w-7 flex items-center justify-center bg-red-500 text-white transition-colors duration-200 border border-red-600 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px]"
+                title="Clear Search"
               >
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5 text-accent"
+                  className="w-4 h-4"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth="2"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth="2"
+                    strokeWidth="3"
                     d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
               </button>
             )}
-
-            {/* Search Icon */}
-            <FiSearch className="text-gray-500 w-5 h-5" />
+            <FiSearch className="text-foreground/40 w-4 h-4 group-focus-within:text-accent transition-colors" />
           </div>
 
-          {/* INPUT FIELD */}
           <input
             type="text"
-            placeholder="Search products..."
-            className="w-full h-full px-4 py-2 rounded-full border border-gray-300 
-               focus:ring-2 focus:ring-accent outline-none pr-14"
+            placeholder="SEARCH_PRODUCTS..."
+            className="w-full bg-background border-2 border-foreground/10 px-4 py-3 rounded-none text-[11px] tracking-wider outline-none focus:border-accent focus:bg-background transition-all pr-20 placeholder:opacity-30 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)] focus:shadow-[4px_4px_0px_0px_var(--accent)]"
             value={apiSearch}
             onChange={(e) => setApiSearch(e.target.value)}
           />
+          <div className="absolute uppercase -top-2 left-3 bg-background px-1 text-[8px] font-bold text-primary uppercase tracking-widest">
+            search_product
+          </div>
         </div>
 
-        {/* Filter Box */}
-        <div className="relative w-56">
-          {/* RIGHT ICONS (Clear + Filter Icon) */}
-          <div className="absolute inset-y-0 right-3 flex items-center gap-2">
-            {/* Clear Button */}
+        {/* FILTER MODULE */}
+        <div className="relative w-full md:w-64 group">
+          <div className="absolute inset-y-0 right-2 flex items-center gap-2 z-30">
+            {/* CLEAR BUTTON - Always shows if text exists */}
             {search && (
               <button
-                type="button"
                 onClick={handleClear}
-                className="text-gray-500 hover:text-red-500 transition flex items-center justify-center"
+                className="h-7 w-7 flex items-center justify-center bg-red-500 text-white hover:bg-black transition-colors border border-red-600 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5"
+                  className="w-4 h-4"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -350,17 +372,14 @@ function Products() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth="2"
+                    strokeWidth="3"
                     d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
               </button>
             )}
-
-            {/* Filter Icon */}
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5 text-gray-500"
+              className="w-4 h-4 text-foreground/40"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -374,113 +393,253 @@ function Products() {
             </svg>
           </div>
 
-          {/* INPUT FIELD */}
           <input
             type="text"
-            placeholder="Filter..."
-            className="w-full px-4 py-2 rounded-full border border-gray-300 
-               focus:ring-2 focus:ring-accent outline-none pr-14"
+            placeholder="FILTER_RESULTS..."
+            className="w-full bg-background border-2 border-foreground/10 px-4 py-3 rounded-none text-[11px] uppercase tracking-widest outline-none focus:border-accent focus:bg-background transition-all pr-20 placeholder:opacity-30 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)] focus:shadow-[4px_4px_0px_0px_var(--accent)]"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
+          <div className="absolute -top-2 left-3 bg-background px-1 text-[8px] font-bold text-foreground/40 uppercase tracking-widest">
+            Local_Filter
+          </div>
         </div>
       </div>
 
       {filteredProductLoading ? (
         <SkeletonCard />
       ) : filteredProducts.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-10 mt-10 px-4 sm:px-12 lg:px-14">
+        <div
+          className="
+            grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
+            mt-10
+            border-t border-l border-foreground/10
+          "
+        >
           {filteredProducts.map((product) => (
             <div
               key={product.id}
               onClick={() => handleViewProduct(product.id)}
-              className="cursor-pointer"
               onLoad={() => setFilteredProductLoading(false)}
+              className="
+                group relative flex flex-col p-6
+                cursor-pointer
+                border-b border-r border-foreground/10
+                transition-all duration-300
+                hover:bg-background
+                hover:-translate-y-1
+              "
             >
-              {/* Image Box - Clean + Minimal */}
-              <div className="relative w-full h-64 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden transition-all duration-500 group hover:-translate-y-3 hover:shadow-xl hover:scale-[1.01] ">
-                {/* Skeleton */}
+              {/* ───────── TOP META ───────── */}
+              <div className="flex justify-between items-center mb-8">
+                <span className="text-[9px] font-mono opacity-40 uppercase tracking-widest">
+                  {product.category || "General_Asset"}
+                </span>
+                <span className="text-[9px] font-mono opacity-40">
+                  00{product.id}
+                </span>
+              </div>
+
+              {/* ───────── IMAGE ───────── */}
+              <div className="relative aspect-[4/5] w-full mb-8 flex items-center justify-center overflow-hidden">
                 {!imageLoaded[product.id] && (
                   <>
-                    <Skeleton className="absolute inset-0 rounded-2xl" />
-                    <FiImage className="absolute inset-0 m-auto text-gray-300 text-4xl z-10" />
+                    <Skeleton className="absolute inset-0" />
+                    <FiImage className="absolute text-3xl opacity-20" />
                   </>
                 )}
 
-                {/* Image */}
                 <img
                   src={product.images[0]}
                   alt={product.title}
                   loading="lazy"
                   onLoad={() => handleImageLoad(product.id)}
-                  className={`h-full object-contain p-4 transition-opacity duration-500
-                  ${imageLoaded[product.id] ? "opacity-100" : "opacity-0"}`}
+                  className={`
+              h-[80%] w-[85%] object-contain
+              transition-all duration-500
+              ${imageLoaded[product.id] ? "opacity-100" : "opacity-0"}
+              group-hover:scale-[1.04]
+            `}
+                />
+
+                {/* subtle glow */}
+                <div
+                  className="
+              pointer-events-none absolute inset-0
+              opacity-0 group-hover:opacity-100
+              transition-opacity duration-300
+              shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]
+            "
                 />
               </div>
 
-              {/* Title + Price */}
-              <div className="mt-3 flex justify-between items-center">
-                <h2 className="text-base text-[12px] font-medium text-gray-900">
+              {/* ───────── TEXT CONTENT ───────── */}
+              <div className="mt-auto space-y-4">
+                <h2
+                  className="
+                    text-sm font-bold uppercase leading-tight
+                    text-foreground/90
+                    transition-colors duration-300
+                    group-hover:text-primary
+                  "
+                >
                   {product.title}
                 </h2>
+                {/* ───────── RATING (UNCHANGED LOGIC) ───────── */}
+                <div className="flex items-center gap-1 pt-1">
+                  {Array.from({ length: 5 }, (_, i) => {
+                    const rating = product.rating;
 
-                <p className="text-base text-[16px] text-accent font-semibold">
-                  ${product.price}
-                </p>
-              </div>
+                    if (i < Math.floor(rating)) {
+                      return (
+                        <i
+                          key={i}
+                          className="bi bi-star-fill text-green-500 text-[11px]"
+                        />
+                      );
+                    } else if (i < rating) {
+                      return (
+                        <i
+                          key={i}
+                          className="bi bi-star-half text-green-500 text-[11px]"
+                        />
+                      );
+                    } else {
+                      return (
+                        <i
+                          key={i}
+                          className="bi bi-star text-foreground/20 text-[11px]"
+                        />
+                      );
+                    }
+                  })}
+                </div>
+                <div className="flex items-end justify-between">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] opacity-30 font-mono uppercase">
+                      Price
+                    </span>
+                    <span className="text-lg text-accent font-semibold tracking-tighter italic">
+                      ${product.price}
+                    </span>
+                  </div>
 
-              {/* Rating */}
-              <div className="flex items-center gap-1 mt-1">
-                {Array.from({ length: 5 }, (_, i) => {
-                  const rating = product.rating;
-
-                  if (i < Math.floor(rating)) {
-                    return (
-                      <i
-                        key={i}
-                        className="bi bi-star-fill text-green-500 text-[12px]"
-                      ></i>
-                    );
-                  } else if (i < rating) {
-                    return (
-                      <i
-                        key={i}
-                        className="bi bi-star-half text-green-500 text-[12px]"
-                      ></i>
-                    );
-                  } else {
-                    return (
-                      <i
-                        key={i}
-                        className="bi bi-star text-gray-300 text-[12px]"
-                      ></i>
-                    );
-                  }
-                })}
+                  {/* arrow reveal */}
+                  <div
+                    className="
+                      w-8 h-8 rounded-full
+                      border border-foreground/10
+                      flex items-center justify-center
+                      opacity-0 translate-x-1
+                      transition-all duration-300
+                      group-hover:opacity-100
+                      group-hover:translate-x-0
+                      group-hover:border-foreground/30
+                    "
+                  >
+                    <span className="text-xs">→</span>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="w-full h-[180px] flex items-center justify-center">
-          <div className="px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm shadow-md flex items-center gap-2 border border-accent/20">
-            <i className="bi bi-binoculars text-accent text-lg"></i>
-            <span className="text-sm text-accent font-medium">
-              No products found
+        <div className="h-96 flex flex-col items-center justify-center border-t border-b border-dashed border-foreground/20 bg-secondary/5 relative overflow-hidden">
+          {/* Decorative Background Element */}
+          <div className="absolute inset-0 opacity-[0.03] flex items-center justify-center pointer-events-none">
+            <span className="text-[20vw] font-black italic select-none">
+              404_NULL
             </span>
           </div>
+
+          <div className="relative flex flex-col items-center gap-4 text-center z-10">
+            {/* Warning Icon with a pulse */}
+            <div className="w-12 h-12 border border-primary flex items-center justify-center mb-2 animate-pulse">
+              <span className="text-primary font-mono font-bold text-xl">
+                !
+              </span>
+            </div>
+
+            <div className="space-y-1">
+              <h3 className="text-xl font-black uppercase italic tracking-tighter">
+                Product_Not_Found
+              </h3>
+              <p className="text-[10px] font-mono opacity-40 uppercase tracking-[0.2em]">
+                The requested asset [ID_NULL] does not exist in the database.
+              </p>
+            </div>
+
+            {/* Small Technical Detail */}
+            <div className="mt-6 px-4 py-2 border border-foreground/10 bg-background flex items-center gap-3">
+              <div className="w-2 h-2 bg-red-500 rounded-full animate-ping" />
+              <span className="text-[9px] font-mono opacity-60">
+                ERROR_CODE: 0x000404
+              </span>
+            </div>
+          </div>
+
+          {/* Corner Markings */}
+          <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-foreground/20" />
+          <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-foreground/20" />
         </div>
       )}
 
       {/* Dropdown and Pagination */}
-      <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 pt-14">
-        <DropDown value={limit} setValue={setLimit} />
+      <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0 p-10 border-t border-foreground/10 mt-20 relative">
+        {/* Left Section: Limit Control */}
+        <div className="flex items-center gap-4 group">
+          <div className="flex flex-col">
+            <span className="text-[9px] font-mono text-primary font-bold uppercase tracking-tighter mb-1">
+              Rows_Per_Page
+            </span>
+            <div className="relative">
+              {/* Decorative corner for the dropdown container */}
+              <div className="absolute -top-1 -left-1 w-1.5 h-1.5 border-t border-l border-primary opacity-0 group-hover:opacity-100 transition-opacity" />
 
-        <PaginationComponent
-          page={page}
-          setPage={setPage}
-          totalPages={totalPages}
-        />
+              <DropDown
+                value={limit}
+                setValue={setLimit}
+                // Suggest adding a className prop to your DropDown to match the style:
+                className="bg-background border border-foreground/10 rounded-none px-4 py-2 font-mono text-xs uppercase hover:border-primary transition-colors"
+              />
+            </div>
+          </div>
+
+          {/* Divider line for technical feel */}
+          <div className="hidden md:block h-8 w-[1px] bg-foreground/10 ml-4" />
+        </div>
+
+        {/* Center Decoration (Optional: Adds to the "System" look) */}
+        <div className="hidden lg:flex items-center gap-2 opacity-20">
+          <div className="w-1 h-1 bg-foreground rounded-full" />
+          <div className="w-12 h-[1px] bg-foreground" />
+          <span className="text-[8px] font-mono uppercase tracking-[0.5em]">
+            Nav_Module
+          </span>
+          <div className="w-12 h-[1px] bg-foreground" />
+          <div className="w-1 h-1 bg-foreground rounded-full" />
+        </div>
+
+        {/* Right Section: Pagination */}
+        <div className="flex flex-col items-center md:items-end">
+          <span className="text-[9px] font-mono text-foreground/40 uppercase tracking-widest mb-2">
+            Page_Index: {page} of {totalPages}
+          </span>
+
+          <div className="p-1 bg-secondary/10 border border-foreground/5 hover:border-primary/30 transition-colors">
+            <PaginationComponent
+              page={page}
+              setPage={setPage}
+              totalPages={totalPages}
+              // Assuming your component accepts styling, apply these to its buttons:
+              // "rounded-none font-mono uppercase text-[10px] border-foreground/10"
+            />
+          </div>
+        </div>
+
+        {/* Bottom accent bar */}
+        <div className="absolute bottom-0 right-0 w-24 h-[1px] bg-primary/40" />
       </div>
     </div>
   );
