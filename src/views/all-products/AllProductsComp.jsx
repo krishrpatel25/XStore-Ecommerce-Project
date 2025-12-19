@@ -349,7 +349,7 @@ function Products() {
             value={apiSearch}
             onChange={(e) => setApiSearch(e.target.value)}
           />
-          <div className="absolute uppercase -top-2 left-3 bg-background px-1 text-[8px] font-bold text-primary uppercase tracking-widest">
+          <div className="absolute uppercase -top-2 left-3 bg-background px-1 text-[8px] font-bold text-primary  tracking-widest">
             search_product
           </div>
         </div>
@@ -396,7 +396,7 @@ function Products() {
           <input
             type="text"
             placeholder="FILTER_RESULTS..."
-            className="w-full bg-background border-2 border-foreground/10 px-4 py-3 rounded-none text-[11px] uppercase tracking-widest outline-none focus:border-accent focus:bg-background transition-all pr-20 placeholder:opacity-30 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)] focus:shadow-[4px_4px_0px_0px_var(--accent)]"
+            className="w-full bg-background border-2 border-foreground/10 px-4 py-3 rounded-none text-[11px] tracking-widest outline-none focus:border-accent focus:bg-background transition-all pr-20 placeholder:opacity-30 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)] focus:shadow-[4px_4px_0px_0px_var(--accent)]"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
