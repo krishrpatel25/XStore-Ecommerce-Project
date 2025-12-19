@@ -1,18 +1,7 @@
 import { FiTrash2 } from "react-icons/fi";
 import { useCart } from "@/context/CartsContext";
 import { useNavigate } from "react-router-dom";
-import QuantityControl from "../view-product/component/QuantityControl";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 
 const CartComp = () => {
@@ -31,18 +20,17 @@ const CartComp = () => {
   const format = (num) =>
     num.toLocaleString("en-US", { minimumFractionDigits: 2 });
 
-const handleRemoveProduct = (e, item) => {
-  e.stopPropagation();
-  removeProduct(item.id);
+  const handleRemoveProduct = (e, item) => {
+    e.stopPropagation();
+    removeProduct(item.id);
 
-  toast("Product removed from your Cart", {
-    icon: <i className="bi bi-cart-x-fill text-accent text-xl"></i>,
-    style: {
-      color: "var(--accent)",
-    },
-  });
-};
-
+    toast("Product removed from your Cart", {
+      icon: <i className="bi bi-cart-x-fill text-accent text-xl"></i>,
+      style: {
+        color: "var(--accent)",
+      },
+    });
+  };
 
   if (cart.length === 0) {
     return (
@@ -118,7 +106,7 @@ const handleRemoveProduct = (e, item) => {
   // Subtotal = sum of products
 
   return (
-    <section className="px-4 md:px-10 lg:px-24 pt-32 min-h-screen">
+    <section className="px-4 md:px-10 lg:px-24 pt-24 md:pt-32 min-h-screen">
       {/* HEADER SECTION */}
       <div className="border-b border-foreground/10 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
@@ -139,13 +127,12 @@ const handleRemoveProduct = (e, item) => {
         </div>
       </div>
 
-      {/* MAIN CONTENT GRID - Optimized for Tablet */}
       <div className="flex flex-col lg:flex-row gap-12 py-12">
-        {/* LEFT: CART ITEMS (Takes full width until LG screen) */}
+        {/* LEFT: CART ITEMS */}
         <div className="w-full lg:w-[65%] xl:w-3/4">
-          {/* Table Header: Hidden on Mobile, Shown on Tablet (SM and up) */}
+          {/* DESKTOP HEADER */}
           <div className="hidden sm:grid grid-cols-12 font-mono text-[10px] uppercase tracking-widest opacity-40 border-b border-foreground/10 pb-4 mb-4">
-            <p className="col-span-6 md:col-span-5">Asset_Description</p>
+            <p className="col-span-5">Asset_Description</p>
             <p className="col-span-3 text-center">Unit_Control</p>
             <p className="col-span-3 text-center">Subtotal</p>
             <p className="col-span-1 text-right">Delete</p>
@@ -159,73 +146,92 @@ const handleRemoveProduct = (e, item) => {
               >
                 {/* PRODUCT INFO */}
                 <div
-                  className="sm:col-span-6 md:col-span-5 flex items-center gap-4 md:gap-6 cursor-pointer"
+                  className="sm:col-span-5 flex items-center gap-6 cursor-pointer"
                   onClick={() => handleViewProduct(item)}
                 >
                   <div className="relative flex-shrink-0">
                     <img
                       src={item.image}
-                      className="w-16 h-16 md:w-20 md:h-20 p-1 md:p-2 object-cover border border-foreground/10 grayscale group-hover:grayscale-0 transition-all"
+                      className="w-20 h-20 md:w-20 md:h-20 p-2 object-cover border border-foreground/10 grayscale group-hover:grayscale-0 transition-all"
                       alt={item.title}
                     />
                     <div className="absolute -top-2 -left-2 w-2 h-2 border-t border-l border-primary" />
                   </div>
                   <div className="min-w-0">
-                    <h2 className="font-black uppercase italic tracking-tighter text-base md:text-lg leading-tight group-hover:text-primary transition-colors truncate">
+                    <h2 className="font-black uppercase italic tracking-tighter text-lg leading-tight group-hover:text-primary transition-colors truncate">
                       {item.title}
                     </h2>
-                    <p className="text-[9px] md:text-[10px] font-mono opacity-50 uppercase tracking-widest mt-1">
-                      Node: {item.category}
+                    <div className="mt-1 space-y-0.5">
+                      <p className="text-[10px] font-mono opacity-50 uppercase tracking-widest">
+                        Cat: {item.category}
+                      </p>
+                      {/* ORIGINAL UNIT PRICE ADDED HERE */}
+                      <p className="text-[10px] font-mono text-foreground/60 uppercase tracking-widest">
+                        Unit_Val:{" "}
+                        <span className="text-foreground font-bold">
+                          ${item.price.toFixed(2)}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* INTERACTIVE ROW */}
+                <div className="flex items-center justify-between sm:contents">
+                  {/* QTY CONTROL */}
+                  <div className="sm:col-span-3 flex justify-start sm:justify-center">
+                    <div
+                      className="flex items-center border border-foreground/20 p-1 bg-background"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <button
+                        className="w-8 h-8 flex items-center justify-center hover:bg-primary hover:text-background transition-all font-mono"
+                        onClick={() => updateCart(item.id, item.qty - 1)}
+                      >
+                        -
+                      </button>
+                      <span className="w-10 text-center font-mono text-sm font-bold">
+                        {item.qty}
+                      </span>
+                      <button
+                        className="w-8 h-8 flex items-center justify-center hover:bg-primary hover:text-background transition-all font-mono"
+                        onClick={() => updateCart(item.id, item.qty + 1)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* SUBTOTAL */}
+                  <div className="sm:col-span-3 text-center">
+                    <p className="font-black italic text-xl tracking-tighter text-primary">
+                      ${(item.price * item.qty).toFixed(2)}
                     </p>
                   </div>
-                </div>
 
-                {/* QTY CONTROL */}
-                <div className="sm:col-span-3 flex justify-start sm:justify-center">
-                  <div className="flex items-center border border-foreground/20 p-1 bg-background">
-                    <button
-                      className="w-8 h-8 flex items-center justify-center hover:bg-primary hover:text-background transition-all font-mono"
-                      onClick={() => updateCart(item.id, item.qty - 1)}
-                    >
-                      -
-                    </button>
-                    <span className="w-8 md:w-10 text-center font-mono text-sm font-bold">
-                      {item.qty}
-                    </span>
-                    <button
-                      className="w-8 h-8 flex items-center justify-center hover:bg-primary hover:text-background transition-all font-mono"
-                      onClick={() => updateCart(item.id, item.qty + 1)}
-                    >
-                      +
-                    </button>
+                  {/* REMOVE ACTION */}
+                  <div className="sm:col-span-1 flex justify-end">
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <button
+                          onClick={(e) => e.stopPropagation()}
+                          className="p-3 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-background transition-all relative z-10"
+                        >
+                          <FiTrash2 size={18} />
+                        </button>
+                      </AlertDialogTrigger>
+                      {/* ... AlertDialogContent ... */}
+                    </AlertDialog>
                   </div>
-                </div>
-
-                {/* TOTAL */}
-                <div className="sm:col-span-2 md:col-span-3 text-left sm:text-center">
-                  <p className="font-black italic text-lg md:text-xl tracking-tighter text-primary">
-                    ${(item.price * item.qty).toFixed(2)}
-                  </p>
-                </div>
-
-                {/* REMOVE ACTION */}
-                <div className="sm:col-span-1 flex justify-end">
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <button className="p-2 md:p-3 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-background transition-all">
-                        <FiTrash2 size={16} />
-                      </button>
-                    </AlertDialogTrigger>
-                    {/* ... AlertDialogContent remains the same ... */}
-                  </AlertDialog>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* RIGHT: PRICE SUMMARY (Stacked on Tablet, Sidebar on Desktop) */}
+        {/* RIGHT: PRICE SUMMARY */}
         <div className="w-full lg:w-[35%] xl:w-1/4">
+          {/* ... Summary Logic Remains Exactly The Same ... */}
           <div className="sticky top-28 border-2 border-primary p-6 bg-background shadow-[8px_8px_0px_0px_rgba(var(--primary),0.1)]">
             <h2 className="text-xs font-mono font-black uppercase tracking-[0.5em] mb-8 border-b border-foreground/10 pb-2">
               Final_Assessment
@@ -249,7 +255,7 @@ const handleRemoveProduct = (e, item) => {
                 <p className="text-[10px] font-mono font-black uppercase tracking-widest">
                   Grand_Total
                 </p>
-                <p className="text-3xl md:text-4xl font-black italic tracking-tighter text-accent">
+                <p className="text-4xl font-black italic tracking-tighter text-accent">
                   ${format(finalTotal)}
                 </p>
               </div>
