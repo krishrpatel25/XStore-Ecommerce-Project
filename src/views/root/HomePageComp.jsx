@@ -12,7 +12,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { Skeleton } from "@/components/ui/skeleton";
 import SkeletonCard from "@/components/ui/skeletonCard";
 import { useQuery } from "@tanstack/react-query";
-import heroImg from "src/assets/hero.jpg";
+import heroImg from "@/assets/hero.jpg";
+
 const HomePageComp = () => {
   const navigate = useNavigate();
 

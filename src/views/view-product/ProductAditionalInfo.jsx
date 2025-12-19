@@ -278,7 +278,7 @@ function ProductAditionalInfo({ products }) {
                           <div className="flex items-center gap-4 md:gap-5 mb-6 md:mb-8">
                             <div className="w-12 h-12 md:w-14 md:h-14 bg-foreground relative overflow-hidden grayscale group-hover:grayscale-0 transition-all">
                               <img
-                                src="/src/assets/ProfilePic2.jpg"
+                                src={profilePic2}
                                 alt="user"
                                 className="w-full h-full object-cover"
                               />

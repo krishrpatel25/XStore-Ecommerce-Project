@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FiEdit2, FiCheck, FiX, FiCamera } from "react-icons/fi";
+import profilePic from "@/assets/profilepic1.png";
 
 const DEFAULT_USER = {
   name: "krish",
@@ -7,7 +8,7 @@ const DEFAULT_USER = {
   email: "krish@protocol.io",
   phone: "1234567890",
   id: "USER_0x2A9F",
-  avatar: "/src/assets/profilepic1.png", // put this in /public
+  avatar: profilePic, // put this in /public
 };
 
 const ProfileComp = () => {
