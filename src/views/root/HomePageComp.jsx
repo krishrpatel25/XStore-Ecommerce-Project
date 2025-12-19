@@ -110,10 +110,16 @@ const HomePageComp = () => {
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
-              <button className="px-8 py-4 bg-accent text-background font-black uppercase text-[11px] tracking-widest hover:bg-accent/80 transition-colors">
+              <button
+                onClick={() => navigate("/allproducts")}
+                className="px-8 py-4 bg-accent text-background font-black uppercase text-[11px] tracking-widest hover:bg-accent/80 transition-colors"
+              >
                 Initialize_Shop
               </button>
-              <button className="px-8 py-4 border border-background/50 hover:border-background text-background uppercase text-[11px] tracking-widest transition-colors relative group">
+              <button
+                onClick={() => navigate("/allproducts")}
+                className="px-8 py-4 border border-background/50 hover:border-background text-background uppercase text-[11px] tracking-widest transition-colors relative group"
+              >
                 View_Specs
                 <span className="absolute inset-0 bg-background/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
               </button>
@@ -154,10 +160,12 @@ const HomePageComp = () => {
                   <span>//SECURE_CHECKOUT</span>
                 </div>
                 <div className="flex justify-between items-end">
-                  <span className="text-xl font-semibold text-primary italic">
+                  <span className="text-[14px] md:text-xl font-semibold text-primary italic">
                     FEATURED_PRODUCT
                   </span>
-                  <span className="text-accent font-bold">$149.00</span>
+                  <span className="text-accent text-[14px] md:text-xl font-bold">
+                    $149.00
+                  </span>
                 </div>
               </div>
             </div>
