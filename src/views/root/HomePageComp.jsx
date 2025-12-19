@@ -89,7 +89,7 @@ const HomePageComp = () => {
           {/* CENTER TITLE SECTION */}
           <div className="lg:col-span-6 flex flex-col justify-center px-10 lg:px-20">
             <div className="relative">
-              <h1 className="text-[clamp(4rem,12vw,6rem)] font-black leading-[0.75] tracking-tighter mix-blend-difference text-background">
+              <h1 className="text-[clamp(2rem,8vw,4rem)] font-black leading-[0.75] tracking-tighter mix-blend-difference text-background">
                 All the Right Products.
                 <br />
                 <span className="relative inline-block">
@@ -103,16 +103,8 @@ const HomePageComp = () => {
               <div className="mt-16 flex items-start gap-10">
                 <div className="w-16 h-[2px] bg-foreground mt-3 shrink-0"></div>
                 <p className="max-w-xs text-sm font-medium leading-relaxed text-foreground opacity-60">
-                  <div className="mt-16 flex items-start gap-10">
-                    <div className="w-16 h-[2px] bg-foreground mt-3 shrink-0"></div>
-                    <p className="max-w-xs text-sm font-medium leading-relaxed text-foreground opacity-60">
-                      A curated marketplace for everyday products — engineered
-                      quality, value, and reliability across every category.
-                    </p>
-                  </div>
-                <span className="text-primary font-bold">for</span>{" "}
-                  and thermal{" "}
-                  <span className="text-accent font-bold">accent</span> energy.
+                  Discover thousands of products across every category, backed
+                  by secure payments, fast delivery, and trusted quality.
                 </p>
               </div>
             </div>

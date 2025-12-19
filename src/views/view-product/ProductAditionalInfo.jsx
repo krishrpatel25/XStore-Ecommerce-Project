@@ -11,248 +11,323 @@ import {
 
 function ProductAditionalInfo({ products }) {
   return (
-    <div>
-      <section className="pt-16">
-        {/* Information buttons  */}
-        <Tabs defaultValue="Description" className="w-full">
-          <TabsList className="w-full h-[150px] bg-transparent border-b-2 border-primary rounded-none flex-col md: flex md:flex-row md:gap-10 md:h-[36px] ">
-            <TabsTrigger
-              className="rounded-none text-gray-700 
-               data-[state=active]:font-semibold
-               data-[state=active]:bg-transparent
-               data-[state=active]:text-accent 
-               data-[state=active]:underline 
-               data-[state=active]:underline-offset-10
-               data-[state=active]:decoration-primary 
-               data-[state=active]:decoration-2 data-[state=active]:shadow-none focus:outline-none"
-              value="Description"
-            >
-              Description
-            </TabsTrigger>
+    <div className="max-w-7xl mx-auto px-4 lg:px-0">
+      <section className="pt-20 pb-32">
+        <Tabs
+          defaultValue="Description"
+          className="flex flex-col lg:flex-row gap-0 border-4 border-foreground bg-background shadow-[20px_20px_0px_0px_rgba(0,0,0,0.05)]"
+        >
+          {/* --- SIDEBAR NAVIGATION --- */}
+          <TabsList className="w-full lg:w-[300px] h-auto bg-secondary flex flex-col items-stretch rounded-none p-0 gap-0 z-20">
+            <div className="p-8 border-b border-background/20 hidden lg:block bg-foreground">
+              <p className="text-[10px] font-mono text-primary font-bold tracking-[0.4em] uppercase mb-2">
+                // CORE_STORAGE
+              </p>
+              <h2 className="text-background text-3xl font-[1000] italic tracking-tighter uppercase leading-none">
+                ASSET_LOG
+              </h2>
+            </div>
 
-            <TabsTrigger
-              className="rounded-none text-gray-700
-               data-[state=active]:font-semibold
-               data-[state=active]:bg-transparent
-               data-[state=active]:text-accent 
-               data-[state=active]:underline 
-               data-[state=active]:underline-offset-10
-               data-[state=active]:decoration-primary 
-               data-[state=active]:decoration-2 data-[state=active]:shadow-none focus:outline-none"
-              value="info"
-            >
-              Additional Information
-            </TabsTrigger>
+            {[
+              {
+                id: "Description",
+                label: "01. SCHEMATIC",
+                sub: "Structural Breakdown",
+              },
+              { id: "info", label: "02. TELEMETRY", sub: "Technical Specs" },
+              { id: "reviews", label: "03. VALIDATION", sub: "User Feedback" },
+            ].map((tab) => (
+              <TabsTrigger
+                key={tab.id}
+                value={tab.id}
+                className="rounded-none border-b border-background/10 px-8 py-10 flex flex-col items-start gap-1 transition-all
+              data-[state=active]:bg-primary data-[state=active]:text-background
+              text-foreground/60 hover:bg-background/10 group relative"
+              >
+                <span className="text-xl font-black italic uppercase leading-none group-data-[state=active]:translate-x-3 transition-transform duration-300">
+                  {tab.label}
+                </span>
+                <span className="text-[9px] font-mono uppercase tracking-[0.2em] opacity-50">
+                  {tab.sub}
+                </span>
+                <div className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-data-[state=active]:opacity-100 group-data-[state=active]:translate-x-0 translate-x-4 transition-all">
+                  <div className="w-3 h-3 bg-background rotate-45" />
+                </div>
+              </TabsTrigger>
+            ))}
 
-            <TabsTrigger
-              className="rounded-none text-gray-700
-               data-[state=active]:font-semibold
-               data-[state=active]:bg-transparent
-               data-[state=active]:text-accent 
-               data-[state=active]:underline 
-               data-[state=active]:underline-offset-10
-               data-[state=active]:decoration-primary 
-               data-[state=active]:decoration-2 data-[state=active]:shadow-none focus:outline-none"
-              value="reviews"
-            >
-              Reviews
-            </TabsTrigger>
+            <div className="mt-auto p-8 hidden lg:block bg-secondary/5 border-t border-background/10">
+              <div className="flex gap-1.5 mb-3">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div key={i} className="w-full h-1 bg-primary/20" />
+                ))}
+              </div>
+              <p className="text-[9px] font-mono text-background/30 leading-tight uppercase tracking-widest">
+                Protocol: Secure_Buy <br />
+                Host: {window.location.hostname}
+              </p>
+            </div>
           </TabsList>
 
-          {/* description  */}
-          <div className="w-full py-6">
-            {/* Description */}
-            <TabsContent value="Description" className="w-full">
-              <p className="text-gray-700 font-medium text-[14px] leading-relaxed">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
-                sed aut dolorem placeat!
-              </p>
+          {/* --- CONTENT AREA (The "Viewport") --- */}
+          <div className="flex-grow relative overflow-hidden bg-background">
+            {/* Technical Grid Overlay */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]" />
 
-              <ul className="pt-4  flex flex-col gap-3">
-                {[
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis adipisci.",
-                  "Necessitatibus, eius laudantium maxime iste.",
-                  "Quos corporis quibusdam assumenda eligendi non ratione.",
-                  "Lorem ipsum dolor sit amet.",
-                  "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta, nobis.",
-                  "Lorem ipsum, dolor sit amet consectetur adipisicing.",
-                ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 text-gray-700 font-medium text-[14px]"
-                  >
-                    <IoMdCheckmark className="mt-1 text-accent" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </TabsContent>
+            <div className="relative z-10 p-6 md:p-16">
+              {/* TAB: DESCRIPTION */}
+              <TabsContent
+                value="Description"
+                className="m-0 focus-visible:outline-none animate-in fade-in slide-in-from-right-8 duration-500"
+              >
+                <div className="flex flex-col gap-16">
+                  <div className="flex items-center gap-6">
+                    <h3 className="text-8xl font-[1000] italic uppercase tracking-tighter leading-none text-foreground/5 select-none">
+                      DATA
+                    </h3>
+                    <div className="h-[2px] flex-grow bg-foreground/10" />
+                    <span className="text-[10px] font-mono font-bold text-primary tracking-widest uppercase">
+                      Rev_2.05
+                    </span>
+                  </div>
 
-            {/* Additional Information */}
-            <TabsContent value="info" className="">
-              <div className="flex p-2 justify-center w-full">
-                <div className=" overflow-visible flex justify-center  w-[50%]">
-                  <table className="w-full table-auto border-collapse border-2 border-gray-300  text-left text-sm sm:text-base">
-                    <tbody className="divide-y-2 divide-gray-300">
-                      <tr>
-                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                          Model
-                        </td>
-                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                          {products?.title}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                          Category
-                        </td>
-                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                          {products?.category}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                          Color
-                        </td>
-                        <td className="px-2 sm:px-4 py-2 break-words">Black</td>
-                      </tr>
-                      <tr>
-                        <td className="px-2  sm:px-4 py-2 text-sm font-semibold break-words">
-                          Weight
-                        </td>
-                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                          {products?.weight}kg
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                          Dimensions
-                        </td>
-                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                          {products?.dimensions?.width} x{" "}
-                          {products?.dimensions?.height} x{" "}
-                          {products?.dimensions?.depth} cm
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                          Size
-                        </td>
-                        <td className="px-2 sm:px-4 text-sm py-2 break-words">
-                          XL, XXL, LG, SM, MD
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                          Warranty
-                        </td>
-                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                          {products?.warrantyInformation}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                          Series
-                        </td>
-                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                          {products?.title}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-2 sm:px-4 py-2 text-sm font-semibold break-words">
-                          Discount
-                        </td>
-                        <td className="px-2 sm:px-4 py-2 text-sm break-words">
-                          {products?.discountPercentage} %
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </TabsContent>
+                  <div className="grid lg:grid-cols-2 gap-16">
+                    <div className="space-y-8">
+                      <p className="text-2xl font-bold italic leading-[1.1] text-foreground border-l-8 border-accent pl-8">
+                        "
+                        {products?.description ||
+                          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto structural integrity."}
+                        "
+                      </p>
+                      <div className="h-px w-full bg-gradient-to-r from-foreground/20 to-transparent" />
+                      <p className="text-sm text-foreground/50 font-medium leading-relaxed">
+                        Automated asset extraction reveals high-density
+                        performance parameters. This unit has been stress-tested
+                        for 2025 consumer environments.
+                      </p>
+                    </div>
 
-            {/* Reviews */}
-            <TabsContent value="reviews" className="w-full">
-              <Carousel className="flex justify-center overflow-x-auto px-2">
-                <CarouselContent className="flex space-x-3">
-                  {products?.reviews?.map((review, index) => (
-                    <CarouselItem
-                      key={index}
-                      className="
-                        w-[180px]      /* NEW: Mobile width ONLY */
-                        xs:w-[200px]   /* NEW: Slightly bigger on very small screens */
-                        sm:w-[200px]   /* same as your original */
-                        flex-shrink-0 flex justify-center
-                      "
-                    >
-                      <div className="relative w-full mx-auto mb-4">
-                        {/* Top Gradient Line */}
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent to-white rounded-t-xl"></div>
-
-                        {/* Main Card */}
+                    <div className="grid grid-cols-1 gap-4">
+                      {[
+                        "Quos corporis quibusdam assumenda eligendi non ratione.",
+                        "Necessitatibus, eius laudantium maxime iste.",
+                        "System optimized for spatial fluid dynamics.",
+                        "Hardened chassis for extreme environment use.",
+                      ].map((item, i) => (
                         <div
-                          className="bg-primary rounded-4xl rounded-t-[10px] 
-                            p-3 sm:p-6 md:p-8   /* NEW: smaller padding ONLY for mobile (p-3) */"
+                          key={i}
+                          className="flex items-center gap-6 p-4 border border-foreground/5 hover:border-accent/50 transition-all bg-secondary/5 group"
                         >
-                          {/* User Info */}
-                          <div className="p-2 sm:p-4 rounded-2xl flex items-center gap-3 mb-2 text-background">
-                            {/* NEW: Smaller image ONLY on mobile */}
-                            <img
-                              src="/src/assets/ProfilePic2.jpg"
-                              alt="profile"
-                              className="
-                    h-12 w-12     /* mobile */
-                    sm:h-20 sm:w-20   /* your original desktop size untouched */
-                    rounded-full object-cover
-                  "
-                            />
+                          <span className="text-2xl font-black italic text-foreground/10 group-hover:text-accent/20 transition-colors">
+                            0{i + 1}
+                          </span>
+                          <p className="text-[11px] font-black uppercase tracking-tight">
+                            {item}
+                          </p>
+                          <IoMdCheckmark className="ml-auto text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
 
+              {/* TAB: ADDITIONAL INFO (High Density Grid) */}
+              <TabsContent
+                value="info"
+                className="m-0 focus-visible:outline-none animate-in zoom-in-95 duration-500"
+              >
+                {/* Header Status Bar */}
+                <div className="flex justify-between items-center px-6 py-3 border-x-2 border-t-2 border-foreground bg-foreground text-background font-mono text-[10px] font-black uppercase tracking-widest">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-accent animate-pulse" />{" "}
+                    {/* Use accent as a status light */}
+                    <span>Asset_Telemetry_Report</span>
+                  </div>
+                  <span className="opacity-50">
+                    Ref_ID: {products?.id || "00"}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border-2 border-foreground bg-background">
+                  {[
+                    { k: "MODEL_ID", v: products?.title, tag: "ID" },
+                    { k: "CATEGORY", v: products?.category, tag: "CAT" },
+                    { k: "MASS_METRIC", v: `${products?.weight}kg`, tag: "WT" },
+                    {
+                      k: "DIMENSIONS",
+                      v: `${products?.dimensions?.width}x${products?.dimensions?.height}cm`,
+                      tag: "DIM",
+                    },
+                    { k: "SKU_SERIAL", v: products?.sku, tag: "SKU" },
+                    {
+                      k: "AVAILABILITY",
+                      v: products?.availabilityStatus,
+                      tag: "STK",
+                    },
+                    {
+                      k: "STOCK_LEVEL",
+                      v: `${products?.stock} UNITS`,
+                      tag: "QTY",
+                    },
+                    {
+                      k: "SHIPPING_EST",
+                      v: products?.shippingInformation,
+                      tag: "LOG",
+                    },
+                    {
+                      k: "BRAND_NODE",
+                      v: products?.brand || "GENERIC",
+                      tag: "BRD",
+                    },
+                    {
+                      k: "WARRANTY",
+                      v: products?.warrantyInformation,
+                      tag: "WRT",
+                    },
+                    {
+                      k: "RETURN_POLICY",
+                      v: products?.returnPolicy,
+                      tag: "RET",
+                    },
+                    {
+                      k: "DISCOUNT",
+                      v: `${products?.discountPercentage}% REDUCED`,
+                      tag: "OFF",
+                    },
+                    {
+                      k: "RATING_INDEX",
+                      v: `${products?.rating} / 5.0`,
+                      tag: "RTG",
+                    },
+                    {
+                      k: "MIN_ORDER",
+                      v: `${products?.minimumOrderQuantity} PCS`,
+                      tag: "MOQ",
+                    },
+                    { k: "FIRMWARE", v: "v4.0.2_STABLE", tag: "VER" },
+                    { k: "STATUS", v: "VERIFIED_ASSET", tag: "OK" },
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="p-6 border border-foreground/5 flex flex-col gap-2 relative group"
+                    >
+                      {/* Subtle Accent Corner Decor */}
+                      <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                      {/* Minimal Label */}
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[9px] font-mono font-bold text-foreground/40 tracking-tighter uppercase">
+                          {item.k}
+                        </span>
+                        <span className="text-[8px] font-mono text-accent font-black bg-accent/10 px-1 px-0.5 rounded-[2px]">
+                          {item.tag}
+                        </span>
+                      </div>
+
+                      {/* Value Text */}
+                      <span className="text-[13px] font-black uppercase tracking-tight leading-tight text-foreground">
+                        {item.v || "N/A"}
+                      </span>
+
+                      {/* Bottom Detail Line */}
+                      <div className="mt-2 h-[1px] w-full bg-foreground/5" />
+                    </div>
+                  ))}
+                </div>
+              </TabsContent>
+
+              {/* TAB: REVIEWS (The Viewport Carousel) */}
+              <TabsContent
+                value="reviews"
+                className="m-0 focus-visible:outline-none animate-in slide-in-from-bottom-8 duration-500"
+              >
+                <Carousel className="w-full">
+                  <div className="mb-12 flex justify-between items-center border-b-2 border-foreground pb-6">
+                    <div>
+                      <h4 className="text-5xl font-black italic uppercase leading-none tracking-tighter">
+                        Validation
+                        <br />
+                        Streams.
+                      </h4>
+                      <p className="text-[10px] font-mono opacity-40 mt-2 uppercase tracking-[0.2em]">
+                        Source: Verified_External_Nodes
+                      </p>
+                    </div>
+                    {/* FIXED: Controls are now inside the Carousel wrapper */}
+                    <div className="flex gap-2">
+                      <CarouselPrevious className="static translate-y-0 h-14 w-14 border-2 border-foreground rounded-none bg-background hover:bg-primary hover:text-background transition-all" />
+                      <CarouselNext className="static translate-y-0 h-14 w-14 border-2 border-foreground rounded-none bg-background hover:bg-primary hover:text-background transition-all" />
+                    </div>
+                  </div>
+
+                  <CarouselContent className="-ml-4">
+                    {products?.reviews?.map((review, i) => (
+                      <CarouselItem
+                        key={i}
+                        className="md:basis-1/2 lg:basis-1/2 pl-4"
+                      >
+                        <div className="border-2 border-foreground p-8 bg-background h-full relative group hover:bg-secondary/10 transition-colors">
+                          <div className="absolute top-4 right-6 font-mono text-[9px] opacity-20 uppercase tracking-widest font-bold">
+                            Encrypted_Log_{i + 1}
+                          </div>
+
+                          <div className="flex items-center gap-5 mb-8">
+                            <div className="w-14 h-14 bg-foreground relative overflow-hidden grayscale group-hover:grayscale-0 transition-all">
+                              <img
+                                src="/src/assets/ProfilePic2.jpg"
+                                alt="user"
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
                             <div>
-                              <p className="font-semibold text-sm sm:text-base">
+                              <p className="text-sm font-black uppercase tracking-tight leading-none mb-1">
                                 {review.reviewerName}
                               </p>
-                              <p className="text-[10px] sm:text-sm text-background/80">
-                                {review.reviewerEmail}
-                              </p>
+                              <div className="flex gap-1">
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                  <div
+                                    key={star}
+                                    className={`w-3 h-1 ${
+                                      star <= 4
+                                        ? "bg-accent"
+                                        : "bg-foreground/10"
+                                    }`}
+                                  />
+                                ))}
+                              </div>
                             </div>
                           </div>
-
-                          {/* Rating Stars */}
-                          <div className="flex pt-2 sm:pt-4 items-center mb-2">
-                            {Array.from({ length: 5 }, (_, i) => (
-                              <svg
-                                key={i}
-                                className="
-                      w-3.5 h-3.5     /* smaller only for mobile */
-                      sm:w-5 sm:h-5   /* original size for md & lg */
-                      text-accent
-                    "
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                              >
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.286 3.974c.3.921-.755 1.688-1.54 1.118l-3.38-2.455a1 1 0 00-1.176 0l-3.38 2.455c-.784.57-1.838-.197-1.539-1.118l1.285-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z" />
-                              </svg>
-                            ))}
-                          </div>
-
-                          {/* Comment */}
-                          <p className="text-xs sm:text-base text-background text-left leading-snug sm:leading-normal">
-                            {review.comment}
+                          <p className="text-lg font-bold italic text-foreground/80 leading-snug">
+                            "{review.comment}"
                           </p>
                         </div>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-
-                {/* hide navigation only on mobile */}
-                <CarouselPrevious className="hidden sm:flex absolute left-2 sm:left-4 lg:left-40 top-1/2 -translate-y-1/2 bg-white p-2 sm:p-3 rounded-full shadow" />
-                <CarouselNext className="hidden sm:flex absolute right-2 sm:right-4 lg:right-40 top-1/2 -translate-y-1/2 bg-white p-2 sm:p-3 rounded-full shadow" />
-              </Carousel>
-            </TabsContent>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                </Carousel>
+              </TabsContent>
+            </div>
           </div>
         </Tabs>
+
+        {/* Footer Terminal Bar */}
+        <div className="w-full h-10 bg-foreground flex items-center px-8 justify-between mt-0 border-x-4 border-b-4 border-foreground">
+          <div className="flex gap-8 items-center">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+              <span className="text-[10px] font-mono text-primary font-bold tracking-widest uppercase italic">
+                Node_Active
+              </span>
+            </div>
+            <span className="text-[10px] font-mono text-background/30 uppercase tracking-tighter">
+              Packets_Loaded: 2,048kb
+            </span>
+          </div>
+          <div className="text-[10px] font-mono text-background/30 uppercase tracking-[0.4em] font-bold">
+            Auth: 0x{products?.id || "FF"}_SYS
+          </div>
+        </div>
       </section>
     </div>
   );
