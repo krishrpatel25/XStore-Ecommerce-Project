@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import ProfilePic2 from "@/assets/ProfilePic2.jpg";
 
 function ProductAditionalInfo({ products }) {
   return (
@@ -278,7 +279,7 @@ function ProductAditionalInfo({ products }) {
                           <div className="flex items-center gap-4 md:gap-5 mb-6 md:mb-8">
                             <div className="w-12 h-12 md:w-14 md:h-14 bg-foreground relative overflow-hidden grayscale group-hover:grayscale-0 transition-all">
                               <img
-                                src={profilePic2}
+                                src={ProfilePic2}
                                 alt="user"
                                 className="w-full h-full object-cover"
                               />
