@@ -155,15 +155,15 @@ const HomePageComp = () => {
 
               {/* Specs Footer */}
               <div className="p-6 font-mono space-y-2">
-                <div className="flex justify-between text-[10px] opacity-50">
+                <div className="flex justify-between text-[8px] opacity-50">
                   <span>// NEW_ARRIVAL</span>
                   <span>//SECURE_CHECKOUT</span>
                 </div>
                 <div className="flex justify-between items-end">
-                  <span className="text-[14px] md:text-xl font-semibold text-primary italic">
+                  <span className="text-[12px] md:text-xl font-semibold text-primary italic">
                     FEATURED_PRODUCT
                   </span>
-                  <span className="text-accent text-[14px] md:text-xl font-bold">
+                  <span className="text-accent text-[12px] md:text-xl font-bold">
                     $149.00
                   </span>
                 </div>
