@@ -68,6 +68,13 @@
 }
 
 
+/* loader */
+/* Add this to your globals.css or tailwind config for the bar animation */
+@keyframes progress {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

@@ -15,6 +15,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { OrdersProvider } from "./context/OrdersContext";
 import OrderPage from "./pages/order/OrderPage";
 import ViewOrderPage from "./pages/view-order/ViewOrderPage";
+import ProfilePage from "./pages/profile/ProfilePage";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const router = new createBrowserRouter([
       { path: "wishlist", element: <WishList /> },
       { path: "order", element: <OrderPage /> },
       { path: "order/:orderId", element: <ViewOrderPage /> },
+      { path: "profile", element: <ProfilePage /> },
     ],
   },
 ]);
@@ -48,6 +50,7 @@ function App() {
                 position="bottom-right"
                 toastOptions={{
                   style: {
+
                     /* Sharp Geometry */
                     borderRadius: "0px",
 
