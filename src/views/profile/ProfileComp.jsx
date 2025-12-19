@@ -27,7 +27,7 @@ const ProfileComp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground pt-24 pb-12 px-4 md:px-20 relative overflow-hidden font-sans">
+    <div className="min-h-screen text-foreground pt-24 pb-12 px-4 md:px-20 relative overflow-hidden font-sans">
       {/* --- BACKGROUND DECOR --- */}
       <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-primary/5 rounded-full blur-[100px] -z-10" />
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-repeat" />
