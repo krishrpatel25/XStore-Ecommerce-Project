@@ -1,7 +1,9 @@
 import React from "react";
 import { FiFacebook, FiInstagram, FiTwitter } from "react-icons/fi";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const FooterComp = () => {
+  const navigate = useNavigate()
   return (
     <>
       <footer className="w-full bg-primary border-t-2 border-foreground pt-16 relative overflow-hidden">
@@ -12,17 +14,21 @@ const FooterComp = () => {
 
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
           {/* Column 1: Core Identification */}
-          <div className="space-y-6">
-            <div className="flex flex-col">
-              {/* BOLD LABEL */}
-              <span className="text-[10px] font-semibold font-bold text-background mb-1 tracking-[0.3em]">
-                ID_TAG:
+          <div className="space-y-6 ">
+            <NavLink
+              to="/"
+              className="flex-shrink-0 group relative px-6 py-1 border-x border-foreground/10"
+            >
+              <div className="absolute top-0 left-0 w-1 h-1 bg-primary" />
+              <div className="absolute bottom-0 right-0 w-1 h-1 bg-primary" />
+
+              <span className="text-2xl py-4 font-black uppercase tracking-tighter italic text-foreground transition-all group-hover:text-background group-hover:skew-x-[-10deg] inline-block">
+                XStore
               </span>
-              {/* ULTRA BOLD HEADING */}
-              <h3 className="text-4xl uppercase italic tracking-tighter text-foreground leading-none">
-                XStore_
-              </h3>
-            </div>
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[7px] font-mono opacity-30 tracking-[0.5em] uppercase">
+                Ver_2.0.25
+              </span>
+            </NavLink>
             <p className="font-semibold text-[11px] uppercase tracking-widest leading-relaxed text-foreground/50 max-w-[240px]">
               Premium assets.{" "}
               <span className="text-foreground/80 font-bold">
@@ -53,13 +59,20 @@ const FooterComp = () => {
               Directory_01
             </h4>
             <ul className="space-y-4 font-semibold text-[11px] uppercase tracking-widest text-foreground/70">
-              {["Men", "Wishlist", "Electronics", "Accessories"].map((item) => (
-                <li
-                  key={item}
-                  className="group flex items-center gap-2 cursor-pointer hover:text-background hover:font-bold transition-all"
-                >
-                  <span className="w-0 group-hover:w-3 h-[2px] bg-background transition-all" />
-                  {item}
+              {[
+                { name: "cart", path: "/cart" },
+                { name: "Wishlist", path: "/wishlist" },
+                { name: "Order", path: "/order" },
+                { name: "My_Profile", path: "/profile" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <NavLink
+                    to={item.path}
+                    className="group flex items-center gap-2 cursor-pointer hover:text-background hover:font-bold transition-all"
+                  >
+                    <span className="w-0 group-hover:w-3 h-[2px] bg-background transition-all" />
+                    {item.name}
+                  </NavLink>
                 </li>
               ))}
             </ul>
