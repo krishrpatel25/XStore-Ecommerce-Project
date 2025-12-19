@@ -1,9 +1,10 @@
 import React from "react";
 import { FiFacebook, FiInstagram, FiTwitter } from "react-icons/fi";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import qrcode from "@/assets/qrCode.png";
+import appstore from "@/assets/appstore.png";
+import playstore from "@/assets/playstore.png";
 const FooterComp = () => {
-  const navigate = useNavigate()
   return (
     <>
       <footer className="w-full bg-primary border-t-2 border-foreground pt-16 relative overflow-hidden">
@@ -115,7 +116,7 @@ const FooterComp = () => {
               <div className="flex gap-4">
                 <div className="relative p-1 border-2 border-foreground/20 bg-white">
                   <img
-                    src="/src/assets/qrCode.png"
+                    src={qrcode}
                     className="h-20 w-20 grayscale brightness-90"
                     alt="QR"
                   />
@@ -123,11 +124,11 @@ const FooterComp = () => {
                 </div>
                 <div className="flex flex-col justify-between">
                   <img
-                    src="/src/assets/playstore.png"
+                    src={playstore}
                     className="h-8 w-auto invert transition-all filter brightness-200"
                   />
                   <img
-                    src="/src/assets/appstore.png"
+                    src={appstore}
                     className="h-8 w-auto invert transition-all filter brightness-200"
                   />
                 </div>
