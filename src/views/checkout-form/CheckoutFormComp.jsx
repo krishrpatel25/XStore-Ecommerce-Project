@@ -106,223 +106,284 @@ const CheckoutFormComp = () => {
   const isDevTool = false;
 
   return (
-    <div className="pt-28 px-4 md:px-10 lg:px-24">
-      <div className="mb-8">
-        <h1 className="text-3xl font-semibold text-gray-900">Checkout</h1>
-        <p className="text-sm text-gray-500 mt-1">
-          Shipping & contact information
+    <div className="min-h-screen bg-background text-foreground pt-28 pb-12 px-6 md:px-10 lg:px-24 relative overflow-hidden font-sans">
+      {/* --- BACKGROUND DECOR --- */}
+      <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-primary/5 rounded-full blur-[100px] -z-10" />
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-repeat" />
+
+      {/* --- HEADER --- */}
+      <div className="mb-12 border-b-2 border-foreground pb-8">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="w-2 h-2 bg-primary animate-pulse" />
+          <p className="text-[10px] font-mono font-black uppercase tracking-[0.4em] text-primary">
+            Secure_Transaction_v2.0
+          </p>
+        </div>
+        <h1 className="text-4xl font-[1000] italic uppercase tracking-tighter text-foreground leading-none">
+          Checkout_<span className="text-primary">Form</span>
+        </h1>
+        <p className="text-[10px] font-mono opacity-40 mt-2 uppercase tracking-[0.2em]">
+          Shipping & contact information protocol
         </p>
       </div>
 
-      <div className="min-h-screen px-4 sm:px-6 py-2">
-        <div className="max-w-5xl mx-auto">
-          <Card className="rounded-xl border bg-background shadow-sm">
-            <CardContent className="p-0">
-              <form id="checkout-form" onSubmit={handleSubmit(onSubmit)}>
-                <div className="p-6 sm:p-8 space-y-10">
-                  {/* PERSONAL */}
-                  <section>
-                    <h2 className="text-2xl text-primary font-semibold mb-2">
-                      Personal details
-                    </h2>
+      <div className="max-w-5xl mx-auto">
+        <form
+          id="checkout-form"
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-16"
+        >
+          {/* SECTION: PERSONAL */}
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-4">
+              <h2 className="text-sm font-mono font-black text-primary uppercase tracking-[0.3em] mb-2">
+                [01] Personal_Details
+              </h2>
+              <div className="h-px bg-foreground/10 w-12" />
+            </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div className="space-y-1.5">
-                        <Label>First name</Label>
-                        <Input
-                          placeholder="your firstname"
-                          {...register("firstName")}
-                        />
-                        <p className="text-xs text-red-500">
-                          {errors.firstName?.message}
-                        </p>
-                      </div>
+            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="group space-y-2">
+                <label className="text-[9px] font-mono font-bold text-accent/40 uppercase tracking-widest">
+                  First_Name
+                </label>
+                <input
+                  placeholder="your firstname"
+                  {...register("firstName")}
+                  className="w-full bg-secondary/50 border-b-2 border-foreground/10 p-3 text-sm font-mono focus:border-primary focus:bg-primary/5 outline-none transition-all "
+                />
+                {errors.firstName && (
+                  <p className="text-[10px] font-mono text-accent uppercase tracking-tighter">
+                    ! {errors.firstName.message}
+                  </p>
+                )}
+              </div>
 
-                      <div className="space-y-1.5">
-                        <Label>Last name</Label>
-                        <Input
-                          placeholder="your lastname"
-                          {...register("lastName")}
-                        />
-                        <p className="text-xs text-red-500">
-                          {errors.lastName?.message}
-                        </p>
-                      </div>
-                    </div>
-                  </section>
+              <div className="group space-y-2">
+                <label className="text-[9px] font-mono font-bold text-accent/40 uppercase tracking-widest">
+                  Last_Name
+                </label>
+                <input
+                  placeholder="your lastname"
+                  {...register("lastName")}
+                  className="w-full bg-secondary/50 border-b-2 border-foreground/10 p-3 text-sm font-mono focus:border-primary focus:bg-primary/5 outline-none transition-all "
+                />
+                {errors.lastName && (
+                  <p className="text-[10px] font-mono text-accent uppercase tracking-tighter">
+                    ! {errors.lastName.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </section>
 
-                  {/* CONTACT */}
-                  <section>
-                    <h2 className="text-2xl text-primary font-semibold mb-2">
-                      Contact
-                    </h2>
+          {/* SECTION: CONTACT */}
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-4">
+              <h2 className="text-sm font-mono font-black text-primary uppercase tracking-[0.3em] mb-2">
+                [02] Contact_Uplink
+              </h2>
+              <div className="h-px bg-foreground/10 w-12" />
+            </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div className="space-y-1.5">
-                        <Label>Mobile</Label>
-                        <Input
-                          placeholder="9876543210"
-                          {...register("mobile")}
-                        />
-                        <p className="text-xs text-red-500">
-                          {errors.mobile?.message}
-                        </p>
-                      </div>
+            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="group space-y-2">
+                <label className="text-[9px] font-mono font-bold text-accent/40 uppercase tracking-widest">
+                  Mobile_Line
+                </label>
+                <input
+                  placeholder="9876543210"
+                  {...register("mobile")}
+                  className="w-full bg-secondary/50 border-b-2 border-foreground/10 p-3 text-sm font-mono focus:border-primary focus:bg-primary/5 outline-none transition-all "
+                />
+                {errors.mobile && (
+                  <p className="text-[10px] font-mono text-accent uppercase tracking-tighter">
+                    ! {errors.mobile.message}
+                  </p>
+                )}
+              </div>
 
-                      <div className="space-y-1.5">
-                        <Label>Email</Label>
-                        <Input
-                          placeholder="you@email.com"
-                          {...register("email")}
-                        />
-                        <p className="text-xs text-red-500">
-                          {errors.email?.message}
-                        </p>
-                      </div>
-                    </div>
-                  </section>
+              <div className="group space-y-2">
+                <label className="text-[9px] font-mono font-bold text-accent/40 uppercase tracking-widest">
+                  Email_Address
+                </label>
+                <input
+                  placeholder="you@email.com"
+                  {...register("email")}
+                  className="w-full bg-secondary/50 border-b-2 border-foreground/10 p-3 text-sm font-mono focus:border-primary focus:bg-primary/5 outline-none transition-all "
+                />
+                {errors.email && (
+                  <p className="text-[10px] font-mono text-accent uppercase tracking-tighter">
+                    ! {errors.email.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </section>
 
-                  {/* ADDRESS */}
-                  <section>
-                    <h2 className="text-2xl text-primary font-semibold mb-2">
-                      Shipping address
-                    </h2>
+          {/* SECTION: SHIPPING */}
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-4">
+              <h2 className="text-sm font-mono font-black text-primary uppercase tracking-[0.3em] mb-2">
+                [03] Shipping_Coords
+              </h2>
+              <div className="h-px bg-foreground/10 w-12" />
+            </div>
 
-                    <div className="space-y-5">
-                      <div className="space-y-1.5">
-                        <Label>Address line 1</Label>
-                        <Textarea
-                          placeholder="House no, street name"
-                          {...register("addressLine1")}
-                        />
-                        <p className="text-xs text-red-500">
-                          {errors.addressLine1?.message}
-                        </p>
-                      </div>
+            <div className="lg:col-span-8 space-y-8">
+              <div className="space-y-2">
+                <label className="text-[9px] font-mono font-bold text-accent/40 uppercase tracking-widest">
+                  Address_Line_01
+                </label>
+                <textarea
+                  placeholder="House no, street name"
+                  {...register("addressLine1")}
+                  className="w-full bg-secondary/50 border-b-2 border-foreground/10 p-3 text-sm font-mono focus:border-primary outline-none transition-all  h-24"
+                />
+                {errors.addressLine1 && (
+                  <p className="text-[10px] font-mono text-accent uppercase tracking-tighter">
+                    ! {errors.addressLine1.message}
+                  </p>
+                )}
+              </div>
 
-                      <div className="space-y-1.5">
-                        <Label>Address line 2</Label>
-                        <Textarea
-                          placeholder="Area, landmark (optional)"
-                          {...register("addressLine2")}
-                        />
-                      </div>
+              <div className="space-y-2">
+                <label className="text-[9px] font-mono font-bold text-accent/40 uppercase tracking-widest">
+                  Address_Line_02 (Optional)
+                </label>
+                <textarea
+                  placeholder="Area, landmark"
+                  {...register("addressLine2")}
+                  className="w-full bg-secondary/50 border-b-2 border-foreground/10 p-3 text-sm font-mono focus:border-primary outline-none transition-all h-24"
+                />
+              </div>
 
-                      {/* LOCATION */}
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                        <div className="space-y-1.5">
-                          <Label>Country</Label>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger className="w-full border px-3 py-2 rounded-md text-left">
-                              {selectedCountry || "Select country"}
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                              {Object.keys(locationData).map((country) => (
-                                <DropdownMenuItem
-                                  key={country}
-                                  onClick={() => {
-                                    setValue("country", country, {
-                                      shouldDirty: true,
-                                      shouldValidate: true,
-                                    });
-                                    setValue("state", "", {
-                                      shouldDirty: true,
-                                      shouldValidate: true,
-                                    });
-                                    setValue("city", "", {
-                                      shouldDirty: true,
-                                      shouldValidate: true,
-                                    });
-                                  }}
-                                >
-                                  {country}
-                                </DropdownMenuItem>
-                              ))}
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </div>
-
-                        <div className="space-y-1.5">
-                          <Label>State</Label>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger
-                              disabled={!selectedCountry}
-                              className="w-full border px-3 py-2 rounded-md text-left"
-                            >
-                              {selectedState || "Select state"}
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                              {selectedCountry &&
-                                Object.keys(locationData[selectedCountry]).map(
-                                  (state) => (
-                                    <DropdownMenuItem
-                                      key={state}
-                                      onClick={() =>
-                                        setValue("state", state, {
-                                          shouldDirty: true,
-                                          shouldValidate: true,
-                                        })
-                                      }
-                                    >
-                                      {state}
-                                    </DropdownMenuItem>
-                                  )
-                                )}
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </div>
-
-                        <div className="space-y-1.5">
-                          <Label>City</Label>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger
-                              disabled={!selectedState}
-                              className="w-full border px-3 py-2 rounded-md text-left"
-                            >
-                              {watch("city") || "Select city"}
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                              {selectedCountry &&
-                                selectedState &&
-                                locationData[selectedCountry][
-                                  selectedState
-                                ].map((city) => (
-                                  <DropdownMenuItem
-                                    key={city}
-                                    onClick={() =>
-                                      setValue("city", city, {
-                                        shouldDirty: true,
-                                        shouldValidate: true,
-                                      })
-                                    }
-                                  >
-                                    {city}
-                                  </DropdownMenuItem>
-                                ))}
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
+              {/* DROPDOWNS */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {/* Country Dropdown */}
+                <div className="space-y-2">
+                  <label className="text-[9px] font-mono font-bold text-accent/40 uppercase tracking-widest">
+                    Country_Node
+                  </label>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="w-full bg-secondary border-b-2 border-foreground/10 px-3 py-3 text-left font-mono text-xs uppercase hover:border-primary transition-all">
+                      {selectedCountry || "Select Country"}
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="bg-background border-foreground/10 font-mono uppercase text-[10px]">
+                      {Object.keys(locationData).map((country) => (
+                        <DropdownMenuItem
+                          key={country}
+                          onClick={() => {
+                            setValue("country", country, {
+                              shouldDirty: true,
+                              shouldValidate: true,
+                            });
+                            setValue("state", "", {
+                              shouldDirty: true,
+                              shouldValidate: true,
+                            });
+                            setValue("city", "", {
+                              shouldDirty: true,
+                              shouldValidate: true,
+                            });
+                          }}
+                        >
+                          {country}
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
-              </form>
-            </CardContent>
 
-            <CardFooter className="border-t bg-muted/40 p-6">
-              <Button
-                type="submit"
-                form="checkout-form"
-                className="w-full h-12 text-base font-medium"
-                disabled={!isDirty || !isValid}
-              >
-                Place Order
-              </Button>
-            </CardFooter>
-          </Card>
+                {/* State Dropdown */}
+                <div className="space-y-2">
+                  <label className="text-[9px] font-mono font-bold text-accent/40 uppercase tracking-widest">
+                    State_Region
+                  </label>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger
+                      disabled={!selectedCountry}
+                      className="w-full bg-secondary border-b-2 border-foreground/10 px-3 py-3 text-left font-mono text-xs uppercase hover:border-primary transition-all disabled:opacity-30"
+                    >
+                      {selectedState || "Select State"}
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="bg-background border-foreground/10 font-mono uppercase text-[10px]">
+                      {selectedCountry &&
+                        Object.keys(locationData[selectedCountry]).map(
+                          (state) => (
+                            <DropdownMenuItem
+                              key={state}
+                              onClick={() =>
+                                setValue("state", state, {
+                                  shouldDirty: true,
+                                  shouldValidate: true,
+                                })
+                              }
+                            >
+                              {state}
+                            </DropdownMenuItem>
+                          )
+                        )}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
 
-          {isDevTool && <DevTool control={control} />}
-        </div>
+                {/* City Dropdown */}
+                <div className="space-y-2">
+                  <label className="text-[9px] font-mono font-bold text-accent/40 uppercase tracking-widest">
+                    City_Terminal
+                  </label>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger
+                      disabled={!selectedState}
+                      className="w-full bg-secondary border-b-2 border-foreground/10 px-3 py-3 text-left font-mono text-xs uppercase hover:border-primary transition-all disabled:opacity-30"
+                    >
+                      {watch("city") || "Select City"}
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="bg-background border-foreground/10 font-mono uppercase text-[10px]">
+                      {selectedCountry &&
+                        selectedState &&
+                        locationData[selectedCountry][selectedState].map(
+                          (city) => (
+                            <DropdownMenuItem
+                              key={city}
+                              onClick={() =>
+                                setValue("city", city, {
+                                  shouldDirty: true,
+                                  shouldValidate: true,
+                                })
+                              }
+                            >
+                              {city}
+                            </DropdownMenuItem>
+                          )
+                        )}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* FOOTER ACTION */}
+          <div className="pt-10 border-t border-foreground/10 flex flex-col items-center">
+            <button
+              type="submit"
+              form="checkout-form"
+              disabled={!isDirty || !isValid}
+              className="w-full max-w-lg bg-foreground text-background py-6 text-sm font-black uppercase tracking-[0.4em] flex items-center justify-center gap-4 transition-all hover:bg-primary disabled:opacity-10 grayscale-[1] disabled:cursor-not-allowed group"
+            >
+              Place_Order
+              <span className="group-hover:translate-x-2 transition-transform">
+                ❯❯
+              </span>
+            </button>
+            <div className="mt-4 flex gap-6 text-[8px] font-mono opacity-20 uppercase tracking-[0.3em]">
+              <span>Auth_Token: Verified</span>
+              <span>System_State: Active</span>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );
