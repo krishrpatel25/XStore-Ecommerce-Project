@@ -5,6 +5,7 @@ import qrcode from "@/assets/qrCode.png";
 import appstore from "@/assets/appstore.png";
 import playstore from "@/assets/playstore.png";
 const FooterComp = () => {
+  const navigate = useNavigate()
   return (
     <>
       <footer className="w-full bg-primary border-t-2 border-foreground pt-16 relative overflow-hidden">
