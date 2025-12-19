@@ -52,21 +52,23 @@ const NavbarComp = () => {
             ))}
           </div>
 
-          {/* LOGO - Brutalist Center */}
-          <NavLink
-            to="/"
-            className="flex-shrink-0 group relative px-6 py-1 border-x border-foreground/10"
-          >
-            <div className="absolute top-0 left-0 w-1 h-1 bg-primary" />
-            <div className="absolute bottom-0 right-0 w-1 h-1 bg-primary" />
+          {/* LOGO - Brutalist Center (Responsive width) */}
+          <div className="flex-1 lg:flex-none flex justify-start lg:justify-center">
+            <NavLink
+              to="/"
+              className="flex-shrink-0 group relative px-4 md:px-6 py-1 border-x border-foreground/10"
+            >
+              <div className="absolute top-0 left-0 w-1 h-1 bg-primary" />
+              <div className="absolute bottom-0 right-0 w-1 h-1 bg-primary" />
 
-            <span className="text-2xl font-black uppercase tracking-tighter italic text-foreground transition-all group-hover:text-primary group-hover:skew-x-[-10deg] inline-block">
-              XStore
-            </span>
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[7px] font-mono opacity-30 tracking-[0.5em] uppercase">
-              Ver_2.0.25
-            </span>
-          </NavLink>
+              <span className="text-xl md:text-2xl font-black uppercase tracking-tighter italic text-foreground transition-all group-hover:text-primary group-hover:skew-x-[-10deg] inline-block">
+                XStore
+              </span>
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[6px] md:text-[7px] font-mono opacity-30 tracking-[0.5em] uppercase whitespace-nowrap">
+                Ver_2.0.25
+              </span>
+            </NavLink>
+          </div>
 
           {/* RIGHT SECTION — DESKTOP */}
           <div className="hidden lg:flex items-center gap-8 flex-1 justify-end">
@@ -96,15 +98,21 @@ const NavbarComp = () => {
             </button>
           </div>
 
-          {/* MOBILE + TABLET RIGHT */}
-          <div className="flex lg:hidden items-center gap-4 flex-1 justify-end">
-            <button onClick={() => setOpen(!open)} className="p-2">
+          {/* MOBILE + TABLET RIGHT (Optimized Layout) */}
+          <div className="flex lg:hidden items-center gap-2 sm:gap-4 flex-1 justify-end">
+
+            {/* Mobile User Toggle */}
+            <button
+              onClick={() => setOpen(!open)}
+              className={`p-2 ${open ? "text-primary" : ""}`}
+            >
               <FiUser size={18} />
             </button>
 
+            {/* Hamburger Menu */}
             <button
               onClick={() => setRightMenuOpen(true)}
-              className="h-10 w-10 flex flex-col items-center justify-center gap-1 border border-foreground/10 hover:border-primary transition-all"
+              className="h-10 w-10 flex flex-col items-center justify-center gap-1 border border-foreground/10"
             >
               <div className="w-5 h-[1px] bg-foreground" />
               <div className="w-3 h-[1px] bg-foreground self-end mr-2.5" />
@@ -123,7 +131,7 @@ const NavbarComp = () => {
         >
           <div className="flex flex-col">
             {[
-              { label: "My Profile", path: null },
+              { label: "My Profile", path: "/profile" },
               { label: "Orders", path: "/order" },
               { label: "Wishlist", path: "/wishlist" },
             ].map((item) => (
