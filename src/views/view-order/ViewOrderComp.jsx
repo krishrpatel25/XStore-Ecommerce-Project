@@ -90,7 +90,7 @@ const ViewOrderComp = () => {
         <div className="max-w-full">
           {/* Title: Added break-words and leading-tight for mobile safety */}
           <h1 className="text-4xl font-[1000] italic uppercase tracking-tighter text-foreground leading-none">
-            Manifest_<span className="text-primary"> Manifest_Details</span>
+            Manifest_<span className="text-primary">Details</span>
           </h1>
 
           {/* Sub-label: Adjusted tracking for better readability on small screens */}
