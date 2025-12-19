@@ -12,7 +12,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { Skeleton } from "@/components/ui/skeleton";
 import SkeletonCard from "@/components/ui/skeletonCard";
 import { useQuery } from "@tanstack/react-query";
-
+import heroImg from "src/assets/hero.jpg";
 const HomePageComp = () => {
   const navigate = useNavigate();
 
@@ -138,7 +138,7 @@ const HomePageComp = () => {
               {/* Content Area */}
               <div className="relative aspect-video overflow-hidden">
                 <img
-                  src="/src/assets/hero.jpg"
+                  src={heroImg}
                   alt="Product"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
