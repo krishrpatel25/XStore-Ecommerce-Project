@@ -1,6 +1,7 @@
 import GoBackButton from "@/components/ui/GoBackButton";
 import { useOrders } from "@/context/OrdersContext";
 import React from "react";
+import { FiPackage, FiMapPin, FiPhone, FiMail } from 'react-icons/fi';
 import { useParams, useNavigate } from "react-router-dom";
 
 const ViewOrderComp = () => {
@@ -78,9 +79,10 @@ const ViewOrderComp = () => {
         </div>
       </div>
     );
-  } 
+  }
   return (
-    <div className="p-32 px-4 md:px-10 lg:px-24 min-h-screen bg-background min-h-screen">
+    <div className="pt-32 pb-20 px-4 md:px-10 lg:px-24 min-h-screen bg-background text-foreground">
+      {/* NAVIGATION */}
       <div className="mb-10">
         <GoBackButton to="/order" label="BACK_TO_LOG" />
       </div>
@@ -88,23 +90,29 @@ const ViewOrderComp = () => {
       {/* HEADER SECTION */}
       <div className="mb-12 border-b border-foreground/10 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6 overflow-hidden">
         <div className="max-w-full">
-          {/* Title: Added break-words and leading-tight for mobile safety */}
-          <h1 className="text-4xl font-[1000] italic uppercase tracking-tighter text-foreground leading-none">
+          <h1 className="text-3xl md:text-5xl font-[1000] italic uppercase tracking-tighter text-foreground leading-none">
             Manifest_<span className="text-primary">Details</span>
           </h1>
 
-          {/* Sub-label: Adjusted tracking for better readability on small screens */}
           <p className="text-[9px] md:text-[10px] font-mono text-primary font-bold mt-3 uppercase tracking-[0.2em] md:tracking-[0.3em] flex flex-wrap gap-2">
             <span>Verified_Shipment</span>
             <span className="opacity-20 hidden sm:inline">//</span>
             <span className="bg-primary/10 px-1 md:bg-transparent md:p-0">
-              ID: {order?.orderId?.slice(-8) || "N/A"}
+              ID: {order?.orderId || "N/A"}
+            </span>
+            <span
+              className={`px-2 py-0.5 text-[8px] border ${
+                order?.status === "panding"
+                  ? "border-yellow-500/50 text-yellow-500"
+                  : "border-green-500/50 text-green-500"
+              }`}
+            >
+              STATUS_{order?.status?.toUpperCase()}
             </span>
           </p>
         </div>
 
-        {/* System Message Section */}
-        <div className="flex flex-col md:items-end border-l-2 md:border-l-0 md:border-r-0 border-primary/20 pl-4 md:pl-0">
+        <div className="flex flex-col md:items-end border-l-2 md:border-l-0 border-primary/20 pl-4 md:pl-0">
           <span className="text-[9px] font-mono opacity-30 uppercase tracking-widest">
             System_Message
           </span>
@@ -114,9 +122,71 @@ const ViewOrderComp = () => {
         </div>
       </div>
 
+      {/* RECIPIENT & LOGISTICS DATA SECTION */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        {/* USER DETAILS - Accessing via order.customer */}
+        <div className="border-l-2 border-primary pl-6 py-2">
+          <h3 className="text-[10px] font-mono font-black text-primary uppercase tracking-[0.4em] mb-4 flex items-center gap-2">
+            Coustomer_Information
+          </h3>
+          <div className="space-y-4">
+            <div>
+              <p className="text-[8px] font-mono opacity-40 uppercase tracking-widest">
+                Legal_Identity
+              </p>
+              <p className="text-lg md:text-xl font-black italic uppercase tracking-tighter text-foreground">
+                {order?.customer?.firstName} {order?.customer?.lastName}
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-10">
+              <div>
+                <p className="text-[8px] font-mono opacity-40 uppercase tracking-widest flex items-center gap-1">
+                  <FiMail size={8} /> Comm_Link
+                </p>
+                <p className="text-xs font-mono font-bold">
+                  {order?.customer?.email}
+                </p>
+              </div>
+              <div>
+                <p className="text-[8px] font-mono opacity-40 uppercase tracking-widest flex items-center gap-1">
+                  <FiPhone size={8} /> Mobile_Node
+                </p>
+                <p className="text-xs font-mono font-bold">
+                  {order?.customer?.mobile}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* SHIPPING ADDRESS - Accessing via order.address */}
+        <div className="bg-secondary/10 border border-foreground/5 p-6 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 -rotate-45 translate-x-8 -translate-y-8 transition-transform group-hover:scale-110" />
+
+          <h3 className="text-[10px] font-mono font-black text-foreground/40 uppercase tracking-[0.4em] mb-4 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 bg-primary animate-pulse" />
+            Destination_Coordinates
+          </h3>
+
+          <div className="font-mono text-[11px] md:text-xs leading-relaxed uppercase">
+            <p className="text-foreground/80 flex items-start gap-2">
+              <FiMapPin className="mt-1 text-primary" />
+              <span>
+                {order?.address?.address}
+                <br />
+                {order?.address?.city}, {order?.address?.state}
+              </span>
+            </p>
+            <div className="mt-4 inline-block bg-foreground text-background px-2 py-0.5 text-[9px] font-black tracking-[0.2em]">
+              REG: {order?.address?.country || "GLOBAL_TRANSIT"}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* ITEMS GRID */}
       <div className="border border-foreground/10 bg-secondary/5">
-        {/* Table Header (Hidden on Mobile) */}
+        {/* Desktop Table Header */}
         <div className="hidden md:flex items-center px-8 py-4 bg-foreground/5 border-b border-foreground/10 text-[9px] font-mono uppercase tracking-[0.2em] opacity-50">
           <div className="w-24">Asset</div>
           <div className="flex-1 ml-10">Description</div>
@@ -128,7 +198,7 @@ const ViewOrderComp = () => {
         <div className="divide-y divide-foreground/10">
           {order?.items?.map((item, index) => (
             <div
-              key={index}
+              key={item.id || index}
               className="flex flex-col md:flex-row md:items-center px-6 md:px-8 py-8 gap-6 group hover:bg-background transition-colors"
             >
               {/* IMAGE */}
@@ -160,25 +230,20 @@ const ViewOrderComp = () => {
 
               {/* DATA COLS */}
               <div className="grid grid-cols-3 md:flex md:items-center gap-4 md:gap-0">
-                {/* PRICE */}
                 <div className="md:w-32 text-left md:text-center">
                   <p className="text-[8px] font-mono opacity-30 uppercase md:hidden">
                     Price
                   </p>
                   <p className="text-sm font-mono font-bold text-foreground/80">
-                    ${item.price.toFixed(2)}
+                    ${item.price?.toFixed(2)}
                   </p>
                 </div>
-
-                {/* QTY */}
                 <div className="md:w-20 text-left md:text-center">
                   <p className="text-[8px] font-mono opacity-30 uppercase md:hidden">
                     Qty
                   </p>
                   <p className="text-sm font-mono font-bold">x{item.qty}</p>
                 </div>
-
-                {/* TOTAL */}
                 <div className="md:w-32 text-left md:text-right">
                   <p className="text-[8px] font-mono opacity-30 uppercase md:hidden">
                     Total
@@ -191,7 +256,7 @@ const ViewOrderComp = () => {
 
               {/* ACTIONS */}
               <div className="flex flex-row md:flex-col gap-2 md:ml-6">
-                <button className="flex-1 md:flex-none px-6 py-2 text-[10px] font-black uppercase tracking-widest bg-foreground text-background hover:bg-primary transition-all duration-300">
+                <button className="flex-1 md:flex-none px-6 py-2 text-[10px] font-black uppercase tracking-widest bg-primary text-background hover:bg-primary/70 transition-all duration-300">
                   Track
                 </button>
                 <button className="flex-1 md:flex-none px-6 py-2 text-[10px] font-black uppercase tracking-widest border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300">
@@ -203,15 +268,23 @@ const ViewOrderComp = () => {
         </div>
       </div>
 
+      {/* FOOTER SUMMARY */}
       {/* Footer Summary */}
       <div className="mt-12 flex justify-end">
-        <div className="w-full md:w-80 border-t-2 border-foreground pt-6 flex justify-between items-baseline">
-          <span className="text-[10px] font-mono font-black uppercase tracking-[0.4em]">
+        {/* Changed w-80 to max-w-md and added responsive flex direction */}
+        <div className="w-full md:w-80 border-t-2 border-foreground pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2">
+          <span className="text-[10px] font-mono font-black uppercase tracking-[0.2em] md:tracking-[0.4em] opacity-70">
             Final_Grand_Total
           </span>
-          <span className="text-4xl font-black italic tracking-tighter text-foreground">
-            ${order?.total?.toFixed(2) || "0.00"}
-          </span>
+          <div className="flex items-baseline gap-1">
+            {/* Currency symbol can be smaller for better focus on the amount */}
+            <span className="text-xl font-mono font-bold text-primary sm:hidden">
+              $
+            </span>
+            <span className="text-4xl md:text-4xl font-[1000] italic tracking-tighter text-accent leading-none">
+              ${order?.total?.toFixed(2) || "0.00"}
+            </span>
+          </div>
         </div>
       </div>
     </div>

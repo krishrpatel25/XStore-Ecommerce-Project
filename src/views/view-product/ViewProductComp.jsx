@@ -36,7 +36,7 @@ function ViewProductComp() {
   return (
     <>
       <div className="p-4 md:p-16 ">
-        <GoBackButton to="/allproducts" className="pt-20 md:px-10 " />
+        <GoBackButton to="/allproducts" label="Back_To_Products" className="pt-20 md:px-10 " />
         {products ? (
           <>
             <ProductDetailContent products={products} />

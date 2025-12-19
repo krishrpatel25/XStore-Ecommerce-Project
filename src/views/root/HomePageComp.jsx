@@ -61,120 +61,129 @@ const HomePageComp = () => {
       {/* ---------------------------------------- */}
       {/* HERO SLIDER */}
       {/* ---------------------------------------- */}
-      <section className="relative bg-secondary text-foreground font-sans overflow-hidden">
-        {/* 1. BACKGROUND LAYER */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          {/* Static Teal Blob */}
-          <div className="absolute top-[-10%] left-[-5%] w-[60vw] h-[60vw] bg-primary rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-40 blur-[100px]" />
 
-          {/* Structural Teal Block */}
-          <div className="absolute right-0 top-0 w-1/3 h-full bg-primary hidden lg:block" />
+      <section className="relative min-h-screen bg-primary text-foreground overflow-hidden flex flex-col pt-10 justify-center">
+        {/* 1. CYBER GRID LAYER */}
+        <div
+          className="absolute inset-0 opacity-20 pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(var(--primary) 1px, transparent 1px), linear-gradient(90deg, var(--primary) 1px, transparent 1px)`,
+            backgroundSize: "50px 50px",
+            maskImage:
+              "radial-gradient(ellipse at center, black, transparent 80%)",
+          }}
+        />
 
-          {/* Static Orange Beam */}
-          <div className="absolute top-[-20%] left-[35%] w-[8vw] h-[150%] rotate-[25deg] bg-accent opacity-90 shadow-2xl shadow-accent/20" />
+        {/* 2. GLOWING ORBS (Blur Layers) */}
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-background/70 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-background/50 rounded-full blur-[120px]" />
 
-          {/* Background Typography */}
-          <h2 className="absolute top-1/2 left-[10%] -translate-y-1/2 text-[25vw] font-black text-foreground opacity-[0.03] select-none tracking-tighter italic">
-            AXIS
-          </h2>
-        </div>
-
-        {/* 2. STATIC SCANNER LINE (NO ANIMATION) */}
-        <div className="absolute top-0 left-[20%] w-[1px] h-full z-20 bg-accent opacity-30 hidden lg:block">
-          <div className="w-3 h-3 rounded-full -translate-x-1 bg-accent shadow-[0_0_20px_theme(colors.accent)]" />
-        </div>
-
-        {/* 3. MAIN CONTENT GRID */}
-        <main className="relative z-30 grid grid-cols-1 lg:grid-cols-12 min-h-[800px]">
-          {/* CENTER TITLE SECTION */}
-          <div className="lg:col-span-6 flex flex-col justify-center pt-25 px-10 lg:px-20">
-            <div className="relative">
-              <h1 className="text-[clamp(2rem,8vw,4rem)] font-black leading-[0.75] tracking-tighter mix-blend-difference text-background">
-                All the Right Products.
-                <br />
-                <span className="relative inline-block">
-                  One Destination.
-                  <span className="absolute -right-16 top-4 text-[10px] tracking-[1em] font-light opacity-30 rotate-90 origin-left whitespace-nowrap text-foreground">
-                    EDITION_2025
-                  </span>
+        <main className="relative z-10 container mx-auto px-10 lg:px-22 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center pt-20">
+          {/* LEFT CONTENT */}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <span className="h-[2px] w-8 bg-background"></span>
+                <span className="font-mono text-[10px] tracking-[0.5em] text-background uppercase font-bold">
+                  Smart Shopping Hub
                 </span>
-              </h1>
-
-              <div className="mt-16 flex items-start gap-10">
-                <div className="w-16 h-[2px] bg-foreground mt-3 shrink-0"></div>
-                <p className="max-w-xs text-sm font-medium leading-relaxed text-foreground opacity-60">
-                  Discover thousands of products across every category, backed
-                  by secure payments, fast delivery, and trusted quality.
-                </p>
               </div>
+
+              <h1 className="text-5xl md:text-8xl  font-black tracking-tighter uppercase italic leading-[0.85]">
+                Shop <br />
+                <span
+                  className="text-transparent"
+                  style={{ WebkitTextStroke: "1px var(--background)" }}
+                >
+                  Without
+                </span>{" "}
+                <br />
+                <span className="text-background">Limits.</span>
+              </h1>
+            </div>
+
+            <p className="max-w-md text-sm md:text-base font-light text-foreground/60 leading-relaxed border-l border-primary/30 pl-6">
+              One platform. Unlimited choices. Shop across categories, find the
+              best deals, and experience shopping reimagined for the modern
+              world.
+            </p>
+
+            <div className="flex flex-wrap gap-4 pt-4">
+              <button className="px-8 py-4 bg-accent text-background font-black uppercase text-[11px] tracking-widest hover:bg-accent/80 transition-colors">
+                Initialize_Shop
+              </button>
+              <button className="px-8 py-4 border border-background/50 hover:border-background text-background uppercase text-[11px] tracking-widest transition-colors relative group">
+                View_Specs
+                <span className="absolute inset-0 bg-background/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+              </button>
             </div>
           </div>
 
-          {/* RIGHT PRODUCT DISPLAY */}
-          <div className="lg:col-span-6 relative flex items-center justify-center p-10 lg:p-0">
-            <div className="relative w-full max-w-[400px]">
-              <div className="relative w-full w-[500px] aspect-square bg-secondary flex border-2 border-foreground overflow-hidden group">
-                {/* Left Spec Sidebar */}
-                <div className="w-16 border-r-2 border-foreground flex items-center justify-center bg-foreground">
-                  <span className="rotate-[-90deg] text-background font-mono text-[10px] tracking-[1em] whitespace-nowrap font-bold">
-                    COLLECTION_V.01
-                  </span>
+          {/* RIGHT MEDIA (The Device Window) */}
+          <div className="relative group">
+            {/* Glass Card Container */}
+            <div className="relative z-20 border border-foreground/10 bg-background backdrop-blur-xl p-2 rounded-sm shadow-2xl">
+              {/* Window Header */}
+              <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/5 bg-background/50">
+                <div className="flex gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-primary" />
+                  <div className="w-2 h-2 rounded-full bg-accent" />
+                  <div className="w-2 h-2 rounded-full bg-secondary" />
                 </div>
+                <span className="text-[9px] font-mono opacity-40 uppercase tracking-widest">
+                  Model_Neo_X
+                </span>
+              </div>
 
-                <div className="flex-1 flex flex-col bg-background">
-                  {/* Product Area */}
-                  <div className="grow relative flex items-center justify-center">
-                    <div className="absolute top-4 right-4 text-[10px] font-mono opacity-20 text-right text-foreground">
-                      [VERIFIED_ASSET]
-                      <br />
-                      LOC_40.7128°N
-                    </div>
-                    <img
-                      src="/src/assets/hero-5.png"
-                      className="w-full h-full object-contain"
-                      alt="Product"
-                    />
-                  </div>
+              {/* Content Area */}
+              <div className="relative aspect-video overflow-hidden">
+                <img
+                  src="/src/assets/hero.jpg"
+                  alt="Product"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                {/* Scanline Overlay */}
+                <div className="absolute" />
+              </div>
 
-                  {/* Footer Info */}
-                  <div className="p-4 border-t-2 border-foreground flex justify-between items-end">
-                    <div>
-                      <h2 className="text-3xl font-black italic uppercase leading-none tracking-tighter text-foreground">
-                        Quantum
-                      </h2>
-                      <div className="flex gap-1 mt-2">
-                        {[...Array(5)].map((_, i) => (
-                          <div key={i} className="w-4 h-1 bg-primary" />
-                        ))}
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-[32px] font-black leading-none text-accent">
-                        $185
-                      </span>
-                    </div>
-                  </div>
+              {/* Specs Footer */}
+              <div className="p-6 font-mono space-y-2">
+                <div className="flex justify-between text-[10px] opacity-50">
+                  <span>// NEW_ARRIVAL</span>
+                  <span>//SECURE_CHECKOUT</span>
+                </div>
+                <div className="flex justify-between items-end">
+                  <span className="text-xl font-semibold text-primary italic">
+                    FEATURED_PRODUCT
+                  </span>
+                  <span className="text-accent font-bold">$149.00</span>
                 </div>
               </div>
             </div>
+
+            {/* Decorative Back Elements */}
+            <div className="absolute -top-6 -right-6 w-full h-full border border-background/30 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform" />
+            <div className="absolute -bottom-6 -left-6 w-full h-full border border-primary/20 -z-10 group-hover:-translate-x-2 group-hover:-translate-y-2 transition-transform" />
           </div>
         </main>
 
-        {/* 4. FOOTER (STATIC) */}
-        <footer className="w-full h-16 border-t border-foreground/5 bg-secondary/50 backdrop-blur-sm flex items-center overflow-hidden px-10">
-          <div className="relative w-full overflow-hidden">
-            <div className="flex gap-12 whitespace-nowrap animate-footer-scroll text-[9px] font-black uppercase tracking-[0.5em] opacity-30 text-foreground">
-              <span>
-                Limited Release • CORE_PRIMARY • Engineered Form • Global
-                Logistics • 2025 Archive •
-              </span>
-              <span aria-hidden="true">
-                Limited Release • CORE_PRIMARY • Engineered Form • Global
-                Logistics • 2025 Archive •
-              </span>
-            </div>
+        {/* FOOTER MARQUEE */}
+        <div className="mt-auto py-6 border-t border-foreground/5 bg-secondary/20">
+          <div className="flex gap-12  text-background animate-footer-scroll whitespace-nowrap overflow-hidden text-[9px] font-mono opacity-70 uppercase tracking-[0.5em]">
+            <span>// Smart_Shopping: Enabled</span>
+            <span>// Global_Products: Live</span>
+            <span>// Secure_Checkout: Active</span>
+            <span>// Instant_Delivery: Online</span>
+            <span>// Exclusive_Deals: Unlocked</span>
+            <span>// NextGen_Commerce</span>
+            <span>// Smart_Shopping: Enabled</span>
+            <span>// Global_Products: Live</span>
+            <span>// Secure_Checkout: Active</span>
+            <span>// Instant_Delivery: Online</span>
+            <span>// Exclusive_Deals: Unlocked</span>
+            <span>// NextGen_Commerce</span>
           </div>
-        </footer>
+        </div>
       </section>
 
       <main className="px-4 md:px-10 lg:px-30 pt-20">
@@ -559,7 +568,7 @@ const HomePageComp = () => {
                   with Us
                 </h2>
 
-                <p className="text-[9px] font-mono uppercase tracking-widest leading-loose opacity-60">
+                <p className="text-[9px] font-medium uppercase tracking-widest leading-loose opacity-90">
                   Establish a persistent data link to receive priority manifest
                   updates and hardware allocation reports.
                 </p>
@@ -600,7 +609,7 @@ const HomePageComp = () => {
                 <div className="relative group">
                   <div className="flex items-center gap-4 mb-2">
                     <span className="text-accent font-bold text-xs">{">"}</span>
-                    <span className="text-[10px] font-mono uppercase tracking-widest ">
+                    <span className="text-[10px] font-bold uppercase tracking-widest ">
                       Enter_User_Email:
                     </span>
                   </div>
@@ -612,7 +621,7 @@ const HomePageComp = () => {
                 </div>
 
                 <button className="group relative w-full flex items-center justify-between border-2 border-foreground p-6 hover:bg-primary hover:text-background transition-all duration-300">
-                  <span className="font-mono text-[11px] font-black uppercase tracking-[0.5em]">
+                  <span className="font-bold text-[11px] font-black uppercase tracking-[0.5em]">
                     SUBSCRIBE
                   </span>
                   <div className="flex gap-1 group-hover:gap-2 transition-all">

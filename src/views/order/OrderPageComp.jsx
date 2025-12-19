@@ -74,7 +74,7 @@ const OrderPageComp = () => {
         </div>
       </div>
     );
-  } 
+  }
 
   return (
     <section className="pt-32 px-4 md:px-10 lg:px-24 min-h-screen">
