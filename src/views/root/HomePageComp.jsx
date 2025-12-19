@@ -61,7 +61,7 @@ const HomePageComp = () => {
       {/* ---------------------------------------- */}
       {/* HERO SLIDER */}
       {/* ---------------------------------------- */}
-      <section className="relative min-h-screen bg-secondary text-foreground font-sans overflow-hidden">
+      <section className="relative bg-secondary text-foreground font-sans overflow-hidden">
         {/* 1. BACKGROUND LAYER */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           {/* Static Teal Blob */}
@@ -85,9 +85,9 @@ const HomePageComp = () => {
         </div>
 
         {/* 3. MAIN CONTENT GRID */}
-        <main className="relative z-30 grid grid-cols-1 lg:grid-cols-12 min-h-screen">
+        <main className="relative z-30 grid grid-cols-1 lg:grid-cols-12 min-h-[800px]">
           {/* CENTER TITLE SECTION */}
-          <div className="lg:col-span-6 flex flex-col justify-center px-10 lg:px-20">
+          <div className="lg:col-span-6 flex flex-col justify-center pt-25 px-10 lg:px-20">
             <div className="relative">
               <h1 className="text-[clamp(2rem,8vw,4rem)] font-black leading-[0.75] tracking-tighter mix-blend-difference text-background">
                 All the Right Products.
