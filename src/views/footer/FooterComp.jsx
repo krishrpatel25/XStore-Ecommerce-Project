@@ -125,11 +125,11 @@ const FooterComp = () => {
                 <div className="flex flex-col justify-between">
                   <img
                     src={playstore}
-                    className="h-8 w-auto invert transition-all filter brightness-200"
+                    className="h-8 w-auto "
                   />
                   <img
                     src={appstore}
-                    className="h-8 w-auto invert transition-all filter brightness-200"
+                    className="h-8 w-auto"
                   />
                 </div>
               </div>
