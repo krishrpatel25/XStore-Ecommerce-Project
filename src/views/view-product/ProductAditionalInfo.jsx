@@ -243,9 +243,10 @@ function ProductAditionalInfo({ products }) {
                 className="m-0 focus-visible:outline-none animate-in slide-in-from-bottom-8 duration-500"
               >
                 <Carousel className="w-full">
-                  <div className="mb-12 flex justify-between items-center border-b-2 border-foreground pb-6">
+                  {/* --- HEADER SECTION --- */}
+                  <div className="mb-8 md:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b-2 border-foreground pb-6 relative">
                     <div>
-                      <h4 className="text-5xl font-black italic uppercase leading-none tracking-tighter">
+                      <h4 className="text-4xl md:text-5xl font-black italic uppercase leading-none tracking-tighter">
                         Validation
                         <br />
                         Streams.
@@ -254,26 +255,28 @@ function ProductAditionalInfo({ products }) {
                         Source: Verified_External_Nodes
                       </p>
                     </div>
-                    {/* FIXED: Controls are now inside the Carousel wrapper */}
-                    <div className="flex gap-2">
-                      <CarouselPrevious className="static translate-y-0 h-14 w-14 border-2 border-foreground rounded-none bg-background hover:bg-primary hover:text-background transition-all" />
-                      <CarouselNext className="static translate-y-0 h-14 w-14 border-2 border-foreground rounded-none bg-background hover:bg-primary hover:text-background transition-all" />
+
+                    {/* --- RESPONSIVE CONTROLS --- */}
+                    <div className="flex gap-1 md:gap-2 absolute md:static top-0 right-0">
+                      <CarouselPrevious className="static translate-y-0 h-10 w-10 md:h-14 md:w-14 border-2 border-foreground rounded-none bg-background hover:bg-primary hover:text-background transition-all flex items-center justify-center" />
+                      <CarouselNext className="static translate-y-0 h-10 w-10 md:h-14 md:w-14 border-2 border-foreground rounded-none bg-background hover:bg-primary hover:text-background transition-all flex items-center justify-center" />
                     </div>
                   </div>
 
+                  {/* --- CAROUSEL CONTENT --- */}
                   <CarouselContent className="-ml-4">
                     {products?.reviews?.map((review, i) => (
                       <CarouselItem
                         key={i}
-                        className="md:basis-1/2 lg:basis-1/2 pl-4"
+                        className="basis-full md:basis-1/2 lg:basis-1/2 pl-4" // Fixed: mobile basis to full
                       >
-                        <div className="border-2 border-foreground p-8 bg-background h-full relative group hover:bg-secondary/10 transition-colors">
+                        <div className="border-2 border-foreground p-6 md:p-8 bg-background h-full relative group hover:bg-secondary/10 transition-colors">
                           <div className="absolute top-4 right-6 font-mono text-[9px] opacity-20 uppercase tracking-widest font-bold">
                             Encrypted_Log_{i + 1}
                           </div>
 
-                          <div className="flex items-center gap-5 mb-8">
-                            <div className="w-14 h-14 bg-foreground relative overflow-hidden grayscale group-hover:grayscale-0 transition-all">
+                          <div className="flex items-center gap-4 md:gap-5 mb-6 md:mb-8">
+                            <div className="w-12 h-12 md:w-14 md:h-14 bg-foreground relative overflow-hidden grayscale group-hover:grayscale-0 transition-all">
                               <img
                                 src="/src/assets/ProfilePic2.jpg"
                                 alt="user"
@@ -281,15 +284,15 @@ function ProductAditionalInfo({ products }) {
                               />
                             </div>
                             <div>
-                              <p className="text-sm font-black uppercase tracking-tight leading-none mb-1">
+                              <p className="text-xs md:text-sm font-black uppercase tracking-tight leading-none mb-1">
                                 {review.reviewerName}
                               </p>
                               <div className="flex gap-1">
                                 {[1, 2, 3, 4, 5].map((star) => (
                                   <div
                                     key={star}
-                                    className={`w-3 h-1 ${
-                                      star <= 4
+                                    className={`w-2 md:w-3 h-1 ${
+                                      star <= review.rating // Using review.rating instead of hardcoded 4
                                         ? "bg-accent"
                                         : "bg-foreground/10"
                                     }`}
@@ -298,7 +301,7 @@ function ProductAditionalInfo({ products }) {
                               </div>
                             </div>
                           </div>
-                          <p className="text-lg font-bold italic text-foreground/80 leading-snug">
+                          <p className="text-base md:text-lg font-bold italic text-foreground/80 leading-snug">
                             "{review.comment}"
                           </p>
                         </div>
