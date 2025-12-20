@@ -198,6 +198,7 @@ const ViewOrderComp = () => {
         <div className="divide-y divide-foreground/10">
           {order?.items?.map((item, index) => (
             <div
+              onClick={() => navigate(`/product/${item.id}`)}
               key={item.id || index}
               className="flex flex-col md:flex-row md:items-center px-6 md:px-8 py-8 gap-6 group hover:bg-background transition-colors"
             >
@@ -206,7 +207,7 @@ const ViewOrderComp = () => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-20 h-20 md:w-24 md:h-24 bg-background border border-foreground/10 p-2 object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
+                  className="w-20 h-20 md:w-24 md:h-24 bg-background border border-foreground/10 p-2 object-contain "
                 />
                 <div className="absolute -top-2 -left-2 bg-primary text-background text-[8px] font-mono px-1">
                   0{index + 1}
@@ -256,10 +257,16 @@ const ViewOrderComp = () => {
 
               {/* ACTIONS */}
               <div className="flex flex-row md:flex-col gap-2 md:ml-6">
-                <button className="flex-1 md:flex-none px-6 py-2 text-[10px] font-black uppercase tracking-widest bg-primary text-background hover:bg-primary/70 transition-all duration-300">
+                <button
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex-1 md:flex-none px-6 py-2 text-[10px] font-black uppercase tracking-widest bg-primary text-background hover:bg-primary/70 transition-all duration-300"
+                >
                   Track
                 </button>
-                <button className="flex-1 md:flex-none px-6 py-2 text-[10px] font-black uppercase tracking-widest border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300">
+                <button
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex-1 md:flex-none px-6 py-2 text-[10px] font-black uppercase tracking-widest border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300"
+                >
                   Cancel
                 </button>
               </div>
