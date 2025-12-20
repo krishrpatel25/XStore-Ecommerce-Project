@@ -1,7 +1,17 @@
 import { FiTrash2 } from "react-icons/fi";
 import { useCart } from "@/context/CartsContext";
 import { useNavigate } from "react-router-dom";
-import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 
 const CartComp = () => {
@@ -20,9 +30,8 @@ const CartComp = () => {
   const format = (num) =>
     num.toLocaleString("en-US", { minimumFractionDigits: 2 });
 
-  const handleRemoveProduct = (e, item) => {
-    e.stopPropagation();
-    removeProduct(item.id);
+  const handleRemoveProduct = (id) => {
+    removeProduct(id);
 
     toast("Product removed from your Cart", {
       icon: <i className="bi bi-cart-x-fill text-accent text-xl"></i>,
@@ -41,7 +50,7 @@ const CartComp = () => {
         </div>
 
         <div className="relative z-10 flex flex-col items-center w-full max-w-[320px] md:max-w-none">
-          {/* MICRO-LABELS (Perfect for Mobile) */}
+          {/* MICRO-LABELS */}
           <div className="flex flex-col items-center mb-8">
             <div className="flex items-center gap-1.5 px-2 py-0.5 border border-red-600/40 bg-red-600/5 mb-2">
               <span className="w-1 h-1 bg-red-600 animate-pulse" />
@@ -54,7 +63,7 @@ const CartComp = () => {
             </p>
           </div>
 
-          {/* MAIN TEXT: Scaled for narrow screens */}
+          {/* MAIN TEXT */}
           <div className="text-center mb-10">
             <h1 className="text-5xl md:text-8xl font-black uppercase italic tracking-tighter leading-[0.85] text-foreground">
               Empty_
@@ -79,12 +88,10 @@ const CartComp = () => {
               </span>
               <span className="text-sm font-bold">❯❯</span>
             </div>
-
-            {/* Brutalist Shadow Accent */}
             <div className="absolute -bottom-1 -right-1 w-full h-full border border-foreground -z-10 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
           </button>
 
-          {/* SYSTEM LOGS (Tiny side-notes) */}
+          {/* SYSTEM LOGS */}
           <div className="mt-12 w-full border-t border-foreground/5 pt-4 flex flex-col gap-1 items-center opacity-40">
             <div className="flex justify-between w-full max-w-[200px] text-[7px] font-mono uppercase tracking-tighter">
               <span>Log_Path</span>
@@ -102,8 +109,6 @@ const CartComp = () => {
       </div>
     );
   }
-
-  // Subtotal = sum of products
 
   return (
     <section className="px-4 md:px-10 lg:px-24 pt-24 md:pt-32 min-h-screen">
@@ -130,7 +135,6 @@ const CartComp = () => {
       <div className="flex flex-col lg:flex-row gap-12 py-12">
         {/* LEFT: CART ITEMS */}
         <div className="w-full lg:w-[65%] xl:w-3/4">
-          {/* DESKTOP HEADER */}
           <div className="hidden sm:grid grid-cols-12 font-mono text-[10px] uppercase tracking-widest opacity-40 border-b border-foreground/10 pb-4 mb-4">
             <p className="col-span-5">Asset_Description</p>
             <p className="col-span-3 text-center">Unit_Control</p>
@@ -142,13 +146,11 @@ const CartComp = () => {
             {cart.map((item) => (
               <div
                 key={item.id}
-                className="group grid grid-cols-1 sm:grid-cols-12 items-center py-8 gap-6 sm:gap-0 relative hover:bg-secondary/5 transition-colors px-2"
+                className="group grid grid-cols-1 sm:grid-cols-12 items-center py-8 gap-6 sm:gap-0 relative hover:bg-secondary/5 transition-colors px-2 cursor-pointer"
+                onClick={() => handleViewProduct(item)}
               >
                 {/* PRODUCT INFO */}
-                <div
-                  className="sm:col-span-5 flex items-center gap-6 cursor-pointer"
-                  onClick={() => handleViewProduct(item)}
-                >
+                <div className="sm:col-span-5 flex items-center gap-6">
                   <div className="relative flex-shrink-0">
                     <img
                       src={item.image}
@@ -165,27 +167,26 @@ const CartComp = () => {
                       <p className="text-[10px] font-mono opacity-50 uppercase tracking-widest">
                         Cat: {item.category}
                       </p>
-                      {/* ORIGINAL UNIT PRICE ADDED HERE */}
                       <p className="text-[10px] font-mono text-foreground/60 uppercase tracking-widest">
                         Unit_Val:{" "}
                         <span className="text-foreground font-bold">
-                          ${item.price.toFixed(2)}
+                          ${format(item.price)}
                         </span>
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* INTERACTIVE ROW */}
-                <div className="flex items-center justify-between sm:contents">
+                {/* INTERACTIVE ROW WRAPPER */}
+                <div
+                  className="flex items-center justify-between sm:contents"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   {/* QTY CONTROL */}
                   <div className="sm:col-span-3 flex justify-start sm:justify-center">
-                    <div
-                      className="flex items-center border border-foreground/20 p-1 bg-background"
-                      onClick={(e) => e.stopPropagation()}
-                    >
+                    <div className="flex items-center border border-foreground/20 p-1 bg-background">
                       <button
-                        className="w-8 h-8 flex items-center justify-center hover:bg-primary hover:text-background transition-all font-mono"
+                        className="w-8 h-8 flex items-center justify-center hover:bg-accent hover:text-background transition-all font-mono"
                         onClick={() => updateCart(item.id, item.qty - 1)}
                       >
                         -
@@ -205,7 +206,7 @@ const CartComp = () => {
                   {/* SUBTOTAL */}
                   <div className="sm:col-span-3 text-center">
                     <p className="font-black italic text-xl tracking-tighter text-primary">
-                      ${(item.price * item.qty).toFixed(2)}
+                      ${format(item.price * item.qty)}
                     </p>
                   </div>
 
@@ -213,14 +214,33 @@ const CartComp = () => {
                   <div className="sm:col-span-1 flex justify-end">
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
-                        <button
-                          onClick={(e) => e.stopPropagation()}
-                          className="p-3 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-background transition-all relative z-10"
-                        >
+                        <button className="p-3 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-background transition-all relative z-10">
                           <FiTrash2 size={18} />
                         </button>
                       </AlertDialogTrigger>
-                      {/* ... AlertDialogContent ... */}
+                      <AlertDialogContent className="bg-background border-2 border-primary rounded-none font-mono">
+                        <AlertDialogHeader>
+                          <AlertDialogTitle className="uppercase tracking-widest font-black italic">
+                            Confirm_Delete
+                          </AlertDialogTitle>
+                          <AlertDialogDescription className="text-[11px] uppercase font-medium text-foreground tracking-tighter">
+                            Are you sure you want to remove{" "}
+                            <span className="text-primary">[{item.title}]</span>{" "}
+                            from the inventory buffer?
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel className="rounded-none border-foreground/20 uppercase text-[10px]">
+                            Cancel
+                          </AlertDialogCancel>
+                          <AlertDialogAction
+                            className="rounded-none bg-red-600 text-white uppercase text-[10px] font-black"
+                            onClick={() => handleRemoveProduct(item.id)}
+                          >
+                            Confirm_Remove
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
                     </AlertDialog>
                   </div>
                 </div>
@@ -231,7 +251,6 @@ const CartComp = () => {
 
         {/* RIGHT: PRICE SUMMARY */}
         <div className="w-full lg:w-[35%] xl:w-1/4">
-          {/* ... Summary Logic Remains Exactly The Same ... */}
           <div className="sticky top-28 border-2 border-primary p-6 bg-background shadow-[8px_8px_0px_0px_rgba(var(--primary),0.1)]">
             <h2 className="text-xs font-mono font-black uppercase tracking-[0.5em] mb-8 border-b border-foreground/10 pb-2">
               Final_Assessment
