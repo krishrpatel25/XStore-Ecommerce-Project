@@ -18,6 +18,7 @@ import { CartsProvider } from "./context/CartsContext";
 import { WishListProvider } from "./context/WishListContext";
 import { OrdersProvider } from "./context/OrdersContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import NotFoundPage from "./pages/not-found-page/NotFoundPage";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const router = createHashRouter([
       { path: "order", element: <OrderPage /> },
       { path: "order/:orderId", element: <ViewOrderPage /> },
       { path: "profile", element: <ProfilePage /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);
