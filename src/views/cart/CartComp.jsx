@@ -154,7 +154,7 @@ const CartComp = () => {
                   <div className="relative flex-shrink-0">
                     <img
                       src={item.image}
-                      className="w-20 h-20 md:w-20 md:h-20 p-2 object-cover border border-foreground/10 grayscale group-hover:grayscale-0 transition-all"
+                      className="w-20 h-20 md:w-20 md:h-20 p-2 object-cover border border-foreground/10 "
                       alt={item.title}
                     />
                     <div className="absolute -top-2 -left-2 w-2 h-2 border-t border-l border-primary" />
