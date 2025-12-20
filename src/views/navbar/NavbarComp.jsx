@@ -33,6 +33,19 @@ const NavbarComp = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
+  
+useEffect(() => {
+  if (rightMenuOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [rightMenuOpen]);
+
   return (
     <>
       {/* NAVBAR */}
