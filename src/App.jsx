@@ -38,6 +38,7 @@ const router = createHashRouter([
       { path: "order/:orderId", element: <ViewOrderPage /> },
       { path: "profile", element: <ProfilePage /> },
       { path: "*", element: <NotFoundPage /> },
+      { path: "not-found", element: <NotFoundPage /> },
     ],
   },
 ]);
