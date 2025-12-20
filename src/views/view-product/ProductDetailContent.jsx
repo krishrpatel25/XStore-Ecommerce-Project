@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartsContext";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import QuantityControl from "./component/QuantityControl";
@@ -18,6 +18,11 @@ function ProductDetailContent({ products }) {
   const showQtyControl = existingItem && existingItem.qty > 0;
 
   const [selectImage, setSelectImage] = useState(products?.thumbnail || "");
+  const [imgLoaded, setImgLoaded] = useState(false);
+
+  useEffect(() => {
+    setImgLoaded(false);
+  }, [selectImage]);
 
   const handleIncrease = () => {
     updateCart(products.id, qty + 1);
@@ -68,46 +73,43 @@ function ProductDetailContent({ products }) {
     <div className=" text-foreground group/section max-w-7xl mx-auto">
       <section className="border-t border-foreground/10">
         <div className="flex flex-col lg:flex-row border-b border-foreground/10 min-h-[450px]">
-          {/* ─── 01. IMAGE SECTION (Height Reduced) ─── */}
-          <div className="relative w-full lg:w-[45%] overflow-hidden flex flex-col md:flex-row items-center justify-center p-4 md:p-8 gap-4">
-            {/* Thumbnails: Smaller sizes */}
-            <div className="flex flex-row md:flex-col gap-4 z-20 order-2 md:order-1">
-              {products?.images?.map((img, index) => (
+          {/* ─── 01. IMAGE SECTION ─── */}
+          <div className="relative w-full lg:w-[50%] min-h-[500px] lg:h-full overflow-hidden flex flex-col lg:flex-row items-center justify-center p-4 md:p-8 gap-8 border-b-2 lg:border-b-0 lg:border-r-2 border-foreground/10 group/section">
+            <div className="grid grid-cols-3 md:grid-cols-2 gap-2 z-20 order-2 lg:order-1 shrink-0">
+              {products?.images?.slice(0, 6).map((img, index) => (
                 <div
                   key={index}
                   onClick={() => setSelectImage(img)}
-                  className="relative cursor-pointer group/item"
+                  className="relative md:w-22 md:h-22 cursor-pointer group/item"
                 >
-                  {/* Background Decorative Block (The "Shadow") */}
+                  {/* Decorative Shadow */}
                   <div
                     className={`absolute inset-0 bg-primary/10 -rotate-3 transition-transform duration-300 group-hover/item:rotate-0
-        ${selectImage === img ? "opacity-100" : "opacity-0"}`}
+            ${selectImage === img ? "opacity-100" : "opacity-0"}`}
                   />
 
-                  {/* Main Thumbnail Container */}
+                  {/* Thumbnail Box */}
                   <div
                     className={`relative p-1 border-2 transition-all duration-500 bg-background
-        ${
-          selectImage === img
-            ? "border-primary translate-x-1 -translate-y-1 shadow-[4px_4px_0px_0px_rgba(var(--primary),1)]"
-            : "border-foreground/10 opacity-60 hover:opacity-100 hover:border-foreground/30"
-        }`}
+            ${
+              selectImage === img
+                ? "border-primary translate-x-1 -translate-y-1 shadow-[4px_4px_0px_0px_rgba(var(--primary),1)]"
+                : "border-foreground/10 opacity-60 hover:opacity-100"
+            }`}
                   >
                     <img
                       src={img}
-                      // Size increased from w-12 to w-16/w-20
-                      className="w-14 h-14 md:w-20 md:h-20 object-cover"
+                      className="w-16 h-16 sm:w-20 sm:h-20 md:w-20 md:h-20 p-1 object-cover"
                       alt={`Thumbnail ${index}`}
                     />
 
-                    {/* Technical index tag inside the image */}
                     <div
                       className={`absolute bottom-0 right-0 px-1 text-[8px] font-mono leading-none
-          ${
-            selectImage === img
-              ? "bg-primary text-background"
-              : "bg-foreground/10 text-foreground"
-          }`}
+              ${
+                selectImage === img
+                  ? "bg-primary text-background"
+                  : "bg-foreground/10 text-foreground"
+              }`}
                     >
                       0{index + 1}
                     </div>
@@ -115,25 +117,32 @@ function ProductDetailContent({ products }) {
                 </div>
               ))}
             </div>
-            {/* Ghost Text: Scaled down from 15vw to 10vw */}
-            <span className="absolute text-[10vw] font-black text-foreground/[0.03] select-none uppercase italic leading-none z-0">
+
+            {/* --- GHOST TEXT --- */}
+            <span className="absolute text-[12vw] lg:text-[10vw] font-black text-foreground/[0.03] select-none uppercase italic leading-none z-0 pointer-events-none">
               {products?.category?.slice(0, 4) || "TECH"}
             </span>
 
-            {/* Main Image: Max-height limited to 300px */}
-            <div className="relative z-10 w-full h-full flex items-center justify-center order-1 md:order-2 group/img">
-              <div className="absolute top-0 left-0 text-[7px] font-mono opacity-20 flex flex-col">
-                <span>RES_1080px</span>
-                <span>MNTR_V2</span>
+            {/* --- MAIN IMAGE VIEWPORT --- */}
+            <div className="relative z-10 w-full flex-1 flex items-center justify-center order-1 lg:order-2 group/img">
+              {/* Technical Metadata Labels */}
+              <div className="absolute top-0 left-0 text-[7px] font-mono opacity-30 flex flex-col uppercase">
+                <span>REF_DATA_SRC</span>
+                <span>IMG_BUFF_ENABLED</span>
               </div>
 
               <img
                 src={selectImage}
-                alt={products?.title}
-                className="max-h-[300px] w-auto object-contain transition-all duration-500 group-hover/img:scale-105"
+                onLoad={() => setImgLoaded(true)}
+                className={`max-h-[300px] md:max-h-[400px] w-auto object-contain transition-all duration-500
+                ${imgLoaded ? "opacity-100" : "opacity-0"}
+                group-hover/img:scale-105`}
+                decoding="async"
+                loading="eager"
               />
             </div>
 
+            {/* Bottom Accent Line */}
             <div className="absolute bottom-0 left-0 w-full h-1 bg-primary scale-x-0 group-hover/section:scale-x-100 transition-transform duration-500 origin-right" />
           </div>
 
@@ -214,7 +223,7 @@ function ProductDetailContent({ products }) {
                     onClick={() => navigate("/cart")}
                     className="h-11 px-5 border border-primary text-primary font-black uppercase text-[10px] tracking-widest"
                   >
-                    View
+                    View_cart
                   </button>
                 </div>
               )}
