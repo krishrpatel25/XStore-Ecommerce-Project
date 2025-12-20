@@ -63,7 +63,7 @@ const HomePageComp = () => {
       {/* HERO SLIDER */}
       {/* ---------------------------------------- */}
 
-      <section className="relative min-h-screen bg-primary text-foreground overflow-hidden flex flex-col pt-10 justify-center">
+      <section className="relative  bg-primary text-foreground overflow-hidden flex flex-col pt-10 lg:pt-22 justify-center">
         {/* 1. CYBER GRID LAYER */}
         <div
           className="absolute inset-0 opacity-20 pointer-events-none"
@@ -79,7 +79,7 @@ const HomePageComp = () => {
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-background/70 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-background/50 rounded-full blur-[120px]" />
 
-        <main className="relative z-10 container mx-auto px-10 lg:px-22 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center pt-20">
+        <main className="relative z-10 container mx-auto py-34 px-10 lg:px-22 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center pt-20">
           {/* LEFT CONTENT */}
           <div className="space-y-8">
             <div className="space-y-4">
@@ -177,20 +177,27 @@ const HomePageComp = () => {
         </main>
 
         {/* FOOTER MARQUEE */}
-        <div className="mt-auto py-6 border-t border-foreground/5 bg-secondary/20">
-          <div className="flex gap-12  text-background animate-footer-scroll whitespace-nowrap overflow-hidden text-[9px] font-mono opacity-70 uppercase tracking-[0.5em]">
-            <span>// Smart_Shopping: Enabled</span>
-            <span>// Global_Products: Live</span>
-            <span>// Secure_Checkout: Active</span>
-            <span>// Instant_Delivery: Online</span>
-            <span>// Exclusive_Deals: Unlocked</span>
-            <span>// NextGen_Commerce</span>
-            <span>// Smart_Shopping: Enabled</span>
-            <span>// Global_Products: Live</span>
-            <span>// Secure_Checkout: Active</span>
-            <span>// Instant_Delivery: Online</span>
-            <span>// Exclusive_Deals: Unlocked</span>
-            <span>// NextGen_Commerce</span>
+        <div className="mt-auto py-6 border-t border-foreground/5 bg-secondary/20 overflow-hidden select-none">
+          <div className="flex w-fit animate-footer-scroll">
+            {/* First Set */}
+            <div className="flex gap-12 px-6 text-background/70 text-[9px] font-medium uppercase tracking-[0.5em] whitespace-nowrap">
+              <span>// Smart_Shopping: Enabled</span>
+              <span>// Global_Products: Live</span>
+              <span>// Secure_Checkout: Active</span>
+              <span>// Instant_Delivery: Online</span>
+              <span>// Exclusive_Deals: Unlocked</span>
+              <span>// NextGen_Commerce</span>
+            </div>
+
+            {/* Duplicate Set (Identical) */}
+            <div className="flex gap-12 px-6 text-background/70 text-[9px] font-medium uppercase tracking-[0.5em] whitespace-nowrap">
+              <span>// Smart_Shopping: Enabled</span>
+              <span>// Global_Products: Live</span>
+              <span>// Secure_Checkout: Active</span>
+              <span>// Instant_Delivery: Online</span>
+              <span>// Exclusive_Deals: Unlocked</span>
+              <span>// NextGen_Commerce</span>
+            </div>
           </div>
         </div>
       </section>
