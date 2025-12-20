@@ -12,14 +12,14 @@ import ProfilePic2 from "@/assets/ProfilePic2.jpg";
 
 function ProductAditionalInfo({ products }) {
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-0">
+    <div className="max-w-7xl mx-auto px-0 lg:px-4 ">
       <section className="pt-20 pb-32">
         <Tabs
           defaultValue="Description"
-          className="flex flex-col lg:flex-row gap-0 border-4 border-foreground bg-background shadow-[20px_20px_0px_0px_rgba(0,0,0,0.05)]"
+          className="flex flex-col lg:flex-row gap-0 border border-foreground bg-background shadow-[20px_20px_0px_0px_rgba(0,0,0,0.05)]"
         >
           {/* --- SIDEBAR NAVIGATION --- */}
-          <TabsList className="w-full lg:w-[300px] h-auto bg-secondary flex flex-col items-stretch rounded-none p-0 gap-0 z-20">
+          <TabsList className="w-full lg:max-w-[300px] h-auto bg-secondary flex flex-col items-stretch rounded-none p-0 gap-0 z-20">
             <div className="p-8 border-b border-background/20 hidden lg:block bg-foreground">
               <p className="text-[10px] font-mono text-primary font-bold tracking-[0.4em] uppercase mb-2">
                 // CORE_STORAGE
@@ -75,7 +75,7 @@ function ProductAditionalInfo({ products }) {
             {/* Technical Grid Overlay */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]" />
 
-            <div className="relative z-10 p-6 md:p-16">
+            <div className="relative z-10 p-2 md:p-6 ">
               {/* TAB: DESCRIPTION */}
               <TabsContent
                 value="Description"
@@ -92,9 +92,9 @@ function ProductAditionalInfo({ products }) {
                     </span>
                   </div>
 
-                  <div className="grid lg:grid-cols-2 gap-16">
+                  <div className="grid lg:grid-cols-2 gap-10">
                     <div className="space-y-8">
-                      <p className="text-2xl font-bold italic leading-[1.1] text-foreground border-l-8 border-accent pl-8">
+                      <p className="text-xl font-semibold italic leading-[1.1] text-foreground border-l-8 border-accent pl-2">
                         "
                         {products?.description ||
                           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto structural integrity."}
@@ -134,22 +134,23 @@ function ProductAditionalInfo({ products }) {
               </TabsContent>
 
               {/* TAB: ADDITIONAL INFO (High Density Grid) */}
+              {/* TAB: ADDITIONAL INFO (Responsive High Density Grid) */}
               <TabsContent
                 value="info"
                 className="m-0 focus-visible:outline-none animate-in zoom-in-95 duration-500"
               >
                 {/* Header Status Bar */}
-                <div className="flex justify-between items-center px-6 py-3 border-x-2 border-t-2 border-foreground bg-foreground text-background font-mono text-[10px] font-black uppercase tracking-widest">
+                <div className="flex justify-between items-center px-4 md:px-6 py-3 border-x-2 border-t-2 border-foreground bg-foreground text-background font-mono text-[9px] md:text-[10px] font-black uppercase tracking-widest">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-accent animate-pulse" />{" "}
-                    {/* Use accent as a status light */}
-                    <span>Asset_Telemetry_Report</span>
+                    <div className="w-2 h-2 bg-accent animate-pulse" />
+                    <span className="truncate">Asset_Telemetry_Report</span>
                   </div>
-                  <span className="opacity-50">
+                  <span className="opacity-50 ml-2 whitespace-nowrap">
                     Ref_ID: {products?.id || "00"}
                   </span>
                 </div>
 
+                {/* Grid: 1 col on mobile, 2 cols on small tablets, 4 cols on desktop */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border-2 border-foreground bg-background">
                   {[
                     { k: "MODEL_ID", v: products?.title, tag: "ID" },
@@ -211,23 +212,23 @@ function ProductAditionalInfo({ products }) {
                   ].map((item, i) => (
                     <div
                       key={i}
-                      className="p-6 border border-foreground/5 flex flex-col gap-2 relative group"
+                      className="p-4 md:p-6 border border-foreground/5 flex flex-col gap-2 relative group hover:bg-secondary/5 transition-colors"
                     >
                       {/* Subtle Accent Corner Decor */}
                       <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent/30 opacity-0 group-hover:opacity-100 transition-opacity" />
 
                       {/* Minimal Label */}
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-[9px] font-mono font-bold text-foreground/40 tracking-tighter uppercase">
+                        <span className="text-[8px] md:text-[9px] font-mono font-bold text-foreground/40 tracking-tighter uppercase">
                           {item.k}
                         </span>
-                        <span className="text-[8px] font-mono text-accent font-black bg-accent/10 px-1 px-0.5 rounded-[2px]">
+                        <span className="text-[7px] md:text-[8px] font-mono text-accent font-black bg-accent/10 px-1 rounded-[2px]">
                           {item.tag}
                         </span>
                       </div>
 
-                      {/* Value Text */}
-                      <span className="text-[13px] font-black uppercase tracking-tight leading-tight text-foreground">
+                      {/* Value Text - Smaller on mobile to prevent overflow */}
+                      <span className="text-[11px] md:text-[13px] font-black uppercase tracking-tight leading-tight text-foreground break-words">
                         {item.v || "N/A"}
                       </span>
 
@@ -245,9 +246,12 @@ function ProductAditionalInfo({ products }) {
               >
                 <Carousel className="w-full">
                   {/* --- HEADER SECTION --- */}
-                  <div className="mb-8 md:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b-2 border-foreground pb-6 relative">
-                    <div>
-                      <h4 className="text-4xl md:text-5xl font-black italic uppercase leading-none tracking-tighter">
+                  {/* FIX: Removed 'relative'. Used flex-row for both mobile and desktop. 
+      'items-start' keeps buttons aligned with the first line of text. */}
+                  <div className="mb-8 md:mb-12 flex flex-row items-start justify-between gap-4 border-b-2 border-foreground pb-6">
+                    {/* TITLE SECTION */}
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-4xl md:text-5xl font-black italic uppercase leading-[0.85] tracking-tighter">
                         Validation
                         <br />
                         Streams.
@@ -258,7 +262,9 @@ function ProductAditionalInfo({ products }) {
                     </div>
 
                     {/* --- RESPONSIVE CONTROLS --- */}
-                    <div className="flex gap-1 md:gap-2 absolute md:static top-0 right-0">
+                    {/* FIX: Removed 'absolute' and 'top-0/right-0'. 
+        'shrink-0' ensures buttons don't get squashed by the title. */}
+                    <div className="flex gap-1 md:gap-2 shrink-0 pt-30">
                       <CarouselPrevious className="static translate-y-0 h-10 w-10 md:h-14 md:w-14 border-2 border-foreground rounded-none bg-background hover:bg-primary hover:text-background transition-all flex items-center justify-center" />
                       <CarouselNext className="static translate-y-0 h-10 w-10 md:h-14 md:w-14 border-2 border-foreground rounded-none bg-background hover:bg-primary hover:text-background transition-all flex items-center justify-center" />
                     </div>
@@ -269,7 +275,7 @@ function ProductAditionalInfo({ products }) {
                     {products?.reviews?.map((review, i) => (
                       <CarouselItem
                         key={i}
-                        className="basis-full md:basis-1/2 lg:basis-1/2 pl-4" // Fixed: mobile basis to full
+                        className="basis-full md:basis-1/2 lg:basis-1/2 pl-4"
                       >
                         <div className="border-2 border-foreground p-6 md:p-8 bg-background h-full relative group hover:bg-secondary/10 transition-colors">
                           <div className="absolute top-4 right-6 font-mono text-[9px] opacity-20 uppercase tracking-widest font-bold">
@@ -277,7 +283,7 @@ function ProductAditionalInfo({ products }) {
                           </div>
 
                           <div className="flex items-center gap-4 md:gap-5 mb-6 md:mb-8">
-                            <div className="w-12 h-12 md:w-14 md:h-14 bg-foreground relative overflow-hidden grayscale group-hover:grayscale-0 transition-all">
+                            <div className="w-12 h-12 md:w-14 md:h-14 bg-foreground relative overflow-hidden grayscale group-hover:grayscale-0 transition-all border border-foreground/10">
                               <img
                                 src={ProfilePic2}
                                 alt="user"
@@ -293,7 +299,7 @@ function ProductAditionalInfo({ products }) {
                                   <div
                                     key={star}
                                     className={`w-2 md:w-3 h-1 ${
-                                      star <= review.rating // Using review.rating instead of hardcoded 4
+                                      star <= review.rating
                                         ? "bg-accent"
                                         : "bg-foreground/10"
                                     }`}
@@ -316,11 +322,11 @@ function ProductAditionalInfo({ products }) {
         </Tabs>
 
         {/* Footer Terminal Bar */}
-        <div className="w-full h-10 bg-foreground flex items-center px-8 justify-between mt-0 border-x-4 border-b-4 border-foreground">
+        <div className="w-full h-10 bg-primary flex items-center px-8 justify-between mt-0 border-x-1 border-b-1 border-foreground">
           <div className="flex gap-8 items-center">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-              <span className="text-[10px] font-mono text-primary font-bold tracking-widest uppercase italic">
+              <div className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
+              <span className="text-[10px] font-mono text-secondary font-bold tracking-widest uppercase italic">
                 Node_Active
               </span>
             </div>
@@ -338,3 +344,4 @@ function ProductAditionalInfo({ products }) {
 }
 
 export default ProductAditionalInfo;
+
