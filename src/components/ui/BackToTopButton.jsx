@@ -27,7 +27,7 @@ const BackToTopButton = () => {
       {visible && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[100] group flex items-center justify-center w-16 h-16 md:w-24 md:h-24 transition-all"
+          className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[20] group flex items-center justify-center w-16 h-16 md:w-24 md:h-24 transition-all"
         >
           {/* 1. ROTATING OUTER RING */}
           <div className="absolute inset-0 border border-dashed border-foreground/10 rounded-full group-hover:border-accent/40 animate-[spin_8s_linear_infinite]" />
