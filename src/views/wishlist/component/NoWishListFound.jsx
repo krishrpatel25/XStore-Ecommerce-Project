@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const NoWishListFound = () => {
+  const navigate = useNavigate()
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] w-full min-h-screen px-6 py-10 bg-background relative overflow-hidden">
       {/* BACKGROUND ACCENT (Ghost Heart) */}
