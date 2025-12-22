@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 import EmptyCart from "./component/EmptyCart.jsx";
+import { customToast } from "@/components/ui/CustomToast.jsx";
 
 const CartComp = () => {
   const { cart, updateCart, removeProduct } = useCart();
@@ -33,19 +34,16 @@ const CartComp = () => {
 
   const handleRemoveProduct = (id) => {
     removeProduct(id);
-
-    toast("Product removed from your Cart", {
+    customToast({
+      text: "Product removed from your Cart",
       icon: <i className="bi bi-cart-x-fill text-accent text-xl"></i>,
-      style: {
-        color: "var(--accent)",
-      },
+      color: "var(--accent)",
     });
   };
 
   if (cart.length === 0) {
     return <EmptyCart />;
   }
-
 
   return (
     <section className="px-4 md:px-10 lg:px-24 pt-24 md:pt-32 min-h-screen">

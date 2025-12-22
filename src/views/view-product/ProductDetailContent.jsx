@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import QuantityControl from "./component/QuantityControl";
 import { useWishList } from "@/context/WishListContext";
+import { customToast } from "@/components/ui/CustomToast";
 
 function ProductDetailContent({ products }) {
   const navigate = useNavigate();
@@ -38,11 +39,10 @@ function ProductDetailContent({ products }) {
 
   const handleAddToCart = () => {
     addProduct(products, qty);
-    toast("Product Added to Cart", {
+    customToast({
+      text: "Product added to cart",
       icon: <i class="bi bi-bag-check-fill text-primary text-xl"></i>,
-      style: {
-        color: "var(--primary)",
-      },
+      color: "var(--primary)",
     });
   };
 
@@ -50,18 +50,16 @@ function ProductDetailContent({ products }) {
     toggleWishlist(products);
 
     if (isWishlisted) {
-      toast("Product remove from wishlist", {
+      customToast({
+        text: "Product remove from wishlist",
         icon: <i class="bi bi-heartbreak-fill text-accent text-xl"></i>,
-        style: {
-          color: "var(--accent)",
-        },
+        color: "var(--accent)",
       });
     } else {
-      toast("Product add to wishlist", {
+      customToast({
+        text: "Product add to wishlist",
         icon: <i class="bi bi-heart-fill text-primary text-xl"></i>,
-        style: {
-          color: "var(--primary)",
-        },
+        color: "var(--primary)",
       });
     }
   };

@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@/context/CartsContext";
 import { useOrders } from "@/context/OrdersContext";
+import { customToast } from "@/components/ui/CustomToast";
 
 const locationData = {
   India: {
@@ -99,7 +100,11 @@ const CheckoutFormComp = () => {
     });
 
     clearCart();
-    toast.success("Order placed successfully");
+    customToast({
+      text: "Order placed successfully",
+      icon: <i class="bi bi-check-circle-fill text-xl"></i>,
+      color: "var(--primary)",
+    });
     navigate("/order");
   };
 
