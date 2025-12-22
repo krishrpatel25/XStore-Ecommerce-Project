@@ -28,7 +28,7 @@ export const OrdersProvider = ({ children }) => {
     const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
     const newOrder = {
-      orderId: `ORD-${Date.now().toString().slice(-3)}`, // ✅ SAFE ID
+      orderId: `ORD-${Date.now().toString().slice(-5)}`, // ✅ SAFE ID
       items: cart,
       total,
       status: "panding",
